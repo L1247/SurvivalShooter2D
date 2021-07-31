@@ -84,7 +84,7 @@ public class CharacterMoving : MonoBehaviour
     {
         attackCount++;
         animator.Play(GetAttackAnimationName());
-        if (attackCount == 3)
+        if (attackCount == 4)
         {
             attack      = false;
             move        = true;
