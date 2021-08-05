@@ -74,7 +74,8 @@ namespace Main.Character
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            if (spawnPosition == Vector3.zero) ProcessPatrolPositions();
+            if (UnityEngine.Application.isPlaying == false)
+                ProcessPatrolPositions();
             DrawLine(leftPatrolX ,  spawnPosition);
             DrawLine(rightPatrolX , spawnPosition);
         }
