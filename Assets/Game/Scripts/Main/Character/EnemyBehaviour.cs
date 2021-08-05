@@ -42,7 +42,7 @@ namespace Main.Character
         {
             tran                   = transform;
             currentDriectionVector = faceRight ? Vector3.right : Vector3.left;
-            ProcessPatrol();
+            ProcessPatrolPositions();
             HandleCharacterFace();
         }
 
@@ -74,7 +74,7 @@ namespace Main.Character
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            if (spawnPosition == Vector3.zero) ProcessPatrol();
+            if (spawnPosition == Vector3.zero) ProcessPatrolPositions();
             DrawLine(leftPatrolX ,  spawnPosition);
             DrawLine(rightPatrolX , spawnPosition);
         }
@@ -97,7 +97,7 @@ namespace Main.Character
             }
         }
 
-        private void ProcessPatrol()
+        private void ProcessPatrolPositions()
         {
             spawnPosition = transform.position;
             var spawnPositionX = spawnPosition.x;
