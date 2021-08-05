@@ -1,6 +1,9 @@
 #region
 
+using System;
 using Sirenix.OdinInspector;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 
 #endregion
@@ -11,6 +14,10 @@ namespace Main.Character
     {
     #region Private Variables
 
+        private CharacterHealth playerHealth;
+
+        private readonly string TAG_PLAYER = "Player";
+
         private Transform tran;
 
         private Vector3 currentDriectionVector;
@@ -19,6 +26,9 @@ namespace Main.Character
 
         [SerializeField]
         private bool faceRight;
+
+        [SerializeField]
+        private float AttackSpeed = 0.5f;
 
         [SerializeField]
         [ReadOnly]
@@ -37,6 +47,9 @@ namespace Main.Character
         private float rightPatrolX;
 
         [SerializeField]
+        private int damage = 10;
+
+        [SerializeField]
         [Required]
         private SpriteRenderer spriteRenderer;
 
@@ -50,10 +63,24 @@ namespace Main.Character
             currentDriectionVector = faceRight ? Vector3.right : Vector3.left;
             ProcessPatrolPositions();
             HandleCharacterFace();
+            this.OnTriggerEnter2DAsObservable()
+                .Where(collider2D => collider2D.CompareTag(TAG_PLAYER))
+                .Subscribe(OnPlayerTriggerEnter);
+            this.OnTriggerExit2DAsObservable()
+                .Where(collider2D => collider2D.CompareTag(TAG_PLAYER))
+                .Subscribe(OnPlayerTriggerExit);
+
+            var attackTimeSpan = TimeSpan.FromSeconds(AttackSpeed);
+
+            Observable.Interval(attackTimeSpan , Scheduler.MainThread)
+                      .Where(l => playerHealth != null)
+                      .Subscribe(AttackPlayer);
         }
 
         private void Update()
         {
+            // stop moving on player triggered
+            if (playerHealth) return;
             ProcessDirectionVector();
             tran.position += currentDriectionVector * moveSpeed * Time.deltaTime;
         }
@@ -61,6 +88,11 @@ namespace Main.Character
     #endregion
 
     #region Private Methods
+
+        private void AttackPlayer(long obj)
+        {
+            playerHealth.TakeDamage(damage);
+        }
 
         private void DrawLine(float patrolX , Vector3 spawnPosition)
         {
@@ -84,6 +116,16 @@ namespace Main.Character
                 ProcessPatrolPositions();
             DrawLine(leftPatrolX ,  spawnPosition);
             DrawLine(rightPatrolX , spawnPosition);
+        }
+
+        private void OnPlayerTriggerEnter(Collider2D obj)
+        {
+            playerHealth = obj.GetComponent<CharacterHealth>();
+        }
+
+        private void OnPlayerTriggerExit(Collider2D obj)
+        {
+            playerHealth = null;
         }
 
         private void ProcessDirectionVector()
