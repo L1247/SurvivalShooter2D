@@ -1,5 +1,6 @@
 #region
 
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 #endregion
@@ -20,6 +21,8 @@ namespace Main.Character
         private bool faceRight;
 
         [SerializeField]
+        [ReadOnly]
+        [BoxGroup("ReadOnly")]
         private float leftPatrolX;
 
         [SerializeField]
@@ -29,9 +32,12 @@ namespace Main.Character
         private float patrolOffsetX;
 
         [SerializeField]
+        [ReadOnly]
+        [BoxGroup("ReadOnly")]
         private float rightPatrolX;
 
         [SerializeField]
+        [Required]
         private SpriteRenderer spriteRenderer;
 
     #endregion
