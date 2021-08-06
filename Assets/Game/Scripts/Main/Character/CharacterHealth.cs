@@ -28,9 +28,9 @@ namespace Main.Character
 
     #region Public Methods
 
-        public void TakeDamage(int damage)
+        public void Add(int damage)
         {
-            currentHealth -= damage;
+            currentHealth += damage;
             if (currentHealth <= 0) Dead();
             Debug.Log($"currentHealth {currentHealth}");
         }

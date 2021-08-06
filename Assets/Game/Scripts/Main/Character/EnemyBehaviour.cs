@@ -9,11 +9,12 @@ using UnityEngine;
 
 namespace Main.Character
 {
-    public class EnemyBehaviour : MonoBehaviour
+    public class EnemyBehaviour : CharacterBehaviour
     {
     #region Private Variables
 
-        private CharacterHealth playerHealth;
+        private bool      isAttacking;
+        private Character attackingCharacter;
 
         private Transform tran;
 
@@ -64,16 +65,30 @@ namespace Main.Character
             var attackTimeSpan = TimeSpan.FromSeconds(AttackSpeed);
 
             Observable.Interval(attackTimeSpan , Scheduler.MainThread)
-                      .Where(l => playerHealth != null)
+                      .Where(l => IsAttacking())
                       .Subscribe(AttackPlayer);
         }
 
         private void Update()
         {
             // stop moving on player triggered
-            if (playerHealth) return;
-            ProcessDirectionVector();
-            tran.position += currentDriectionVector * moveSpeed * Time.deltaTime;
+            if (IsAttacking() == false) Move();
+        }
+
+    #endregion
+
+    #region Public Methods
+
+        public override void OntriggerEnter(Character target)
+        {
+            attackingCharacter = target;
+            isAttacking        = true;
+        }
+
+        public override void OntriggerExit(Character target)
+        {
+            isAttacking = false;
+            if (attackingCharacter == target) attackingCharacter = null;
         }
 
     #endregion
@@ -82,7 +97,7 @@ namespace Main.Character
 
         private void AttackPlayer(long obj)
         {
-            playerHealth.TakeDamage(damage);
+            attackingCharacter.TakeDamage(damage);
         }
 
         private void DrawLine(float patrolX , Vector3 spawnPosition)
@@ -97,6 +112,17 @@ namespace Main.Character
         private void HandleCharacterFace()
         {
             spriteRenderer.flipX = faceRight;
+        }
+
+        private bool IsAttacking()
+        {
+            return isAttacking;
+        }
+
+        private void Move()
+        {
+            ProcessDirectionVector();
+            tran.position += currentDriectionVector * moveSpeed * Time.deltaTime;
         }
 
 

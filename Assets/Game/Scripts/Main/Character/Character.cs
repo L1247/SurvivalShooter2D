@@ -12,11 +12,15 @@ namespace Main.Character
     {
     #region Public Variables
 
+        public CharacterBehaviour characterBehaviour { get; private set; }
+
         public string Id { get; private set; }
 
     #endregion
 
     #region Private Variables
+
+        private CharacterHealth characterHealth;
 
         [Inject]
         private CharacterRepository characterRepository;
@@ -29,6 +33,17 @@ namespace Main.Character
         {
             Id = Guid.NewGuid().ToString();
             characterRepository.Register(Id , this);
+            characterBehaviour = GetComponent<CharacterBehaviour>();
+            characterHealth    = GetComponent<CharacterHealth>();
+        }
+
+    #endregion
+
+    #region Public Methods
+
+        public void TakeDamage(int damage)
+        {
+            characterHealth.Add(-damage);
         }
 
     #endregion

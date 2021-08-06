@@ -17,6 +17,8 @@ namespace Main.Character
         [Inject]
         private SignalBus signalBus;
 
+        private string characterId;
+
         [SerializeField]
         private string TAG_TARGET = "Player";
 
@@ -24,8 +26,10 @@ namespace Main.Character
 
     #region Unity events
 
-        private void Awake()
+        private void Start()
         {
+            var character = GetComponent<Character>();
+            characterId = character.Id;
             RegisterTriggerEvent();
         }
 
@@ -35,13 +39,15 @@ namespace Main.Character
 
         private void OnTriggerEnter2D(Collider2D obj)
         {
-            signalBus.Fire(new TriggerEnter());
+            var character = obj.GetComponent<Character>();
+            signalBus.Fire(new TriggerEnter(characterId , character));
             // enemyBehaviour.playerHealth = obj.GetComponent<CharacterHealth>();
         }
 
         private void OnTriggerExit2D(Collider2D obj)
         {
-            signalBus.Fire(new TriggerExit());
+            var character = obj.GetComponent<Character>();
+            signalBus.Fire(new TriggerExit(characterId , character));
             // enemyBehaviour.playerHealth = null;
         }
 

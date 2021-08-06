@@ -10,15 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 4819695567264185101}
   - component: {fileID: 4819695567264185100}
-  - component: {fileID: 4819695567264185102}
   - component: {fileID: 4819695567264185103}
   - component: {fileID: 5959520608705589107}
   - component: {fileID: 101848872}
   - component: {fileID: 6117388890906524513}
   - component: {fileID: 5234347968843912324}
   - component: {fileID: 4794258690929566380}
+  - component: {fileID: 7342619741099287497}
   m_Layer: 0
-  m_Name: Character
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,21 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4819695567264185102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819695567264185091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b64969e194d8441ab72ff374880540, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 101848872}
-  moveSpeed: 3
-  AttackSpeed: 1.5
 --- !u!61 &4819695567264185103
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -197,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76519932653b4cc0802fb8238f901561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
 --- !u!114 &4794258690929566380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,3 +201,18 @@ MonoBehaviour:
   _useSceneContext: 0
   _context: {fileID: 0}
   _bindType: 0
+--- !u!114 &7342619741099287497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819695567264185091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b64969e194d8441ab72ff374880540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 101848872}
+  moveSpeed: 3
+  AttackSpeed: 0.5

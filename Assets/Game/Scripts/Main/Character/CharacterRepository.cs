@@ -16,6 +16,11 @@ namespace Main.Character
 
     #region Public Methods
 
+        public Character FindById(string id)
+        {
+            return characters[id];
+        }
+
         public void Register(string id , Character character)
         {
             characters.Add(id , character);

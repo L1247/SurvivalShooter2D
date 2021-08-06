@@ -1,17 +1,23 @@
+#region
+
 using System;
 using System.Collections.Generic;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using Zenject;
 using Random = UnityEngine.Random;
 
-public class CharacterMoving : MonoBehaviour
+#endregion
+
+public class PlayerBehaviour : MonoBehaviour
 {
 #region Private Variables
 
-    private bool         attack;
-    private bool         move;
+    private bool       attack;
+    private bool       move;
+    private GameObject currentAttackingEnemy;
+
+    private int          attackCount;
     private List<string> attackAnimations;
 
     private string    ANIMATION_IDLE = "Idle";
@@ -23,13 +29,10 @@ public class CharacterMoving : MonoBehaviour
     private Animator animator;
 
     [SerializeField]
-    private int moveSpeed = 3;
-
-    [SerializeField]
     private float AttackSpeed = 0.5f;
 
-    private int        attackCount;
-    private GameObject currentAttackingEnemy;
+    [SerializeField]
+    private int moveSpeed = 3;
 
 #endregion
 

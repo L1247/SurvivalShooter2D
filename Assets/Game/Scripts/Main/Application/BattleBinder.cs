@@ -19,6 +19,7 @@ namespace Main.Application
             Container.DeclareSignal<InputHorizontal>();
             Container.DeclareSignal<TriggerEnter>();
             Container.DeclareSignal<TriggerExit>();
+            Container.BindInterfacesAndSelfTo<CharacterEventHandler>().AsSingle();
             // System
             // Container.BindInterfacesAndSelfTo<InputManager>().AsSingle();
             Container.Bind<CharacterRepository>().AsSingle();
