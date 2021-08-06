@@ -10,8 +10,10 @@ namespace Main.Character
     {
     #region Public Methods
 
-        public virtual void OntriggerEnter(Character target) { }
-        public virtual void OntriggerExit(Character  target) { }
+        public virtual void MakeCharacterDie() { }
+
+        public virtual void TriggerEnter(Character target) { }
+        public virtual void TriggerExit(Character  target) { }
 
     #endregion
     }

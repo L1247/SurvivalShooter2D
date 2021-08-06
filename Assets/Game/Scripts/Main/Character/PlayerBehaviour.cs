@@ -14,11 +14,14 @@ public class PlayerBehaviour : CharacterBehaviour
 #region Private Variables
 
     private bool      attack;
+    private bool      isDead;
     private bool      move;
     private Character currentAttackingEnemy;
 
     private int          attackCount;
     private List<string> attackAnimations;
+
+    private readonly string ANIMATION_DIE = "Death";
 
     private string    ANIMATION_IDLE = "Idle";
     private string    ANIMATION_MOVE = "Move";
@@ -57,7 +60,16 @@ public class PlayerBehaviour : CharacterBehaviour
 
 #region Public Methods
 
-    public override void OntriggerEnter(Character target)
+    public override void MakeCharacterDie()
+    {
+        move   = false;
+        attack = false;
+        isDead = true;
+        animator.Play(ANIMATION_DIE);
+        GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public override void TriggerEnter(Character target)
     {
         currentAttackingEnemy = target;
         move                  = false;
@@ -69,8 +81,9 @@ public class PlayerBehaviour : CharacterBehaviour
                   .Subscribe(PlayAttackAnimation).AddTo(gameObject);
     }
 
-    public override void OntriggerExit(Character target)
+    public override void TriggerExit(Character target)
     {
+        if (isDead) return;
         attack      = false;
         move        = true;
         attackCount = 0;

@@ -4864,10 +4864,20 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6117388890906524513, guid: bfa47a07369123e46a2422cf6b384af2,
+        type: 3}
+      propertyPath: StartingHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7342619741099287497, guid: bfa47a07369123e46a2422cf6b384af2,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7342619741099287497, guid: bfa47a07369123e46a2422cf6b384af2,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfa47a07369123e46a2422cf6b384af2, type: 3}

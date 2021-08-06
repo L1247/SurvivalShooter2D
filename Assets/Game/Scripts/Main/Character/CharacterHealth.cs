@@ -1,6 +1,8 @@
 #region
 
+using Main.Event;
 using UnityEngine;
+using Zenject;
 
 #endregion
 
@@ -12,6 +14,11 @@ namespace Main.Character
 
         private int currentHealth;
 
+        [Inject]
+        private SignalBus signalBus;
+
+        private string characterId;
+
         [SerializeField]
         private int StartingHealth = 100;
 
@@ -22,6 +29,12 @@ namespace Main.Character
         private void Awake()
         {
             currentHealth = StartingHealth;
+        }
+
+        private void Start()
+        {
+            var character = GetComponent<Character>();
+            characterId = character.Id;
         }
 
     #endregion
@@ -41,7 +54,7 @@ namespace Main.Character
 
         private void Dead()
         {
-            Debug.Log("Dead");
+            signalBus.Fire(new CharacterDead(characterId));
         }
 
     #endregion

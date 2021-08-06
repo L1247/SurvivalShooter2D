@@ -24,6 +24,24 @@ namespace Main.Event
     #endregion
     }
 
+    public class CharacterDead
+    {
+    #region Public Variables
+
+        public string CharacterId { get; }
+
+    #endregion
+
+    #region Constructor
+
+        public CharacterDead(string characterId)
+        {
+            CharacterId = characterId;
+        }
+
+    #endregion
+    }
+
     public class TriggerExit
     {
     #region Public Variables

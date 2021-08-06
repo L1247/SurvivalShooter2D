@@ -79,13 +79,13 @@ namespace Main.Character
 
     #region Public Methods
 
-        public override void OntriggerEnter(Character target)
+        public override void TriggerEnter(Character target)
         {
             attackingCharacter = target;
             isAttacking        = true;
         }
 
-        public override void OntriggerExit(Character target)
+        public override void TriggerExit(Character target)
         {
             isAttacking = false;
             if (attackingCharacter == target) attackingCharacter = null;
