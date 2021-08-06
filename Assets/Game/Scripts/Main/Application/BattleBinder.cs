@@ -1,7 +1,7 @@
 #region
 
+using Main.Character;
 using Main.Event;
-using Main.System;
 using Zenject;
 
 #endregion
@@ -20,7 +20,8 @@ namespace Main.Application
             Container.DeclareSignal<TriggerEnter>();
             Container.DeclareSignal<TriggerExit>();
             // System
-            Container.BindInterfacesAndSelfTo<InputManager>().AsSingle();
+            // Container.BindInterfacesAndSelfTo<InputManager>().AsSingle();
+            Container.Bind<CharacterRepository>().AsSingle();
         }
 
     #endregion
