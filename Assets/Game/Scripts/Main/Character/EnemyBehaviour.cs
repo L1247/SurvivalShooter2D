@@ -3,7 +3,6 @@
 using System;
 using Sirenix.OdinInspector;
 using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 
 #endregion
@@ -15,8 +14,6 @@ namespace Main.Character
     #region Private Variables
 
         private CharacterHealth playerHealth;
-
-        private readonly string TAG_PLAYER = "Player";
 
         private Transform tran;
 
@@ -63,12 +60,6 @@ namespace Main.Character
             currentDriectionVector = faceRight ? Vector3.right : Vector3.left;
             ProcessPatrolPositions();
             HandleCharacterFace();
-            this.OnTriggerEnter2DAsObservable()
-                .Where(collider2D => collider2D.CompareTag(TAG_PLAYER))
-                .Subscribe(OnPlayerTriggerEnter);
-            this.OnTriggerExit2DAsObservable()
-                .Where(collider2D => collider2D.CompareTag(TAG_PLAYER))
-                .Subscribe(OnPlayerTriggerExit);
 
             var attackTimeSpan = TimeSpan.FromSeconds(AttackSpeed);
 
@@ -116,16 +107,6 @@ namespace Main.Character
                 ProcessPatrolPositions();
             DrawLine(leftPatrolX ,  spawnPosition);
             DrawLine(rightPatrolX , spawnPosition);
-        }
-
-        private void OnPlayerTriggerEnter(Collider2D obj)
-        {
-            playerHealth = obj.GetComponent<CharacterHealth>();
-        }
-
-        private void OnPlayerTriggerExit(Collider2D obj)
-        {
-            playerHealth = null;
         }
 
         private void ProcessDirectionVector()
