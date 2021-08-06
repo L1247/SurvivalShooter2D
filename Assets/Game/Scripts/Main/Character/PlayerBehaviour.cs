@@ -2,20 +2,20 @@
 
 using System;
 using System.Collections.Generic;
+using Main.Character;
 using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 #endregion
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehaviour : CharacterBehaviour
 {
 #region Private Variables
 
-    private bool       attack;
-    private bool       move;
-    private GameObject currentAttackingEnemy;
+    private bool      attack;
+    private bool      move;
+    private Character currentAttackingEnemy;
 
     private int          attackCount;
     private List<string> attackAnimations;
@@ -43,10 +43,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         attackAnimations = new List<string>() { "Attack1" , "Attack2" , "Attack3" };
         trans            = transform;
-        this.OnTriggerEnter2DAsObservable()
-            .Where(collider2D => collider2D.CompareTag(TAG_ENEMY))
-            .Subscribe(OnTriggerEnemy);
-        move = true;
+        move             = true;
         animator.Play(ANIMATION_MOVE);
     }
 
@@ -54,6 +51,30 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         if (move) Move();
+    }
+
+#endregion
+
+#region Public Methods
+
+    public override void OntriggerEnter(Character target)
+    {
+        currentAttackingEnemy = target;
+        move                  = false;
+        attack                = true;
+        animator.Play(ANIMATION_IDLE);
+        var attackTimeSpan = TimeSpan.FromSeconds(AttackSpeed);
+        Observable.Interval(attackTimeSpan , Scheduler.MainThread)
+                  .TakeWhile(l => attack)
+                  .Subscribe(PlayAttackAnimation).AddTo(gameObject);
+    }
+
+    public override void OntriggerExit(Character target)
+    {
+        attack      = false;
+        move        = true;
+        attackCount = 0;
+        animator.Play(ANIMATION_MOVE);
     }
 
 #endregion
@@ -71,30 +92,11 @@ public class PlayerBehaviour : MonoBehaviour
         trans.Translate(trans.right * moveSpeed * Time.deltaTime);
     }
 
-    private void OnTriggerEnemy(Collider2D obj)
-    {
-        currentAttackingEnemy = obj.gameObject;
-        move                  = false;
-        attack                = true;
-        animator.Play(ANIMATION_IDLE);
-        var attackTimeSpan = TimeSpan.FromSeconds(AttackSpeed);
-        Observable.Interval(attackTimeSpan , Scheduler.MainThread)
-                  .TakeWhile(l => attack)
-                  .Subscribe(PlayAttackAnimation);
-    }
-
     private void PlayAttackAnimation(long obj)
     {
         attackCount++;
         animator.Play(GetAttackAnimationName());
-        if (attackCount == 4)
-        {
-            attack      = false;
-            move        = true;
-            attackCount = 0;
-            currentAttackingEnemy.SetActive(false);
-            animator.Play(ANIMATION_MOVE);
-        }
+        currentAttackingEnemy.TakeDamage(25);
     }
 
 #endregion

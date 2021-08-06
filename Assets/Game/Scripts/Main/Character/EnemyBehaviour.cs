@@ -66,7 +66,7 @@ namespace Main.Character
 
             Observable.Interval(attackTimeSpan , Scheduler.MainThread)
                       .Where(l => isAttacking)
-                      .Subscribe(AttackPlayer);
+                      .Subscribe(AttackPlayer).AddTo(gameObject);
         }
 
         private void Update()
