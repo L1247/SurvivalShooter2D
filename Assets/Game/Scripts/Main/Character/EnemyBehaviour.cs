@@ -65,14 +65,14 @@ namespace Main.Character
             var attackTimeSpan = TimeSpan.FromSeconds(AttackSpeed);
 
             Observable.Interval(attackTimeSpan , Scheduler.MainThread)
-                      .Where(l => IsAttacking())
+                      .Where(l => isAttacking)
                       .Subscribe(AttackPlayer);
         }
 
         private void Update()
         {
             // stop moving on player triggered
-            if (IsAttacking() == false) Move();
+            if (isAttacking == false) Move();
         }
 
     #endregion
@@ -112,11 +112,6 @@ namespace Main.Character
         private void HandleCharacterFace()
         {
             spriteRenderer.flipX = faceRight;
-        }
-
-        private bool IsAttacking()
-        {
-            return isAttacking;
         }
 
         private void Move()
