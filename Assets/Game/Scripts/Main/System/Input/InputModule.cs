@@ -1,14 +1,12 @@
 #region
 
-using Main.Event;
-using UnityEngine;
 using Zenject;
 
 #endregion
 
-namespace Main.System
+namespace Main.System.Input
 {
-    public class InputManager : IInitializable , ITickable
+    public class InputModule : IInitializable , ITickable
     {
     #region Private Variables
 
@@ -39,7 +37,7 @@ namespace Main.System
             // whether the input is coming from a joystick, the keyboard, mouse, or a custom controller.
             // get input by name or action id
             // -1 : left , 0 : no press , 1 : right
-            var horizontalValue = Input.GetAxisRaw("Move Horizontal");
+            var horizontalValue = UnityEngine.Input.GetAxisRaw("Move Horizontal");
             if (lastHorizontalValue != horizontalValue)
                 signalBus.Fire(new InputHorizontal((int)horizontalValue));
             lastHorizontalValue = horizontalValue;
