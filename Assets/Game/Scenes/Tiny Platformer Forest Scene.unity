@@ -197,7 +197,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &287024217
 GameObject:
@@ -2663,7 +2663,7 @@ Transform:
   - {fileID: 1710314685}
   - {fileID: 1205557217}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1326268219
 GameObject:
@@ -4701,7 +4701,7 @@ Transform:
   - {fileID: 903730963}
   - {fileID: 287024219}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3234665766942828946
 PrefabInstance:
@@ -4728,7 +4728,7 @@ PrefabInstance:
     - target: {fileID: 3234665768501477282, guid: 7f4eb71b0388bf44084a367706596c66,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3234665768501477282, guid: 7f4eb71b0388bf44084a367706596c66,
         type: 3}
@@ -4783,7 +4783,7 @@ PrefabInstance:
     - target: {fileID: 3234665768501477308, guid: 7f4eb71b0388bf44084a367706596c66,
         type: 3}
       propertyPath: m_Name
-      value: Enemy_02
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8575194469531397684, guid: 7f4eb71b0388bf44084a367706596c66,
         type: 3}
@@ -4859,25 +4859,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4819695567264185102, guid: bfa47a07369123e46a2422cf6b384af2,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6117388890906524513, guid: bfa47a07369123e46a2422cf6b384af2,
-        type: 3}
-      propertyPath: StartingHealth
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7342619741099287497, guid: bfa47a07369123e46a2422cf6b384af2,
         type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7342619741099287497, guid: bfa47a07369123e46a2422cf6b384af2,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfa47a07369123e46a2422cf6b384af2, type: 3}

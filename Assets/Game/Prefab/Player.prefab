@@ -216,7 +216,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 101848872}
   AttackSpeed: 0.5
-  moveSpeed: 3
+  moveSpeed: 5
+  damage: 25
 --- !u!114 &5810371867747269361
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,6 +35,9 @@ public class PlayerBehaviour : CharacterBehaviour
     private float AttackSpeed = 0.5f;
 
     [SerializeField]
+    private int damage = 10;
+
+    [SerializeField]
     private int moveSpeed = 3;
 
 #endregion
@@ -109,7 +112,7 @@ public class PlayerBehaviour : CharacterBehaviour
     {
         attackCount++;
         animator.Play(GetAttackAnimationName());
-        currentAttackingEnemy.TakeDamage(25);
+        currentAttackingEnemy.TakeDamage(damage);
     }
 
 #endregion
