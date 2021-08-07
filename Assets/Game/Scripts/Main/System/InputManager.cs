@@ -1,5 +1,10 @@
+#region
+
 using Main.Event;
+using UnityEngine;
 using Zenject;
+
+#endregion
 
 namespace Main.System
 {
@@ -7,10 +12,8 @@ namespace Main.System
     {
     #region Private Variables
 
-        private bool initialized;
-
-        private          float  lastHorzonTalValue = -999;
-        private readonly int    playerId           = 0;
+        private bool  initialized;
+        private float lastHorizontalValue = -999;
 
         [Inject]
         private SignalBus signalBus;
@@ -19,9 +22,7 @@ namespace Main.System
 
     #region Public Methods
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
 
         public void Tick()
         {
@@ -38,10 +39,10 @@ namespace Main.System
             // whether the input is coming from a joystick, the keyboard, mouse, or a custom controller.
             // get input by name or action id
             // -1 : left , 0 : no press , 1 : right
-            var horizontalValue   = UnityEngine.Input.GetAxisRaw("Move Horizontal");
-            if (lastHorzonTalValue != horizontalValue)
+            var horizontalValue = Input.GetAxisRaw("Move Horizontal");
+            if (lastHorizontalValue != horizontalValue)
                 signalBus.Fire(new InputHorizontal((int)horizontalValue));
-            lastHorzonTalValue = horizontalValue;
+            lastHorizontalValue = horizontalValue;
         }
 
     #endregion

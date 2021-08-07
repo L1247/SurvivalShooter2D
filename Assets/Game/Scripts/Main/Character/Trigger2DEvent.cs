@@ -41,14 +41,12 @@ namespace Main.Character
         {
             var character = obj.GetComponent<Character>();
             signalBus.Fire(new TriggerEnter(characterId , character));
-            // enemyBehaviour.playerHealth = obj.GetComponent<CharacterHealth>();
         }
 
         private void OnTriggerExit2D(Collider2D obj)
         {
             var character = obj.GetComponent<Character>();
             signalBus.Fire(new TriggerExit(characterId , character));
-            // enemyBehaviour.playerHealth = null;
         }
 
         private void RegisterTriggerEvent()
