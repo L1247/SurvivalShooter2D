@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8575194469531397684}
   - component: {fileID: 8662401004273738341}
   - component: {fileID: 2564025338183149968}
+  - component: {fileID: 3117375212978690752}
   m_Layer: 0
   m_Name: Enemy_02
   m_TagString: Enemy
@@ -193,3 +194,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 100
+--- !u!114 &3117375212978690752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234665768501477308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf1effc8c60aec4eb93328aed0d3b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  show: 1
+  volume: 1
+  Collider_Type: 0
+  static_color: {r: 0, g: 1, b: 0, a: 0.3}
+  color_in_collision: 0
+  collision_color: {r: 1, g: 0, b: 0, a: 0.3}
+  trans: {fileID: 3234665768501477282}
