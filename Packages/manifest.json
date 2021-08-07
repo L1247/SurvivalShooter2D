@@ -41,6 +41,19 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
-  }
+    "com.unity.modules.xr": "1.0.0",
+    "com.av.smart-inspector": "0.8.0-pre.1",
+    "com.av.smart-hierarchy": "0.3.1"
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.av.smart-hierarchy",
+        "com.av.smart-inspector",
+        "com.openupm"
+      ]
+    }
+  ]
 }
