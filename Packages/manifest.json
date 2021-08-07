@@ -1,8 +1,5 @@
 {
   "dependencies": {
-    "com.av.smart-hierarchy": "0.3.1",
-    "com.av.smart-inspector": "0.8.0-pre.1",
-    "com.smkplus.custom-toolbar": "https://github.com/smkplus/CustomToolbar.git#master",
     "com.unity.2d.animation": "6.0.4",
     "com.unity.2d.pixel-perfect": "5.0.0",
     "com.unity.2d.psdimporter": "5.0.4",
@@ -44,7 +41,9 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
+    "com.unity.modules.xr": "1.0.0",
+    "com.av.smart-inspector": "0.8.0-pre.1",
+    "com.av.smart-hierarchy": "0.3.1"
   },
   "scopedRegistries": [
     {
