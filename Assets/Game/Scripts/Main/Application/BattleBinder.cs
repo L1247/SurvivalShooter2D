@@ -21,6 +21,7 @@ namespace Main.Application
             Container.DeclareSignal<TriggerEnter>();
             Container.DeclareSignal<TriggerExit>();
             Container.DeclareSignal<CharacterDead>();
+            Container.DeclareSignal<CharacterHurt>();
             Container.BindInterfacesAndSelfTo<CharacterEventHandler>().AsSingle();
             // System
             // Container.BindInterfacesAndSelfTo<InputManager>().AsSingle();

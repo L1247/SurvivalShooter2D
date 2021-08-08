@@ -44,8 +44,8 @@ namespace Main.Character
         public void Add(int damage)
         {
             currentHealth += damage;
+            signalBus.Fire(new CharacterHurt(characterId , damage));
             if (currentHealth <= 0) Dead();
-            Debug.Log($"currentHealth {currentHealth}");
         }
 
     #endregion

@@ -1,6 +1,7 @@
 #region
 
 using Main.Character;
+using UnityEngine;
 using Zenject;
 
 #endregion
@@ -26,6 +27,7 @@ namespace Main.Event
             signalBus.Subscribe<TriggerEnter>(OnTriggerEnter);
             signalBus.Subscribe<TriggerExit>(OnTriggerExit);
             signalBus.Subscribe<CharacterDead>(OnCharacterDead);
+            signalBus.Subscribe<CharacterHurt>(OnCharacterHurt);
         }
 
     #endregion
@@ -44,6 +46,13 @@ namespace Main.Event
             var characterId        = obj.CharacterId;
             var characterBehaviour = GetCharacterBehaviour(characterId);
             characterBehaviour.MakeCharacterDie();
+        }
+
+        private void OnCharacterHurt(CharacterHurt hurt)
+        {
+            var hurtCharacterId = hurt.CharacterId;
+            var hurtCharacter   = characterRepository.FindById(hurtCharacterId);
+            Debug.Log($"OnCharacterHurt {hurtCharacter} , damage {hurt.Damage}");
         }
 
         private void OnTriggerEnter(TriggerEnter obj)
