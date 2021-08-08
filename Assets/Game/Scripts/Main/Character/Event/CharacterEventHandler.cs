@@ -1,7 +1,6 @@
 #region
 
 using Main.Character;
-using UnityEngine;
 using Zenject;
 
 #endregion
@@ -11,6 +10,9 @@ namespace Main.Event
     public class CharacterEventHandler : IInitializable
     {
     #region Private Variables
+
+        [Inject]
+        private CharacterPresenter characterPresenter;
 
         [Inject]
         private CharacterRepository characterRepository;
@@ -51,8 +53,8 @@ namespace Main.Event
         private void OnCharacterHurt(CharacterHurt hurt)
         {
             var hurtCharacterId = hurt.CharacterId;
-            var hurtCharacter   = characterRepository.FindById(hurtCharacterId);
-            Debug.Log($"OnCharacterHurt {hurtCharacter} , damage {hurt.Damage}");
+            var hurtDamage      = hurt.Damage;
+            characterPresenter.OnCharacterHurt(hurtCharacterId , hurtDamage);
         }
 
         private void OnTriggerEnter(TriggerEnter obj)
