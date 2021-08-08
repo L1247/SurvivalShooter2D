@@ -2,6 +2,7 @@
 
 using Main.Character;
 using Main.Event;
+using Main.System;
 using Main.System.Input;
 using Zenject;
 
@@ -21,10 +22,11 @@ namespace Main.Application
             Container.DeclareSignal<TriggerEnter>();
             Container.DeclareSignal<TriggerExit>();
             Container.DeclareSignal<CharacterDead>();
+            Container.DeclareSignal<CharacterHurt>();
             Container.BindInterfacesAndSelfTo<CharacterEventHandler>().AsSingle();
             // System
-            // Container.BindInterfacesAndSelfTo<InputManager>().AsSingle();
             Container.Bind<CharacterRepository>().AsSingle();
+            Container.Bind<PopupTextSpawner>().AsSingle();
         }
 
     #endregion

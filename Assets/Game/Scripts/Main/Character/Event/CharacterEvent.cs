@@ -42,6 +42,26 @@ namespace Main.Event
     #endregion
     }
 
+    public class CharacterHurt
+    {
+    #region Public Variables
+
+        public int    Damage      { get; }
+        public string CharacterId { get; }
+
+    #endregion
+
+    #region Constructor
+
+        public CharacterHurt(string characterId , int damage)
+        {
+            CharacterId = characterId;
+            Damage      = damage;
+        }
+
+    #endregion
+    }
+
     public class TriggerExit
     {
     #region Public Variables

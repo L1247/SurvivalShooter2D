@@ -12,6 +12,9 @@ namespace Main.Event
     #region Private Variables
 
         [Inject]
+        private CharacterPresenter characterPresenter;
+
+        [Inject]
         private CharacterRepository characterRepository;
 
         [Inject]
@@ -26,6 +29,7 @@ namespace Main.Event
             signalBus.Subscribe<TriggerEnter>(OnTriggerEnter);
             signalBus.Subscribe<TriggerExit>(OnTriggerExit);
             signalBus.Subscribe<CharacterDead>(OnCharacterDead);
+            signalBus.Subscribe<CharacterHurt>(OnCharacterHurt);
         }
 
     #endregion
@@ -44,6 +48,13 @@ namespace Main.Event
             var characterId        = obj.CharacterId;
             var characterBehaviour = GetCharacterBehaviour(characterId);
             characterBehaviour.MakeCharacterDie();
+        }
+
+        private void OnCharacterHurt(CharacterHurt hurt)
+        {
+            var hurtCharacterId = hurt.CharacterId;
+            var hurtDamage      = hurt.Damage;
+            characterPresenter.OnCharacterHurt(hurtCharacterId , hurtDamage);
         }
 
         private void OnTriggerEnter(TriggerEnter obj)
