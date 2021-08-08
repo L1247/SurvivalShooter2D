@@ -1,5 +1,6 @@
 #region
 
+using Main.System;
 using UnityEngine;
 using Zenject;
 
@@ -14,8 +15,8 @@ namespace Main.Character
         [Inject]
         private CharacterRepository characterRepository;
 
-        [SerializeField]
-        private GameObject popupTextPrefab;
+        [Inject]
+        private PopupTextSpawner popupTextSpawner;
 
     #endregion
 
@@ -23,13 +24,11 @@ namespace Main.Character
 
         public void OnCharacterHurt(string hurtCharacterId , int hurtDamage)
         {
-            var hurtCharacter      = characterRepository.FindById(hurtCharacterId);
-            var position           = hurtCharacter.transform.position;
-            var popupTextInstance  = Instantiate(popupTextPrefab , position , Quaternion.identity);
-            var popupTextComponent = popupTextInstance.GetComponent<PopupTextComponent>();
-            var textColor          = hurtDamage < 0 ? Color.red : Color.green;
-            var context            = hurtDamage.ToString();
-            popupTextComponent.Show(context , textColor);
+            var hurtCharacter = characterRepository.FindById(hurtCharacterId);
+            var position      = hurtCharacter.transform.position;
+            var textColor     = hurtDamage < 0 ? Color.red : Color.green;
+            var context       = hurtDamage.ToString();
+            popupTextSpawner.Spawn(position , textColor , context);
         }
 
     #endregion

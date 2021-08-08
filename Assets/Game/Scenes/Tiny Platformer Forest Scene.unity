@@ -165,7 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: f736f159e62f9824f88c9d6681e5e642, type: 2}
   _monoInstallers:
   - {fileID: 75445064}
   _installerPrefabs: []
@@ -507,8 +508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c70eca36568476cb1e6b0e80ca3cc71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupTextPrefab: {fileID: 80881044189422351, guid: 4877bcd5e607fe84c9d0fa0e99ffc1a5,
-    type: 3}
 --- !u!114 &891504023
 MonoBehaviour:
   m_ObjectHideFlags: 0
