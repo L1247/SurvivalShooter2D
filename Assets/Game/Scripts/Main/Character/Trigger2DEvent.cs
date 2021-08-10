@@ -43,6 +43,7 @@ namespace Main.Character
             signalBus.Fire(new TriggerEnter(characterId , character));
         }
 
+
         private void OnTriggerExit2D(Collider2D obj)
         {
             var character = obj.GetComponent<Character>();
@@ -51,15 +52,14 @@ namespace Main.Character
 
         private void RegisterTriggerEvent()
         {
-            this
-                .OnTriggerEnter2DAsObservable()
+            this.OnTriggerEnter2DAsObservable()
                 .Where(collider2D => collider2D.CompareTag(TAG_TARGET))
-                .Subscribe(OnTriggerEnter2D);
-            this
-                .OnTriggerExit2DAsObservable()
-                .Where(collider2D =>
-                           collider2D.CompareTag(TAG_TARGET))
-                .Subscribe(OnTriggerExit2D);
+                .Subscribe(OnTriggerEnter2D)
+                .AddTo(gameObject);
+            this.OnTriggerExit2DAsObservable()
+                .Where(collider2D => collider2D.CompareTag(TAG_TARGET))
+                .Subscribe(OnTriggerExit2D)
+                .AddTo(gameObject);
         }
 
     #endregion
