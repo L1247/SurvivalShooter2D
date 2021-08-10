@@ -41,10 +41,10 @@ namespace Main.Character
 
     #region Public Methods
 
-        public void Add(int damage)
+        public void Add(int amount)
         {
-            currentHealth += damage;
-            signalBus.Fire(new CharacterHurt(characterId , damage));
+            currentHealth += amount;
+            signalBus.Fire(new CharacterHealthModified(characterId , amount));
             if (currentHealth <= 0) Dead();
         }
 

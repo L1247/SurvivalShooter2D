@@ -42,7 +42,7 @@ namespace Main.Event
     #endregion
     }
 
-    public class CharacterHurt
+    public class CharacterHealthModified
     {
     #region Public Variables
 
@@ -53,7 +53,7 @@ namespace Main.Event
 
     #region Constructor
 
-        public CharacterHurt(string characterId , int damage)
+        public CharacterHealthModified(string characterId , int damage)
         {
             CharacterId = characterId;
             Damage      = damage;

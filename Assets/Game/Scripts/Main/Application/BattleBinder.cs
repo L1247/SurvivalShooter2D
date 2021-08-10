@@ -22,7 +22,7 @@ namespace Main.Application
             Container.DeclareSignal<TriggerEnter>();
             Container.DeclareSignal<TriggerExit>();
             Container.DeclareSignal<CharacterDead>();
-            Container.DeclareSignal<CharacterHurt>();
+            Container.DeclareSignal<CharacterHealthModified>();
             Container.BindInterfacesAndSelfTo<CharacterEventHandler>().AsSingle();
             // System
             Container.Bind<CharacterRepository>().AsSingle();

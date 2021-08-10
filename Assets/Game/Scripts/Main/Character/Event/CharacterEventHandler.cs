@@ -29,7 +29,7 @@ namespace Main.Event
             signalBus.Subscribe<TriggerEnter>(OnTriggerEnter);
             signalBus.Subscribe<TriggerExit>(OnTriggerExit);
             signalBus.Subscribe<CharacterDead>(OnCharacterDead);
-            signalBus.Subscribe<CharacterHurt>(OnCharacterHurt);
+            signalBus.Subscribe<CharacterHealthModified>(OnCharacterModified);
         }
 
     #endregion
@@ -50,11 +50,11 @@ namespace Main.Event
             characterBehaviour.MakeCharacterDie();
         }
 
-        private void OnCharacterHurt(CharacterHurt hurt)
+        private void OnCharacterModified(CharacterHealthModified healthModified)
         {
-            var hurtCharacterId = hurt.CharacterId;
-            var hurtDamage      = hurt.Damage;
-            characterPresenter.OnCharacterHurt(hurtCharacterId , hurtDamage);
+            var characterId = healthModified.CharacterId;
+            var amount      = healthModified.Damage;
+            characterPresenter.ShowPopupText(characterId , amount);
         }
 
         private void OnTriggerEnter(TriggerEnter obj)

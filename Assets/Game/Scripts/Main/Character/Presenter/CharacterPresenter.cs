@@ -22,12 +22,12 @@ namespace Main.Character
 
     #region Public Methods
 
-        public void OnCharacterHurt(string hurtCharacterId , int hurtDamage)
+        public void ShowPopupText(string characterId , int amount)
         {
-            var hurtCharacter = characterRepository.FindById(hurtCharacterId);
-            var position      = hurtCharacter.transform.position;
-            var textColor     = hurtDamage < 0 ? Color.red : Color.green;
-            var context       = hurtDamage.ToString();
+            var character = characterRepository.FindById(characterId);
+            var position  = character.transform.position;
+            var textColor = amount <= 0 ? Color.red : Color.green;
+            var context   = amount.ToString();
             popupTextSpawner.Spawn(position , textColor , context);
         }
 
