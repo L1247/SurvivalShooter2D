@@ -18,14 +18,12 @@ public class PlayerBehaviour : CharacterBehaviour
     private bool      move;
     private Character currentAttackingEnemy;
 
-    private int          attackCount;
     private List<string> attackAnimations;
 
     private readonly string ANIMATION_DIE = "Death";
 
     private string    ANIMATION_IDLE = "Idle";
     private string    ANIMATION_MOVE = "Move";
-    private string    TAG_ENEMY      = "Enemy";
     private Transform trans;
 
     [SerializeField]
@@ -87,9 +85,8 @@ public class PlayerBehaviour : CharacterBehaviour
     public override void TriggerExit(Character target)
     {
         if (isDead) return;
-        attack      = false;
-        move        = true;
-        attackCount = 0;
+        attack = false;
+        move   = true;
         animator.Play(ANIMATION_MOVE);
     }
 
@@ -110,7 +107,6 @@ public class PlayerBehaviour : CharacterBehaviour
 
     private void PlayAttackAnimation(long obj)
     {
-        attackCount++;
         animator.Play(GetAttackAnimationName());
         currentAttackingEnemy.TakeDamage(damage);
     }
