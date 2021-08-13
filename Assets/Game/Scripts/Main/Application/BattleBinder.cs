@@ -1,6 +1,6 @@
 #region
 
-using Main.Character;
+using Main.Character.Repository;
 using Main.Event;
 using Main.System;
 using Main.System.Input;

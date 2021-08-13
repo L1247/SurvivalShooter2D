@@ -7,7 +7,7 @@ using UnityEngine;
 
 #endregion
 
-namespace Main.Character
+namespace Main.Character.Behaviour
 {
     public class EnemyBehaviour : CharacterBehaviour
     {

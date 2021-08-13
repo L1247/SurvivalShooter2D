@@ -1,6 +1,10 @@
 #region
 
 using System;
+using Character.Component;
+using Main.Character.Ablity;
+using Main.Character.Behaviour;
+using Main.Character.Repository;
 using UnityEngine;
 using Zenject;
 
@@ -25,6 +29,8 @@ namespace Main.Character
         [Inject]
         private CharacterRepository characterRepository;
 
+        private MoveForward moveForward;
+
     #endregion
 
     #region Unity events
@@ -35,11 +41,17 @@ namespace Main.Character
             characterRepository.Register(Id , this);
             characterBehaviour = GetComponent<CharacterBehaviour>();
             characterHealth    = GetComponent<CharacterHealth>();
+            moveForward        = GetComponent<MoveForward>();
         }
 
     #endregion
 
     #region Public Methods
+
+        public void SetMove(bool move)
+        {
+            moveForward.SetMove(move);
+        }
 
         public void TakeDamage(int damage)
         {

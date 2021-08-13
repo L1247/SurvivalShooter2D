@@ -4,7 +4,7 @@ using UnityEngine;
 
 #endregion
 
-namespace Main.Character
+namespace Main.Character.Behaviour
 {
     public class CharacterBehaviour : MonoBehaviour
     {

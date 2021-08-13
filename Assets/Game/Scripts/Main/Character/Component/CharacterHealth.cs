@@ -6,7 +6,7 @@ using Zenject;
 
 #endregion
 
-namespace Main.Character
+namespace Character.Component
 {
     public class CharacterHealth : MonoBehaviour
     {
@@ -33,7 +33,7 @@ namespace Main.Character
 
         private void Start()
         {
-            var character = GetComponent<Character>();
+            var character = GetComponent<Main.Character.Character>();
             characterId = character.Id;
         }
 
