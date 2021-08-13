@@ -35,7 +35,7 @@ namespace Main.Character.Ablity
 
     #region Public Methods
 
-        public void SetMove(bool move)
+        public void Move(bool move)
         {
             this.move = move;
         }

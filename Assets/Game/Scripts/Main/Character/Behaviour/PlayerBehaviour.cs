@@ -17,7 +17,6 @@ namespace Main.Character.Behaviour
         private bool attack;
         private bool isDead;
 
-        private Character character;
         private Character currentAttackingEnemy;
 
         private List<string> attackAnimations;
@@ -40,16 +39,11 @@ namespace Main.Character.Behaviour
 
     #region Unity events
 
-        private void Awake()
-        {
-            character = GetComponent<Character>();
-        }
-
         // Start is called before the first frame update
         private void Start()
         {
             attackAnimations = new List<string>() { "Attack1" , "Attack2" , "Attack3" };
-            SetMove(true);
+            Move(true);
             animator.Play(ANIMATION_MOVE);
         }
 
@@ -59,7 +53,7 @@ namespace Main.Character.Behaviour
 
         public override void MakeCharacterDie()
         {
-            SetMove(false);
+            Move(false);
             attack = false;
             isDead = true;
             animator.Play(ANIMATION_DIE);
@@ -69,7 +63,7 @@ namespace Main.Character.Behaviour
         public override void TriggerEnter(Character target)
         {
             currentAttackingEnemy = target;
-            SetMove(false);
+            Move(false);
             attack = true;
             animator.Play(ANIMATION_IDLE);
             var attackTimeSpan = TimeSpan.FromSeconds(AttackSpeed);
@@ -82,7 +76,7 @@ namespace Main.Character.Behaviour
         {
             if (isDead) return;
             attack = false;
-            SetMove(true);
+            Move(true);
             animator.Play(ANIMATION_MOVE);
         }
 
@@ -100,11 +94,6 @@ namespace Main.Character.Behaviour
         {
             animator.Play(GetAttackAnimationName());
             currentAttackingEnemy.TakeDamage(damage);
-        }
-
-        private void SetMove(bool move)
-        {
-            character.SetMove(move);
         }
 
     #endregion

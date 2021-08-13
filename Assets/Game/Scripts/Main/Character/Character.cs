@@ -48,9 +48,9 @@ namespace Main.Character
 
     #region Public Methods
 
-        public void SetMove(bool move)
+        public void Move(bool move)
         {
-            moveForward.SetMove(move);
+            moveForward.Move(move);
         }
 
         public void TakeDamage(int damage)
