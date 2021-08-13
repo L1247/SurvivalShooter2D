@@ -216,10 +216,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b64969e194d8441ab72ff374880540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 101848872}
+  ANIMATION_DIE: Death
+  ANIMATION_IDLE: Idle
+  ANIMATION_MOVE: Move
+  attackAnimationNames:
+  - Attack1
+  - Attack2
+  - Attack3
   AttackSpeed: 0.5
   damage: 25
-  moveForward: {fileID: 2341925155490409624}
 --- !u!114 &5810371867747269361
 MonoBehaviour:
   m_ObjectHideFlags: 0

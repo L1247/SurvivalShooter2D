@@ -24,6 +24,8 @@ namespace Main.Character
 
     #region Private Variables
 
+        private Animator animator;
+
         private CharacterHealth characterHealth;
 
         [Inject]
@@ -42,6 +44,7 @@ namespace Main.Character
             characterBehaviour = GetComponent<CharacterBehaviour>();
             characterHealth    = GetComponent<CharacterHealth>();
             moveForward        = GetComponent<MoveForward>();
+            animator           = GetComponent<Animator>();
         }
 
     #endregion
@@ -51,6 +54,11 @@ namespace Main.Character
         public void Move(bool move)
         {
             moveForward.Move(move);
+        }
+
+        public void PlayAnimation(string animationName)
+        {
+            animator.Play(animationName);
         }
 
         public void TakeDamage(int damage)

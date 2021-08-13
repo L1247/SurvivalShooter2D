@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -19,21 +20,29 @@ namespace Main.Character.Behaviour
 
         private Character currentAttackingEnemy;
 
-        private List<string> attackAnimations;
-
-        private readonly string ANIMATION_DIE = "Death";
-
-        private readonly string ANIMATION_IDLE = "Idle";
-        private readonly string ANIMATION_MOVE = "Move";
-
-        [SerializeField]
-        private Animator animator;
 
         [SerializeField]
         private float AttackSpeed = 0.5f;
 
         [SerializeField]
         private int damage = 10;
+
+
+        [BoxGroup("Animation")]
+        [SerializeField]
+        private List<string> attackAnimationNames = new List<string>();
+
+        [BoxGroup("Animation")]
+        [SerializeField]
+        private string ANIMATION_DIE = "Death";
+
+        [BoxGroup("Animation")]
+        [SerializeField]
+        private string ANIMATION_IDLE = "Idle";
+
+        [BoxGroup("Animation")]
+        [SerializeField]
+        private string ANIMATION_MOVE = "Move";
 
     #endregion
 
@@ -42,9 +51,7 @@ namespace Main.Character.Behaviour
         // Start is called before the first frame update
         private void Start()
         {
-            attackAnimations = new List<string>() { "Attack1" , "Attack2" , "Attack3" };
             Move(true);
-            animator.Play(ANIMATION_MOVE);
         }
 
     #endregion
@@ -56,7 +63,7 @@ namespace Main.Character.Behaviour
             Move(false);
             attack = false;
             isDead = true;
-            animator.Play(ANIMATION_DIE);
+            PlayAnimation(ANIMATION_DIE);
             GetComponent<BoxCollider2D>().enabled = false;
         }
 
@@ -65,7 +72,6 @@ namespace Main.Character.Behaviour
             currentAttackingEnemy = target;
             Move(false);
             attack = true;
-            animator.Play(ANIMATION_IDLE);
             var attackTimeSpan = TimeSpan.FromSeconds(AttackSpeed);
             Observable.Interval(attackTimeSpan , Scheduler.MainThread)
                       .TakeWhile(l => attack)
@@ -77,7 +83,17 @@ namespace Main.Character.Behaviour
             if (isDead) return;
             attack = false;
             Move(true);
-            animator.Play(ANIMATION_MOVE);
+        }
+
+    #endregion
+
+    #region Protected Methods
+
+        protected override void Move(bool move)
+        {
+            base.Move(move);
+            var animationName = move ? ANIMATION_MOVE : ANIMATION_IDLE;
+            PlayAnimation(animationName);
         }
 
     #endregion
@@ -87,12 +103,12 @@ namespace Main.Character.Behaviour
         private string GetAttackAnimationName()
         {
             var randomValue = Random.Range(0 , 3);
-            return attackAnimations[randomValue];
+            return attackAnimationNames[randomValue];
         }
 
         private void PlayAttackAnimation(long obj)
         {
-            animator.Play(GetAttackAnimationName());
+            PlayAnimation(GetAttackAnimationName());
             currentAttackingEnemy.TakeDamage(damage);
         }
 

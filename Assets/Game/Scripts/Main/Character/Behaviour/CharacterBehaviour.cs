@@ -39,6 +39,11 @@ namespace Main.Character.Behaviour
             character.Move(move);
         }
 
+        protected virtual void PlayAnimation(string animationName)
+        {
+            character.PlayAnimation(animationName);
+        }
+
     #endregion
     }
 }
