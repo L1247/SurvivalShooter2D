@@ -38,11 +38,6 @@ namespace Main.SO
 
     #region Private Methods
 
-        private void OnEnable()
-        {
-            Debug.Log("TEST_SO OnEnable");
-        }
-
         [OnInspectorGUI]
         private void Test()
         {
