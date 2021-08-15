@@ -18,7 +18,7 @@ namespace Main.Character.Behaviour
 
         private Transform tran;
 
-        private Vector3 currentDriectionVector;
+        private Vector3 currentDirectionVector;
 
         private Vector3 spawnPosition;
 
@@ -58,7 +58,7 @@ namespace Main.Character.Behaviour
         private void Awake()
         {
             tran                   = transform;
-            currentDriectionVector = faceRight ? Vector3.right : Vector3.left;
+            currentDirectionVector = faceRight ? Vector3.right : Vector3.left;
             ProcessPatrolPositions();
             HandleCharacterFace();
 
@@ -69,12 +69,6 @@ namespace Main.Character.Behaviour
                       .Subscribe(AttackPlayer).AddTo(gameObject);
         }
 
-        private void Update()
-        {
-            // stop moving on player triggered
-            if (isAttacking == false) Move();
-        }
-
     #endregion
 
     #region Public Methods
@@ -83,12 +77,14 @@ namespace Main.Character.Behaviour
         {
             attackingCharacter = target;
             isAttacking        = true;
+            Move(false);
         }
 
         public override void TriggerExit(Character target)
         {
             isAttacking = false;
             if (attackingCharacter == target) attackingCharacter = null;
+            Move(true);
         }
 
     #endregion
@@ -114,11 +110,11 @@ namespace Main.Character.Behaviour
             spriteRenderer.flipX = faceRight;
         }
 
-        private void Move()
-        {
-            ProcessDirectionVector();
-            tran.position += currentDriectionVector * moveSpeed * Time.deltaTime;
-        }
+        // private void Move()
+        // {
+        //     ProcessDirectionVector();
+        //     tran.position += currentDirectionVector * moveSpeed * Time.deltaTime;
+        // }
 
 
         private void OnDrawGizmos()
@@ -135,14 +131,14 @@ namespace Main.Character.Behaviour
             var positionX = tran.position.x;
             if (positionX < leftPatrolX)
             {
-                currentDriectionVector = Vector3.right;
+                currentDirectionVector = Vector3.right;
                 faceRight              = true;
                 HandleCharacterFace();
             }
 
             if (positionX > rightPatrolX)
             {
-                currentDriectionVector = Vector3.left;
+                currentDirectionVector = Vector3.left;
                 faceRight              = false;
                 HandleCharacterFace();
             }

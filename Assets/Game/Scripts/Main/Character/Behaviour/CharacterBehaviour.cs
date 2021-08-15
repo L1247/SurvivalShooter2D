@@ -36,6 +36,8 @@ namespace Main.Character.Behaviour
 
         protected virtual void Move(bool move)
         {
+            if (character == null) Debug.Log($"gameob {gameObject}");
+
             character.Move(move);
         }
 

@@ -2,7 +2,7 @@
 
 using System;
 using Character.Component;
-using Main.Character.Ablity;
+using Main.Character.Ability.Move;
 using Main.Character.Behaviour;
 using Main.Character.Repository;
 using UnityEngine;
@@ -31,7 +31,7 @@ namespace Main.Character
         [Inject]
         private CharacterRepository characterRepository;
 
-        private MoveForward moveForward;
+        private IMove move;
 
     #endregion
 
@@ -43,7 +43,7 @@ namespace Main.Character
             characterRepository.Register(Id , this);
             characterBehaviour = GetComponent<CharacterBehaviour>();
             characterHealth    = GetComponent<CharacterHealth>();
-            moveForward        = GetComponent<MoveForward>();
+            move               = GetComponent<IMove>();
             animator           = GetComponent<Animator>();
         }
 
@@ -51,19 +51,19 @@ namespace Main.Character
 
     #region Public Methods
 
-        public void Move(bool move)
+        public void Move(bool enable)
         {
-            moveForward.Move(move);
+            move?.SetMove(enable);
         }
 
         public void PlayAnimation(string animationName)
         {
-            animator.Play(animationName);
+            animator?.Play(animationName);
         }
 
         public void TakeDamage(int damage)
         {
-            characterHealth.Add(-damage);
+            characterHealth?.Add(-damage);
         }
 
     #endregion
