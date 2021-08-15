@@ -11,8 +11,6 @@ namespace Main.Character.Behaviour
     {
     #region Private Variables
 
-        private bool isDead;
-
         [BoxGroup("Animation")]
         [SerializeField]
         private string ANIMATION_DIE = "Death";
@@ -32,7 +30,7 @@ namespace Main.Character.Behaviour
 
         public override void MakeCharacterDie()
         {
-            isDead = true;
+            base.MakeCharacterDie();
             Move(false);
             Attack(false);
             PlayAnimation(ANIMATION_DIE);
@@ -41,6 +39,7 @@ namespace Main.Character.Behaviour
 
         public override void TriggerEnter(Character target)
         {
+            if (isDead) return;
             Move(false);
             Attack(true , target);
         }
