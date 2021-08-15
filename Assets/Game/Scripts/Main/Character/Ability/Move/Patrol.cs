@@ -11,12 +11,7 @@ namespace Main.Character.Ability.Move
     {
     #region Private Variables
 
-        private Vector3 currentDirectionVector;
-
         private Vector3 spawnPosition;
-
-        [SerializeField]
-        private bool faceRight;
 
         [SerializeField]
         [ReadOnly]
@@ -44,9 +39,7 @@ namespace Main.Character.Ability.Move
         protected override void Awake()
         {
             base.Awake();
-            currentDirectionVector = faceRight ? Vector3.right : Vector3.left;
             ProcessPatrolPositions();
-            HandleCharacterFace();
         }
 
     #endregion
@@ -55,13 +48,20 @@ namespace Main.Character.Ability.Move
 
         public override void Move()
         {
-            ProcessDirectionVector();
-            trans.position += currentDirectionVector * moveSpeed * Time.deltaTime;
+            DetectFacing();
+            trans.position += character.GetCurrentFacingVector() * moveSpeed * Time.deltaTime;
         }
 
     #endregion
 
     #region Private Methods
+
+        private void DetectFacing()
+        {
+            var positionX = trans.position.x;
+            if (positionX < leftPatrolX) character.SetFacing(true);
+            if (positionX > rightPatrolX) character.SetFacing(false);
+        }
 
         private void DrawLine(float patrolX , Vector3 spawnPosition)
         {
@@ -72,10 +72,6 @@ namespace Main.Character.Ability.Move
             Gizmos.DrawLine(startPoint , endPoint);
         }
 
-        private void HandleCharacterFace()
-        {
-            spriteRenderer.flipX = faceRight;
-        }
 
         private void OnDrawGizmos()
         {
@@ -84,24 +80,6 @@ namespace Main.Character.Ability.Move
                 ProcessPatrolPositions();
             DrawLine(leftPatrolX ,  spawnPosition);
             DrawLine(rightPatrolX , spawnPosition);
-        }
-
-        private void ProcessDirectionVector()
-        {
-            var positionX = trans.position.x;
-            if (positionX < leftPatrolX)
-            {
-                currentDirectionVector = Vector3.right;
-                faceRight              = true;
-                HandleCharacterFace();
-            }
-
-            if (positionX > rightPatrolX)
-            {
-                currentDirectionVector = Vector3.left;
-                faceRight              = false;
-                HandleCharacterFace();
-            }
         }
 
         private void ProcessPatrolPositions()

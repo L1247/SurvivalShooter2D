@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 5568006568785088961}
   - component: {fileID: 2341925155490409624}
   - component: {fileID: 4292199622721683581}
+  - component: {fileID: 6503573652773877466}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -218,8 +219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ANIMATION_DIE: Death
-  ANIMATION_IDLE: Idle
-  ANIMATION_MOVE: Move
 --- !u!114 &5810371867747269361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +264,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  ANIMATION_IDLE: Idle
+  ANIMATION_MOVE: Move
 --- !u!114 &4292199622721683581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,3 +284,18 @@ MonoBehaviour:
   - Attack1
   - Attack2
   - Attack3
+--- !u!114 &6503573652773877466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819695567264185091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f27317801384e49a96c38c377542cce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingFaceRight: 1
+  defaultSpriteRight: 1
+  spriteRenderer: {fileID: 4819695567264185100}

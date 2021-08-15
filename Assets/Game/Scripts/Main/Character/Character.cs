@@ -5,6 +5,7 @@ using Character.Component;
 using Main.Character.Ability.Attack;
 using Main.Character.Ability.Move;
 using Main.Character.Behaviour;
+using Main.Character.Component;
 using Main.Character.Repository;
 using UnityEngine;
 using Zenject;
@@ -25,7 +26,8 @@ namespace Main.Character
 
     #region Private Variables
 
-        private Animator animator;
+        private Animator        animator;
+        private CharacterFacing characterFacing;
 
         private CharacterHealth characterHealth;
 
@@ -49,6 +51,7 @@ namespace Main.Character
             move               = GetComponent<IMove>();
             attack             = GetComponent<IAttack>();
             animator           = GetComponent<Animator>();
+            characterFacing    = GetComponent<CharacterFacing>();
         }
 
     #endregion
@@ -61,6 +64,11 @@ namespace Main.Character
             attack?.SetTarget(target);
         }
 
+        public Vector3 GetCurrentFacingVector()
+        {
+            return characterFacing.CurrentDirectionVector;
+        }
+
         public void Move(bool enable)
         {
             move?.SetEnable(enable);
@@ -69,6 +77,11 @@ namespace Main.Character
         public void PlayAnimation(string animationName)
         {
             animator?.Play(animationName);
+        }
+
+        public void SetFacing(bool faceRight)
+        {
+            characterFacing.SetFacing(faceRight);
         }
 
         public void TakeDamage(int damage)

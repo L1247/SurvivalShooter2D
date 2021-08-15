@@ -29,7 +29,8 @@ namespace Main.Character.Ability.Move
 
         public override void Move()
         {
-            trans.Translate(trans.right * moveSpeed * Time.deltaTime);
+            var currentFacingVector = character.GetCurrentFacingVector();
+            trans.Translate(currentFacingVector * moveSpeed * Time.deltaTime);
         }
 
         public override void SetEnable(bool enable)
