@@ -25,8 +25,7 @@ namespace Main.Character.Behaviour
 
     #region Public Methods
 
-        public virtual void MakeCharacterDie() { }
-
+        public virtual void MakeCharacterDie()             { }
         public virtual void TriggerEnter(Character target) { }
         public virtual void TriggerExit(Character  target) { }
 

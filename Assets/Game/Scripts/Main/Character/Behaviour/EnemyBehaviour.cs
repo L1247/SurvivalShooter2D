@@ -1,7 +1,6 @@
 #region
 
 using System;
-using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
 
@@ -16,54 +15,21 @@ namespace Main.Character.Behaviour
         private bool      isAttacking;
         private Character attackingCharacter;
 
-        private Transform tran;
-
-        private Vector3 currentDirectionVector;
-
-        private Vector3 spawnPosition;
-
-        [SerializeField]
-        private bool faceRight;
-
         [SerializeField]
         private float AttackSpeed = 0.5f;
 
         [SerializeField]
-        [ReadOnly]
-        [BoxGroup("ReadOnly")]
-        private float leftPatrolX;
-
-        [SerializeField]
-        private float moveSpeed = 3f;
-
-        [SerializeField]
-        private float patrolOffsetX;
-
-        [SerializeField]
-        [ReadOnly]
-        [BoxGroup("ReadOnly")]
-        private float rightPatrolX;
-
-        [SerializeField]
         private int damage = 10;
-
-        [SerializeField]
-        [Required]
-        private SpriteRenderer spriteRenderer;
 
     #endregion
 
     #region Unity events
 
-        private void Awake()
+        protected override void Awake()
         {
-            tran                   = transform;
-            currentDirectionVector = faceRight ? Vector3.right : Vector3.left;
-            ProcessPatrolPositions();
-            HandleCharacterFace();
-
+            base.Awake();
+            Move(true);
             var attackTimeSpan = TimeSpan.FromSeconds(AttackSpeed);
-
             Observable.Interval(attackTimeSpan , Scheduler.MainThread)
                       .Where(l => isAttacking)
                       .Subscribe(AttackPlayer).AddTo(gameObject);
@@ -75,16 +41,16 @@ namespace Main.Character.Behaviour
 
         public override void TriggerEnter(Character target)
         {
-            attackingCharacter = target;
-            isAttacking        = true;
+            isAttacking = true;
             Move(false);
+            attackingCharacter = target;
         }
 
         public override void TriggerExit(Character target)
         {
             isAttacking = false;
-            if (attackingCharacter == target) attackingCharacter = null;
             Move(true);
+            if (attackingCharacter == target) attackingCharacter = null;
         }
 
     #endregion
@@ -94,62 +60,6 @@ namespace Main.Character.Behaviour
         private void AttackPlayer(long obj)
         {
             attackingCharacter.TakeDamage(damage);
-        }
-
-        private void DrawLine(float patrolX , Vector3 spawnPosition)
-        {
-            var spawnPositionY = spawnPosition.y;
-            var spawnPositionZ = spawnPosition.z;
-            var startPoint     = new Vector3(patrolX , spawnPositionY ,        spawnPositionZ);
-            var endPoint       = new Vector3(patrolX , spawnPositionY - 2.5f , spawnPositionZ);
-            Gizmos.DrawLine(startPoint , endPoint);
-        }
-
-        private void HandleCharacterFace()
-        {
-            spriteRenderer.flipX = faceRight;
-        }
-
-        // private void Move()
-        // {
-        //     ProcessDirectionVector();
-        //     tran.position += currentDirectionVector * moveSpeed * Time.deltaTime;
-        // }
-
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.green;
-            if (UnityEngine.Application.isPlaying == false)
-                ProcessPatrolPositions();
-            DrawLine(leftPatrolX ,  spawnPosition);
-            DrawLine(rightPatrolX , spawnPosition);
-        }
-
-        private void ProcessDirectionVector()
-        {
-            var positionX = tran.position.x;
-            if (positionX < leftPatrolX)
-            {
-                currentDirectionVector = Vector3.right;
-                faceRight              = true;
-                HandleCharacterFace();
-            }
-
-            if (positionX > rightPatrolX)
-            {
-                currentDirectionVector = Vector3.left;
-                faceRight              = false;
-                HandleCharacterFace();
-            }
-        }
-
-        private void ProcessPatrolPositions()
-        {
-            spawnPosition = transform.position;
-            var spawnPositionX = spawnPosition.x;
-            leftPatrolX  = spawnPositionX - patrolOffsetX;
-            rightPatrolX = spawnPositionX + patrolOffsetX;
         }
 
     #endregion
