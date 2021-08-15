@@ -1,6 +1,7 @@
 #region
 
 using System.Collections.Generic;
+using System.Linq;
 
 #endregion
 
@@ -15,6 +16,11 @@ namespace Main.Character.Repository
     #endregion
 
     #region Public Methods
+
+        public List<string> FindAllId()
+        {
+            return characters.Keys.ToList();
+        }
 
         public Character FindById(string id)
         {

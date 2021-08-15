@@ -1,0 +1,19 @@
+{
+  "name": "CustomEditorTools",
+  "rootNamespace": "",
+  "references": [
+    "GUID:1d5d48da6f2427548827ad66bb938353",
+    "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
