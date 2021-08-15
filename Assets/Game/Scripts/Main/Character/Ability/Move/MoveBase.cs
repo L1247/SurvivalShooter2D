@@ -1,5 +1,6 @@
 #region
 
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 #endregion
@@ -34,16 +35,13 @@ namespace Main.Character.Ability.Move
 
     #region Public Methods
 
-        public virtual void SetMove(bool enable)
+        [Button]
+        public virtual void Move() { }
+
+        public virtual void SetEnable(bool enable)
         {
             move = enable;
         }
-
-    #endregion
-
-    #region Protected Methods
-
-        protected virtual void Move() { }
 
     #endregion
     }

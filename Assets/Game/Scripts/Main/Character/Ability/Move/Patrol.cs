@@ -51,9 +51,9 @@ namespace Main.Character.Ability.Move
 
     #endregion
 
-    #region Protected Methods
+    #region Public Methods
 
-        protected override void Move()
+        public override void Move()
         {
             ProcessDirectionVector();
             trans.position += currentDirectionVector * moveSpeed * Time.deltaTime;

@@ -12,9 +12,9 @@ namespace Main.Character.Ability.Move
 {
     public class MoveForward : MoveBase
     {
-    #region Protected Methods
+    #region Public Methods
 
-        protected override void Move()
+        public override void Move()
         {
             trans.Translate(trans.right * moveSpeed * Time.deltaTime);
         }

@@ -2,6 +2,7 @@
 
 using System;
 using Character.Component;
+using Main.Character.Ability.Attack;
 using Main.Character.Ability.Move;
 using Main.Character.Behaviour;
 using Main.Character.Repository;
@@ -31,6 +32,8 @@ namespace Main.Character
         [Inject]
         private CharacterRepository characterRepository;
 
+        private IAttack attack;
+
         private IMove move;
 
     #endregion
@@ -44,6 +47,7 @@ namespace Main.Character
             characterBehaviour = GetComponent<CharacterBehaviour>();
             characterHealth    = GetComponent<CharacterHealth>();
             move               = GetComponent<IMove>();
+            attack             = GetComponent<IAttack>();
             animator           = GetComponent<Animator>();
         }
 
@@ -51,9 +55,15 @@ namespace Main.Character
 
     #region Public Methods
 
+        public void Attack(bool enable , Character target)
+        {
+            attack?.SetEnable(enable);
+            attack?.SetTarget(target);
+        }
+
         public void Move(bool enable)
         {
-            move?.SetMove(enable);
+            move?.SetEnable(enable);
         }
 
         public void PlayAnimation(string animationName)

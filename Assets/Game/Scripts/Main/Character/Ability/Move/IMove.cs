@@ -1,10 +1,10 @@
 namespace Main.Character.Ability.Move
 {
-    public interface IMove
+    public interface IMove : IAbility
     {
     #region Public Methods
 
-        void SetMove(bool enable);
+        public void Move();
 
     #endregion
     }

@@ -8,9 +8,9 @@ namespace Main.Character.Behaviour
 {
     public class CharacterBehaviour : MonoBehaviour
     {
-    #region Private Variables
+    #region Protected Variables
 
-        private Character character;
+        protected Character character;
 
     #endregion
 
@@ -32,6 +32,11 @@ namespace Main.Character.Behaviour
     #endregion
 
     #region Protected Methods
+
+        protected virtual void Attack(bool enable , Character target)
+        {
+            character.Attack(enable , target);
+        }
 
         protected virtual void Move(bool move)
         {
