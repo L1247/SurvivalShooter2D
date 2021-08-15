@@ -7,9 +7,9 @@ using Zenject;
 
 #endregion
 
-namespace Main.Character
+namespace Main.Character.Presenter
 {
-    public class CharacterPresenter : MonoBehaviour
+    public class CharacterPresenter
     {
     #region Private Variables
 

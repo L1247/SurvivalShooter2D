@@ -1,7 +1,7 @@
 #region
 
-using Main.Character;
 using Main.Character.Behaviour;
+using Main.Character.Presenter;
 using Main.Character.Repository;
 using Zenject;
 
