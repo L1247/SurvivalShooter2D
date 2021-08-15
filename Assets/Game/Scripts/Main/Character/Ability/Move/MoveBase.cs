@@ -11,7 +11,9 @@ namespace Main.Character.Ability.Move
     {
     #region Protected Variables
 
-        protected bool      move;
+        protected bool move;
+
+        protected Character character;
         protected Transform trans;
 
         [SerializeField]
@@ -23,7 +25,8 @@ namespace Main.Character.Ability.Move
 
         protected virtual void Awake()
         {
-            trans = transform;
+            character = GetComponent<Character>();
+            trans     = transform;
         }
 
         protected virtual void Update()

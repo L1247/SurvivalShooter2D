@@ -17,19 +17,10 @@ namespace Main.Character.Behaviour
         [SerializeField]
         private string ANIMATION_DIE = "Death";
 
-        [BoxGroup("Animation")]
-        [SerializeField]
-        private string ANIMATION_IDLE = "Idle";
-
-        [BoxGroup("Animation")]
-        [SerializeField]
-        private string ANIMATION_MOVE = "Move";
-
     #endregion
 
     #region Unity events
 
-        // Start is called before the first frame update
         private void Start()
         {
             Move(true);
@@ -59,17 +50,6 @@ namespace Main.Character.Behaviour
             if (isDead) return;
             Attack(false);
             Move(true);
-        }
-
-    #endregion
-
-    #region Protected Methods
-
-        protected override void Move(bool move)
-        {
-            base.Move(move);
-            var animationName = move ? ANIMATION_MOVE : ANIMATION_IDLE;
-            PlayAnimation(animationName);
         }
 
     #endregion
