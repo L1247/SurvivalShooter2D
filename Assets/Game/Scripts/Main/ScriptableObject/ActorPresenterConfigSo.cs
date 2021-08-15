@@ -10,21 +10,29 @@ using Zenject;
 
 namespace Main.SO
 {
-    [CreateAssetMenu(fileName = "TestSO" , menuName = "TEST_SO" , order = 0)]
-    public class TestSO : ScriptableObject
+    [CreateAssetMenu(fileName = "ActorPresenterConfigSo" , menuName = "ActorPresenterConfigSo" , order = 0)]
+    public class ActorPresenterConfigSo : ScriptableObject
     {
     #region Private Variables
 
-        private bool               init;
-        private CharacterPresenter characterPresenter;
-
+        private bool                init;
+        private CharacterPresenter  characterPresenter;
         private CharacterRepository characterRepository;
+
+        [InlineButton("CreateActor")]
+        [SerializeField]
+        private string ActorDataId;
 
     #endregion
 
-    #region Public Methods
+    #region Private Methods
 
-        public void Init()
+        private void CreateActor()
+        {
+            Debug.Log($"ActorDataId {ActorDataId}");
+        }
+
+        private void Init()
         {
             if (init) return;
             init = true;
@@ -34,9 +42,10 @@ namespace Main.SO
             characterRepository = container.Resolve<CharacterRepository>();
         }
 
-    #endregion
-
-    #region Private Methods
+        private void OnGUI()
+        {
+            var characterIdList = characterRepository.FindAllId();
+        }
 
         [OnInspectorGUI]
         private void Test()
@@ -48,19 +57,7 @@ namespace Main.SO
             }
 
             Init();
-            var characterIdList = characterRepository.FindAllId();
-            GUILayout.BeginVertical();
-            GUILayout.Label("Character Id List");
-            foreach (var id in characterIdList)
-            {
-                GUILayout.BeginHorizontal();
-                GUILayout.Label($"Id: {id} ");
-                if (GUILayout.Button("Show PopUpText"))
-                    characterPresenter.ShowPopupText(id , -Random.Range(1 , 101));
-                GUILayout.EndHorizontal();
-            }
-
-            GUILayout.EndVertical();
+            OnGUI();
         }
 
     #endregion
