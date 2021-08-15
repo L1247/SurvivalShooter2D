@@ -1,6 +1,8 @@
 #region
 
 using Main.Character;
+using Main.Character.Behaviour;
+using Main.Character.Repository;
 using Zenject;
 
 #endregion

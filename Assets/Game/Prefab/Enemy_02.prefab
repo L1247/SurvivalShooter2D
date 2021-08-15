@@ -17,6 +17,9 @@ GameObject:
   - component: {fileID: 8662401004273738341}
   - component: {fileID: 2564025338183149968}
   - component: {fileID: 3117375212978690752}
+  - component: {fileID: 4293817900944457181}
+  - component: {fileID: 8822073455693952166}
+  - component: {fileID: 7544119842836239632}
   m_Layer: 0
   m_Name: Enemy_02
   m_TagString: Enemy
@@ -129,14 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e0e933874834866bb43ddc6b3467200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  faceRight: 0
-  AttackSpeed: 0.5
-  leftPatrolX: 1.5999999
-  moveSpeed: 3
-  patrolOffsetX: 3
-  rightPatrolX: 7.6
-  damage: 10
-  spriteRenderer: {fileID: 3234665768501477309}
 --- !u!114 &1906143013897610813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,3 +208,48 @@ MonoBehaviour:
   color_in_collision: 0
   collision_color: {r: 1, g: 0, b: 0, a: 0.3}
   trans: {fileID: 3234665768501477282}
+--- !u!114 &4293817900944457181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234665768501477308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6a71dda34b4ba9b8770a7b6427e382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  leftPatrolX: 1.31
+  patrolOffsetX: 3
+  rightPatrolX: 7.31
+  spriteRenderer: {fileID: 3234665768501477309}
+--- !u!114 &8822073455693952166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234665768501477308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3576ead142438bbc1dd6c8c3c3d0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackSpeed: 0.5
+  damage: 10
+--- !u!114 &7544119842836239632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234665768501477308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f27317801384e49a96c38c377542cce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingFaceRight: 0
+  spriteRenderer: {fileID: 3234665768501477309}

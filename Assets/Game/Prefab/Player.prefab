@@ -19,6 +19,9 @@ GameObject:
   - component: {fileID: 7342619741099287497}
   - component: {fileID: 5810371867747269361}
   - component: {fileID: 5568006568785088961}
+  - component: {fileID: 2341925155490409624}
+  - component: {fileID: 4292199622721683581}
+  - component: {fileID: 6503573652773877466}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -215,10 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b64969e194d8441ab72ff374880540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 101848872}
-  AttackSpeed: 0.5
-  damage: 25
-  moveSpeed: 5
+  ANIMATION_DIE: Death
 --- !u!114 &5810371867747269361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,3 +251,51 @@ MonoBehaviour:
   color_in_collision: 0
   collision_color: {r: 1, g: 0, b: 0, a: 0.3}
   trans: {fileID: 4819695567264185101}
+--- !u!114 &2341925155490409624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819695567264185091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9f699e98f64daf993bfedfac4ec6cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  ANIMATION_IDLE: Idle
+  ANIMATION_MOVE: Move
+--- !u!114 &4292199622721683581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819695567264185091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2955f9ffd1e545109e01005fabdabea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackSpeed: 0.5
+  damage: 10
+  attackAnimationNames:
+  - Attack1
+  - Attack2
+  - Attack3
+--- !u!114 &6503573652773877466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819695567264185091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f27317801384e49a96c38c377542cce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingFaceRight: 1
+  defaultSpriteRight: 1
+  spriteRenderer: {fileID: 4819695567264185100}

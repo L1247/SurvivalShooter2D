@@ -8,7 +8,7 @@ using Zenject;
 
 #endregion
 
-namespace Main.Character
+namespace Character.Component
 {
     public class Trigger2DEvent : MonoBehaviour
     {
@@ -28,7 +28,7 @@ namespace Main.Character
 
         private void Start()
         {
-            var character = GetComponent<Character>();
+            var character = GetComponent<Main.Character.Character>();
             characterId = character.Id;
             RegisterTriggerEvent();
         }
@@ -39,14 +39,14 @@ namespace Main.Character
 
         private void OnTriggerEnter2D(Collider2D obj)
         {
-            var character = obj.GetComponent<Character>();
+            var character = obj.GetComponent<Main.Character.Character>();
             signalBus.Fire(new TriggerEnter(characterId , character));
         }
 
 
         private void OnTriggerExit2D(Collider2D obj)
         {
-            var character = obj.GetComponent<Character>();
+            var character = obj.GetComponent<Main.Character.Character>();
             signalBus.Fire(new TriggerExit(characterId , character));
         }
 

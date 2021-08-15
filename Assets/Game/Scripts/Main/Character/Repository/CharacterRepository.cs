@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace Main.Character
+namespace Main.Character.Repository
 {
     public class CharacterRepository
     {

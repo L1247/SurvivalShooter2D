@@ -1,5 +1,6 @@
 #region
 
+using Main.Character.Repository;
 using Main.System;
 using UnityEngine;
 using Zenject;

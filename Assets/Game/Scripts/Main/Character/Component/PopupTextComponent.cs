@@ -6,7 +6,7 @@ using UnityEngine;
 
 #endregion
 
-namespace Main.Character
+namespace Character.Component
 {
     public class PopupTextComponent : MonoBehaviour
     {
