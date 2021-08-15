@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 5810371867747269361}
   - component: {fileID: 5568006568785088961}
   - component: {fileID: 2341925155490409624}
+  - component: {fileID: 4292199622721683581}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -216,12 +217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b64969e194d8441ab72ff374880540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackSpeed: 0.5
-  damage: 25
-  attackAnimationNames:
-  - Attack1
-  - Attack2
-  - Attack3
   ANIMATION_DIE: Death
   ANIMATION_IDLE: Idle
   ANIMATION_MOVE: Move
@@ -269,4 +264,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9f699e98f64daf993bfedfac4ec6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 5
+--- !u!114 &4292199622721683581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819695567264185091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2955f9ffd1e545109e01005fabdabea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackSpeed: 0.5
+  damage: 10
+  attackAnimationNames:
+  - Attack1
+  - Attack2
+  - Attack3

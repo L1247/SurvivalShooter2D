@@ -16,6 +16,8 @@ namespace Main.Character.Ability.Attack
         protected bool      isAttacking;
         protected Character attackingCharacter;
 
+        protected Character character;
+
         [SerializeField]
         protected float AttackSpeed = 0.5f;
 
@@ -28,10 +30,11 @@ namespace Main.Character.Ability.Attack
 
         protected virtual void Awake()
         {
+            character = GetComponent<Character>();
             var attackTimeSpan = TimeSpan.FromSeconds(AttackSpeed);
             Observable.Interval(attackTimeSpan , Scheduler.MainThread)
                       .Where(l => isAttacking)
-                      .Subscribe(_ => AttackPlayer()).AddTo(gameObject);
+                      .Subscribe(_ => Attack()).AddTo(gameObject);
         }
 
     #endregion
@@ -41,7 +44,7 @@ namespace Main.Character.Ability.Attack
         [Button]
         public virtual void Attack()
         {
-            AttackPlayer();
+            attackingCharacter?.TakeDamage(damage);
         }
 
         public void SetEnable(bool enable)
@@ -52,15 +55,6 @@ namespace Main.Character.Ability.Attack
         public void SetTarget(Character target)
         {
             attackingCharacter = target;
-        }
-
-    #endregion
-
-    #region Private Methods
-
-        private void AttackPlayer()
-        {
-            attackingCharacter?.TakeDamage(damage);
         }
 
     #endregion

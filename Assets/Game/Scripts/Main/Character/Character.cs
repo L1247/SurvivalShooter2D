@@ -55,7 +55,7 @@ namespace Main.Character
 
     #region Public Methods
 
-        public void Attack(bool enable , Character target)
+        public void Attack(bool enable , Character target = null)
         {
             attack?.SetEnable(enable);
             attack?.SetTarget(target);

@@ -33,7 +33,7 @@ namespace Main.Character.Behaviour
 
     #region Protected Methods
 
-        protected virtual void Attack(bool enable , Character target)
+        protected virtual void Attack(bool enable , Character target = null)
         {
             character.Attack(enable , target);
         }
