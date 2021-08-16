@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8d4d254346408e9a0bbfb63962d0d5, type: 3}
   m_Name: ActorData 1
   m_EditorClassIdentifier: 
+  actorPrefab: {fileID: 4819695567264185091, guid: bfa47a07369123e46a2422cf6b384af2,
+    type: 3}
   actorDataId: Player_1
-  actorPrefab: {fileID: 0}

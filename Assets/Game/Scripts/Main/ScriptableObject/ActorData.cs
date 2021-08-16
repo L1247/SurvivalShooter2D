@@ -17,6 +17,7 @@ namespace Main.SO
 
         [LabelText("角色Prefab")]
         [Required]
+        [PropertyOrder(1)]
         public GameObject actorPrefab;
 
     #endregion
@@ -26,6 +27,7 @@ namespace Main.SO
         [SerializeField]
         [LabelText("角色ID")]
         [Required]
+        [PropertyOrder(0)]
         private string actorDataId;
 
     #endregion

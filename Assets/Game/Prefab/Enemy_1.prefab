@@ -215,15 +215,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3234665768501477308}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c6a71dda34b4ba9b8770a7b6427e382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  leftPatrolX: 2.12
+  leftPatrolX: 1.31
   patrolOffsetX: 3
-  rightPatrolX: 8.12
+  rightPatrolX: 7.31
   spriteRenderer: {fileID: 3234665768501477309}
 --- !u!114 &8822073455693952166
 MonoBehaviour:

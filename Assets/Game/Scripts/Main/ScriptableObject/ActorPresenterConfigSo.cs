@@ -1,5 +1,8 @@
 #region
 
+using System.Collections;
+using System.Linq;
+using AutoBot.Utilities;
 using Main.Character.Presenter;
 using Main.Character.Repository;
 using Sirenix.OdinInspector;
@@ -15,13 +18,16 @@ namespace Main.SO
     {
     #region Private Variables
 
+        private ActorDataOverview actorDataOverview;
+
         private bool                init;
         private CharacterPresenter  characterPresenter;
         private CharacterRepository characterRepository;
 
         [InlineButton("CreateActor")]
         [SerializeField]
-        private string ActorDataId;
+        [ValueDropdown("GetAllActorDataIds")]
+        private string actorDataId;
 
     #endregion
 
@@ -29,7 +35,13 @@ namespace Main.SO
 
         private void CreateActor()
         {
-            Debug.Log($"ActorDataId {ActorDataId}");
+            characterPresenter.SpawnCharacter(actorDataId);
+        }
+
+        private IEnumerable GetAllActorDataIds()
+        {
+            return actorDataOverview.FindAll().Select(data => data.ActorDataId)
+                                    .Select(id => new ValueDropdownItem(id , id));
         }
 
         private void Init()
@@ -47,9 +59,13 @@ namespace Main.SO
             var characterIdList = characterRepository.FindAllId();
         }
 
+
         [OnInspectorGUI]
         private void Test()
         {
+            if (actorDataOverview == null)
+                actorDataOverview = CustomEditorUtility.GetScriptableObject<ActorDataOverview>();
+
             if (UnityEngine.Application.isPlaying == false)
             {
                 init = false;

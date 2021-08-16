@@ -1,6 +1,7 @@
 #region
 
 using Main.Character.Data;
+using Main.SO;
 using Utilities.Contract;
 using Zenject;
 
@@ -13,7 +14,7 @@ namespace Main.Character.Repository
     #region Private Variables
 
         [Inject]
-        private IDataRepository dataRepository;
+        private ActorDataOverview actorDataOverview;
 
     #endregion
 
@@ -22,7 +23,7 @@ namespace Main.Character.Repository
         public IActorData GetActorData(string actorDataId)
         {
             Contract.RequireString(actorDataId , "actorDataId");
-            var actorData = dataRepository.GetActorData(actorDataId);
+            var actorData = actorDataOverview.FindActorData(actorDataId);
             Contract.EnsureNotNull(actorData , $"actorDataId: {actorDataId} , actorData");
             return actorData;
         }

@@ -24,6 +24,11 @@ namespace Main.SO
             return actorDatas.Find(data => data.ActorDataId == actorDataId);
         }
 
+        public List<ActorData> FindAll()
+        {
+            return actorDatas;
+        }
+
     #endregion
     }
 }
