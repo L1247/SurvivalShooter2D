@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 4292199622721683581}
   - component: {fileID: 6503573652773877466}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player_1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4819695567264185091}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e9f699e98f64daf993bfedfac4ec6cd, type: 3}
   m_Name: 
@@ -297,5 +297,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingFaceRight: 1
-  defaultSpriteRight: 1
   spriteRenderer: {fileID: 4819695567264185100}
+  defaultSpriteRight: 1

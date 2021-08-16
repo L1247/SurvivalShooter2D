@@ -30,6 +30,8 @@ namespace Main.Application
             Container.Bind<PopupTextSpawner>().AsSingle();
             // Presenter
             Container.Bind<CharacterPresenter>().AsSingle();
+            // Repository
+            Container.Bind<IDataRepository>().To<DataRepository>().AsSingle();
         }
 
     #endregion
