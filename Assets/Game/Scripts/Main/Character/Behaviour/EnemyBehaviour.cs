@@ -8,9 +8,9 @@ namespace Main.Character.Behaviour
     {
     #region Unity events
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
             Move(true);
         }
 

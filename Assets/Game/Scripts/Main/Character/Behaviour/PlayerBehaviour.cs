@@ -19,8 +19,9 @@ namespace Main.Character.Behaviour
 
     #region Unity events
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             Move(true);
         }
 

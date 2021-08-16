@@ -36,9 +36,8 @@ namespace Main.Character.Ability.Move
 
     #region Unity events
 
-        protected override void Awake()
+        private void Start()
         {
-            base.Awake();
             ProcessPatrolPositions();
         }
 

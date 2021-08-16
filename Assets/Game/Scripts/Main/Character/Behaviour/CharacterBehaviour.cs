@@ -24,6 +24,8 @@ namespace Main.Character.Behaviour
             character = GetComponent<Character>();
         }
 
+        protected virtual void Start() { }
+
     #endregion
 
     #region Public Methods
