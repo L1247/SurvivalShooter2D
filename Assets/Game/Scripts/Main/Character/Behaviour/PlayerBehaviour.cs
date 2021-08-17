@@ -17,38 +17,12 @@ namespace Main.Character.Behaviour
 
     #endregion
 
-    #region Unity events
-
-        private void Start()
-        {
-            Move(true);
-        }
-
-    #endregion
-
     #region Public Methods
 
-        public override void MakeCharacterDie()
+        public override void Die()
         {
-            base.MakeCharacterDie();
-            Move(false);
-            Attack(false);
+            base.Die();
             PlayAnimation(ANIMATION_DIE);
-            GetComponent<BoxCollider2D>().enabled = false;
-        }
-
-        public override void TriggerEnter(Character target)
-        {
-            if (isDead) return;
-            Move(false);
-            Attack(true , target);
-        }
-
-        public override void TriggerExit(Character target)
-        {
-            if (isDead) return;
-            Attack(false);
-            Move(true);
         }
 
     #endregion

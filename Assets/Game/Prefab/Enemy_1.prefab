@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 8822073455693952166}
   - component: {fileID: 7544119842836239632}
   m_Layer: 0
-  m_Name: Enemy_02
+  m_Name: Enemy_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,3 +253,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingFaceRight: 0
   spriteRenderer: {fileID: 3234665768501477309}
+  defaultSpriteRight: 0

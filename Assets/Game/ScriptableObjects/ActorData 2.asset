@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c0ef044756c9bc4983d56c536ce52bb, type: 3}
-  m_Name: GameSetting
+  m_Script: {fileID: 11500000, guid: fa8d4d254346408e9a0bbfb63962d0d5, type: 3}
+  m_Name: ActorData 2
   m_EditorClassIdentifier: 
-  actorDataOverview: {fileID: 11400000, guid: bf69eb0b33215dc42b8f73ed86ff8a3c, type: 2}
-  PopupTextPrefab: {fileID: 80881044189422351, guid: 4877bcd5e607fe84c9d0fa0e99ffc1a5,
+  actorPrefab: {fileID: 3234665768501477308, guid: 7f4eb71b0388bf44084a367706596c66,
     type: 3}
+  actorDataId: Enemy_1

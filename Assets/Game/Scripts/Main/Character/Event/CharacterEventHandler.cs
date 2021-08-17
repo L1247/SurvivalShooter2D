@@ -1,7 +1,7 @@
 #region
 
-using Main.Character;
 using Main.Character.Behaviour;
+using Main.Character.Presenter;
 using Main.Character.Repository;
 using Zenject;
 
@@ -49,7 +49,7 @@ namespace Main.Event
         {
             var characterId        = obj.CharacterId;
             var characterBehaviour = GetCharacterBehaviour(characterId);
-            characterBehaviour.MakeCharacterDie();
+            characterBehaviour.Die();
         }
 
         private void OnCharacterModified(CharacterHealthModified healthModified)

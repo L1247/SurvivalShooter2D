@@ -37,29 +37,29 @@ namespace Character.Component
 
     #region Private Methods
 
-        private void OnTriggerEnter2D(Collider2D obj)
+        private void RegisterTriggerEvent()
+        {
+            this.OnTriggerEnter2DAsObservable()
+                .Where(collider2D => collider2D.CompareTag(TAG_TARGET))
+                .Subscribe(TriggerEnter)
+                .AddTo(gameObject);
+            this.OnTriggerExit2DAsObservable()
+                .Where(collider2D => collider2D.CompareTag(TAG_TARGET))
+                .Subscribe(TriggerExit)
+                .AddTo(gameObject);
+        }
+
+        private void TriggerEnter(Collider2D obj)
         {
             var character = obj.GetComponent<Main.Character.Character>();
             signalBus.Fire(new TriggerEnter(characterId , character));
         }
 
 
-        private void OnTriggerExit2D(Collider2D obj)
+        private void TriggerExit(Collider2D obj)
         {
             var character = obj.GetComponent<Main.Character.Character>();
             signalBus.Fire(new TriggerExit(characterId , character));
-        }
-
-        private void RegisterTriggerEvent()
-        {
-            this.OnTriggerEnter2DAsObservable()
-                .Where(collider2D => collider2D.CompareTag(TAG_TARGET))
-                .Subscribe(OnTriggerEnter2D)
-                .AddTo(gameObject);
-            this.OnTriggerExit2DAsObservable()
-                .Where(collider2D => collider2D.CompareTag(TAG_TARGET))
-                .Subscribe(OnTriggerExit2D)
-                .AddTo(gameObject);
         }
 
     #endregion

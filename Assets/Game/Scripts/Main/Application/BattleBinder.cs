@@ -1,5 +1,6 @@
 #region
 
+using Main.Character.Presenter;
 using Main.Character.Repository;
 using Main.Event;
 using Main.System;
@@ -27,6 +28,10 @@ namespace Main.Application
             // System
             Container.Bind<CharacterRepository>().AsSingle();
             Container.Bind<PopupTextSpawner>().AsSingle();
+            // Presenter
+            Container.Bind<CharacterPresenter>().AsSingle();
+            // Repository
+            Container.Bind<IDataRepository>().To<DataRepository>().AsSingle();
         }
 
     #endregion
