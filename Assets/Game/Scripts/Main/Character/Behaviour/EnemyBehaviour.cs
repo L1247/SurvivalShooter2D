@@ -6,28 +6,12 @@ namespace Main.Character.Behaviour
 {
     public class EnemyBehaviour : CharacterBehaviour
     {
-    #region Unity events
-
-        protected override void Start()
-        {
-            base.Start();
-            Move(true);
-        }
-
-    #endregion
-
     #region Public Methods
 
-        public override void TriggerEnter(Character target)
+        public override void Die()
         {
-            Move(false);
-            Attack(true , target);
-        }
-
-        public override void TriggerExit(Character target)
-        {
-            Move(true);
-            Attack(false , target);
+            base.Die();
+            gameObject.SetActive(false);
         }
 
     #endregion

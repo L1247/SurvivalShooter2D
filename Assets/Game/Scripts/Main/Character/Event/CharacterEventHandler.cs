@@ -49,7 +49,7 @@ namespace Main.Event
         {
             var characterId        = obj.CharacterId;
             var characterBehaviour = GetCharacterBehaviour(characterId);
-            characterBehaviour.MakeCharacterDie();
+            characterBehaviour.Die();
         }
 
         private void OnCharacterModified(CharacterHealthModified healthModified)

@@ -17,28 +17,51 @@ namespace Main.Character.Behaviour
 
     #endregion
 
+    #region Private Variables
+
+        private BoxCollider2D boxCollider2D;
+
+    #endregion
+
     #region Unity events
 
         protected virtual void Awake()
         {
-            character = GetComponent<Character>();
+            character     = GetComponent<Character>();
+            boxCollider2D = GetComponent<BoxCollider2D>();
         }
 
-        protected virtual void Start() { }
+        protected virtual void Start()
+        {
+            Move(true);
+        }
 
     #endregion
 
     #region Public Methods
 
         [Button]
-        public virtual void MakeCharacterDie()
+        public virtual void Die()
         {
             isDead = true;
+            Move(false);
+            Attack(false);
+            boxCollider2D.enabled = false;
         }
 
-        public virtual void TriggerEnter(Character target) { }
+        public virtual void TriggerEnter(Character target)
+        {
+            if (isDead) return;
+            Move(false);
+            Attack(true , target);
+        }
 
-        public virtual void TriggerExit(Character target) { }
+        public virtual void TriggerExit(Character target)
+        {
+            if (isDead) return;
+            Attack(false);
+            Move(true);
+        }
 
     #endregion
 
