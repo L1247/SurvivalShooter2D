@@ -1,5 +1,6 @@
 #region
 
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -13,13 +14,16 @@ namespace Main.Character.Behaviour
 
         protected bool isDead;
 
-        protected Character character;
-
     #endregion
 
     #region Private Variables
 
         private BoxCollider2D boxCollider2D;
+        private Character     character;
+
+        [SerializeField]
+        [ReadOnly]
+        private List<Character> triggerTargets = new List<Character>();
 
     #endregion
 
@@ -40,6 +44,14 @@ namespace Main.Character.Behaviour
 
     #region Public Methods
 
+        public void ChooseANewTarget()
+        {
+            RemoveTarget(character.AttackAbility.AttackingCharacter);
+            var noTargetCanChoose = triggerTargets.Count == 0;
+            if (noTargetCanChoose) KeepMove();
+            else Attack(true , triggerTargets[0]);
+        }
+
         [Button]
         public virtual void Die()
         {
@@ -51,35 +63,67 @@ namespace Main.Character.Behaviour
 
         public virtual void TriggerEnter(Character target)
         {
+            AddTarget(target);
             if (isDead) return;
-            Move(false);
-            Attack(true , target);
+            if (IsAttacking()) return;
+            StopAndAttack(target);
         }
 
         public virtual void TriggerExit(Character target)
         {
+            RemoveTarget(target);
             if (isDead) return;
-            Attack(false);
-            Move(true);
+            if (character.AttackAbility.AttackingCharacter == target) ChooseANewTarget();
         }
 
     #endregion
 
     #region Protected Methods
 
-        protected virtual void Attack(bool enable , Character target = null)
+        protected virtual void Attack(bool use , Character target = null)
         {
-            character.Attack(enable , target);
+            character.Attack(use , target);
         }
 
-        protected virtual void Move(bool move)
+        protected virtual void Move(bool use)
         {
-            character.Move(move);
+            character.Move(use);
         }
 
         protected virtual void PlayAnimation(string animationName)
         {
             character.PlayAnimation(animationName);
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private void AddTarget(Character target)
+        {
+            if (triggerTargets.Contains(target) == false) triggerTargets.Add(target);
+        }
+
+        private bool IsAttacking()
+        {
+            return character.AttackAbility.AttackingCharacter != null;
+        }
+
+        private void KeepMove()
+        {
+            Attack(false);
+            Move(true);
+        }
+
+        private void RemoveTarget(Character target)
+        {
+            if (triggerTargets.Contains(target)) triggerTargets.Remove(target);
+        }
+
+        private void StopAndAttack(Character target)
+        {
+            Move(false);
+            Attack(true , target);
         }
 
     #endregion

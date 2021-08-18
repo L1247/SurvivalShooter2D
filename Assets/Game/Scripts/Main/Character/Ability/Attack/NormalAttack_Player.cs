@@ -23,6 +23,7 @@ namespace Main.Character.Ability.Attack
         public override void Attack()
         {
             base.Attack();
+            if (isAttacking == false) return;
             character.PlayAnimation(GetAttackAnimationName());
         }
 

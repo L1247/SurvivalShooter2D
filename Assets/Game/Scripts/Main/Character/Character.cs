@@ -20,6 +20,8 @@ namespace Main.Character
 
         public CharacterBehaviour characterBehaviour { get; private set; }
 
+        public IAttack AttackAbility { get; private set; }
+
         public string Id { get; private set; }
 
     #endregion
@@ -28,13 +30,10 @@ namespace Main.Character
 
         private Animator        animator;
         private CharacterFacing characterFacing;
-
         private CharacterHealth characterHealth;
 
         [Inject]
         private CharacterRepository characterRepository;
-
-        private IAttack attack;
 
         private IMove move;
 
@@ -49,7 +48,7 @@ namespace Main.Character
             characterBehaviour = GetComponent<CharacterBehaviour>();
             characterHealth    = GetComponent<CharacterHealth>();
             move               = GetComponent<IMove>();
-            attack             = GetComponent<IAttack>();
+            AttackAbility      = GetComponent<IAttack>();
             animator           = GetComponent<Animator>();
             characterFacing    = GetComponent<CharacterFacing>();
         }
@@ -58,10 +57,10 @@ namespace Main.Character
 
     #region Public Methods
 
-        public void Attack(bool enable , Character target = null)
+        public void Attack(bool use , Character target = null)
         {
-            attack?.SetEnable(enable);
-            attack?.SetTarget(target);
+            AttackAbility?.SetEnable(use);
+            AttackAbility?.SetTarget(target);
         }
 
         public Vector3 GetCurrentFacingVector()
@@ -69,9 +68,9 @@ namespace Main.Character
             return characterFacing.CurrentDirectionVector;
         }
 
-        public void Move(bool enable)
+        public void Move(bool use)
         {
-            move?.SetEnable(enable);
+            move?.SetEnable(use);
         }
 
         public void PlayAnimation(string animationName)
