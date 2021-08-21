@@ -15,3 +15,4 @@ MonoBehaviour:
   actorPrefab: {fileID: 3234665768501477308, guid: 7f4eb71b0388bf44084a367706596c66,
     type: 3}
   actorDataId: Enemy_1
+  startingHealth: 100

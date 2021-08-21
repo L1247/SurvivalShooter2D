@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e0e933874834866bb43ddc6b3467200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerTargets: []
 --- !u!114 &1906143013897610813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76519932653b4cc0802fb8238f901561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actorDataId: Player_1
 --- !u!114 &2564025338183149968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820c9a55d0d34b6eb328e5f6009b238f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
   StartingHealth: 100
 --- !u!114 &3117375212978690752
 MonoBehaviour:
@@ -221,9 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  leftPatrolX: 1.31
+  leftPatrolX: -10.71
   patrolOffsetX: 3
-  rightPatrolX: 7.31
+  rightPatrolX: -4.71
   spriteRenderer: {fileID: 3234665768501477309}
 --- !u!114 &8822073455693952166
 MonoBehaviour:

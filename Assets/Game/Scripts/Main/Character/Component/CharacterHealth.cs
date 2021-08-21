@@ -47,6 +47,11 @@ namespace Character.Component
             if (currentHealth <= 0) Dead();
         }
 
+        public void SetStartingHealth(int amount)
+        {
+            StartingHealth = amount;
+        }
+
     #endregion
 
     #region Private Methods

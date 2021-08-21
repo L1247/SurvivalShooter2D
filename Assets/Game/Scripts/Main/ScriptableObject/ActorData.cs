@@ -13,6 +13,8 @@ namespace Main.SO
     {
     #region Public Variables
 
+        public int StartingHealth => startingHealth;
+
         public string ActorDataId => actorDataId;
 
         [LabelText("角色Prefab")]
@@ -23,6 +25,11 @@ namespace Main.SO
     #endregion
 
     #region Private Variables
+
+        [SerializeField]
+        [LabelText("初始生命")]
+        [ValidateInput("@startingHealth>0" , "can't be zero , or small than zero")]
+        private int startingHealth = 100;
 
         [SerializeField]
         [LabelText("角色ID")]

@@ -15,3 +15,4 @@ MonoBehaviour:
   actorPrefab: {fileID: 4819695567264185091, guid: bfa47a07369123e46a2422cf6b384af2,
     type: 3}
   actorDataId: Player_1
+  startingHealth: 200

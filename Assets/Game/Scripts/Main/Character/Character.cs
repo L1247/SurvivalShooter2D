@@ -6,8 +6,10 @@ using Main.Character.Ability.Attack;
 using Main.Character.Ability.Move;
 using Main.Character.Behaviour;
 using Main.Character.Component;
+using Main.Character.Data;
 using Main.Character.Repository;
 using UnityEngine;
+using Utilities.Contract;
 using Zenject;
 
 #endregion
@@ -35,7 +37,13 @@ namespace Main.Character
         [Inject]
         private CharacterRepository characterRepository;
 
+        [Inject]
+        private IDataRepository dataRepository;
+
         private IMove move;
+
+        [SerializeField]
+        private string actorDataId;
 
     #endregion
 
@@ -45,12 +53,17 @@ namespace Main.Character
         {
             Id = Guid.NewGuid().ToString();
             characterRepository.Register(Id , this);
-            characterBehaviour = GetComponent<CharacterBehaviour>();
-            characterHealth    = GetComponent<CharacterHealth>();
-            move               = GetComponent<IMove>();
-            AttackAbility      = GetComponent<IAttack>();
-            animator           = GetComponent<Animator>();
-            characterFacing    = GetComponent<CharacterFacing>();
+            GetComponentOfCharacter();
+            IActorData actorData      = null;
+            var        startingHealth = 100;
+            try
+            {
+                actorData      = dataRepository.GetActorData(actorDataId);
+                startingHealth = actorData.StartingHealth;
+            }
+            catch (PostConditionViolationException e) { }
+
+            characterHealth.SetStartingHealth(startingHealth);
         }
 
     #endregion
@@ -87,6 +100,20 @@ namespace Main.Character
         public void TakeDamage(int damage)
         {
             characterHealth?.Add(-damage);
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private void GetComponentOfCharacter()
+        {
+            characterBehaviour = GetComponent<CharacterBehaviour>();
+            characterHealth    = GetComponent<CharacterHealth>();
+            move               = GetComponent<IMove>();
+            AttackAbility      = GetComponent<IAttack>();
+            animator           = GetComponent<Animator>();
+            characterFacing    = GetComponent<CharacterFacing>();
         }
 
     #endregion
