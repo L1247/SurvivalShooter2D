@@ -65,6 +65,7 @@ namespace Main.Character
 
         public Vector3 GetCurrentFacingVector()
         {
+            if (characterFacing == null) return Vector3.right;
             return characterFacing.CurrentDirectionVector;
         }
 
@@ -80,7 +81,7 @@ namespace Main.Character
 
         public void SetFacing(bool faceRight)
         {
-            characterFacing.SetFacing(faceRight);
+            characterFacing?.SetFacing(faceRight);
         }
 
         public void TakeDamage(int damage)
