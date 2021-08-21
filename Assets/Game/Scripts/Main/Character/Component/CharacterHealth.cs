@@ -29,13 +29,9 @@ namespace Character.Component
 
     #region Unity events
 
-        private void Awake()
-        {
-            currentHealth = StartingHealth;
-        }
-
         private void Start()
         {
+            currentHealth = StartingHealth;
             var character = GetComponent<Main.Character.Character>();
             characterId = character.Id;
         }
