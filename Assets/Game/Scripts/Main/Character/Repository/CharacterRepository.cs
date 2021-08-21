@@ -27,9 +27,19 @@ namespace Main.Character.Repository
             return characters[id];
         }
 
+        public List<Character> GetAllCharacter()
+        {
+            return characters.Values.ToList();
+        }
+
         public void Register(string id , Character character)
         {
             characters.Add(id , character);
+        }
+
+        public void Remove(string characterId)
+        {
+            characters.Remove(characterId);
         }
 
     #endregion

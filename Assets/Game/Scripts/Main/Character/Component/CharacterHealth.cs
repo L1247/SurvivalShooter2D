@@ -1,6 +1,7 @@
 #region
 
 using Main.Event;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
@@ -12,12 +13,14 @@ namespace Character.Component
     {
     #region Private Variables
 
-        private int currentHealth;
-
         [Inject]
         private SignalBus signalBus;
 
         private string characterId;
+
+        [SerializeField]
+        [ReadOnly]
+        private int currentHealth;
 
         [SerializeField]
         private int StartingHealth = 100;

@@ -11,6 +11,12 @@ namespace Main.Character.Ability.Attack
 {
     public class AttackBase : MonoBehaviour , IAttack
     {
+    #region Public Variables
+
+        public Character AttackingCharacter => attackingCharacter;
+
+    #endregion
+
     #region Protected Variables
 
         protected bool      isAttacking;

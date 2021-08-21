@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Sirenix.Utilities;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -198,22 +197,6 @@ namespace AutoBot.Utilities
 
         #endif
             return _sprites;
-        }
-
-        public static Type GetType(string typeName , Type typeOfExistAssembly)
-        {
-            var allTypesOfAssembly = typeOfExistAssembly.Assembly.GetTypes().ToList();
-            var types              = allTypesOfAssembly.FindAll(t => t.GetNiceName() == typeName);
-            var inGameDataStructure = types.FirstOrDefault(t =>
-            {
-                var fullName = t.FullName;
-                var contains =
-                    fullName.Contains("GameDataStructure") ||
-                    fullName.Contains("ViewDataSo");
-                return contains;
-            });
-            if (inGameDataStructure != null) return inGameDataStructure;
-            return types.Count > 0 ? types[0] : null;
         }
 
         public static List<AnimationClip> LoadAllClipAtPath(string path)

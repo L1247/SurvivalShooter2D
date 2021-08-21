@@ -1,5 +1,6 @@
 #region
 
+using System.Linq;
 using Main.Character.Behaviour;
 using Main.Character.Presenter;
 using Main.Character.Repository;
@@ -47,9 +48,16 @@ namespace Main.Event
 
         private void OnCharacterDead(CharacterDead obj)
         {
-            var characterId        = obj.CharacterId;
-            var characterBehaviour = GetCharacterBehaviour(characterId);
-            characterBehaviour.Die();
+            var deadCharacterId        = obj.CharacterId;
+            var deadCharacter          = characterRepository.FindById(deadCharacterId);
+            var deadCharacterBehaviour = deadCharacter.characterBehaviour;
+            deadCharacterBehaviour.Die();
+            characterRepository.Remove(deadCharacterId);
+            var allCharacter = characterRepository.GetAllCharacter();
+            var sameTargetCharacters = allCharacter
+                                       .Where(character => character.AttackAbility.AttackingCharacter == deadCharacter)
+                                       .ToList();
+            sameTargetCharacters.ForEach(character => character.characterBehaviour.ChooseANewTarget());
         }
 
         private void OnCharacterModified(CharacterHealthModified healthModified)
