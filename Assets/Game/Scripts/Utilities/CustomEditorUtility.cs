@@ -121,6 +121,15 @@ namespace AutoBot.Utilities
             return path;
         }
 
+        public static string GetAssetPath(Object obj)
+        {
+            var path = string.Empty;
+        #if UNITY_EDITOR
+            path = AssetDatabase.GetAssetPath(obj);
+        #endif
+            return path;
+        }
+
 
         public static T GetScriptableObject<T>() where T : ScriptableObject
         {

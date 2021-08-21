@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76519932653b4cc0802fb8238f901561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actorDataId: Player_1
+  actorDataId: Enemy_1
 --- !u!114 &2564025338183149968
 MonoBehaviour:
   m_ObjectHideFlags: 0

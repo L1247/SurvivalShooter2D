@@ -34,7 +34,7 @@ namespace Main.Character.Component
 
     #region Unity events
 
-        private void Awake()
+        private void Start()
         {
             SetFacing(startingFaceRight);
         }
@@ -42,6 +42,11 @@ namespace Main.Character.Component
     #endregion
 
     #region Public Methods
+
+        public void SetDefaultSpriteRight(bool spriteRight)
+        {
+            defaultSpriteRight = spriteRight;
+        }
 
         [Button]
         public virtual void SetFacing(bool faceRight)

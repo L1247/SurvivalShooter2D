@@ -6,7 +6,6 @@ using Main.Character.Ability.Attack;
 using Main.Character.Ability.Move;
 using Main.Character.Behaviour;
 using Main.Character.Component;
-using Main.Character.Data;
 using Main.Character.Repository;
 using UnityEngine;
 using Utilities.Contract;
@@ -54,16 +53,21 @@ namespace Main.Character
             Id = Guid.NewGuid().ToString();
             characterRepository.Register(Id , this);
             GetComponentOfCharacter();
-            IActorData actorData      = null;
-            var        startingHealth = 100;
+            var startingHealth     = 100;
+            var defaultSpriteRight = true;
+            var defaultFacingRight = true;
             try
             {
-                actorData      = dataRepository.GetActorData(actorDataId);
-                startingHealth = actorData.StartingHealth;
+                var actorData = dataRepository.GetActorData(actorDataId);
+                startingHealth     = actorData.StartingHealth;
+                defaultSpriteRight = actorData.DefaultSpriteRight;
+                defaultFacingRight = actorData.DefaultFacingRight;
             }
             catch (PostConditionViolationException e) { }
 
-            characterHealth.SetStartingHealth(startingHealth);
+            characterHealth?.SetStartingHealth(startingHealth);
+            characterFacing?.SetDefaultSpriteRight(defaultSpriteRight);
+            characterFacing?.SetFacing(defaultFacingRight);
         }
 
     #endregion

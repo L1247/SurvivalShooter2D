@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actorPrefab: {fileID: 3234665768501477308, guid: 7f4eb71b0388bf44084a367706596c66,
     type: 3}
-  actorDataId: Enemy_1
   startingHealth: 100
+  actorDataId: Enemy_1
+  defaultSpriteRight: 0
+  defaultFacingRight: 0
+  preview: {fileID: 8793639957104055765, guid: 93685d0d260a4dd46824cbe2adc9a405, type: 3}
