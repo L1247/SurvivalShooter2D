@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 1906143013897610813}
   - component: {fileID: 8575194469531397684}
   - component: {fileID: 8662401004273738341}
-  - component: {fileID: 2564025338183149968}
   - component: {fileID: 7544119842836239632}
   - component: {fileID: 4293817900944457181}
   - component: {fileID: 8822073455693952166}
@@ -197,20 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actorDataId: Enemy_1
---- !u!114 &2564025338183149968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3234665768501477308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 820c9a55d0d34b6eb328e5f6009b238f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  StartingHealth: 100
 --- !u!114 &7544119842836239632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,9 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  leftPatrolX: 0.23000002
+  leftPatrolX: 2.12
   patrolOffsetX: 3
-  rightPatrolX: 6.23
+  rightPatrolX: 8.12
   spriteRenderer: {fileID: 3234665768501477309}
 --- !u!114 &8822073455693952166
 MonoBehaviour:

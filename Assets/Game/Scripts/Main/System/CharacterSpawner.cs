@@ -37,6 +37,8 @@ namespace Main.System
             var characterInstance = container.InstantiatePrefab(characterPrefab , spawnPoint.transform);
             characterInstance.transform.localPosition = Vector3.zero;
             characterInstance.transform.parent        = null;
+            var character = characterInstance.GetComponent<Character.Character>();
+            character.Init();
         }
 
     #endregion

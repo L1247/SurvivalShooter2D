@@ -1,6 +1,7 @@
 #region
 
 using AutoBot.Utilities;
+using Character.Component;
 using Main.Character.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace Main.SO
 
         public bool DefaultSpriteRight => defaultSpriteRight;
 
-        public int StartingHealth => startingHealth;
+        public CharacterHealth.Setting SettingHealth => settingHealth;
 
         public string ActorDataId => actorDataId;
 
@@ -42,10 +43,9 @@ namespace Main.SO
         private bool defaultSpriteRight;
 
         [SerializeField]
-        [LabelText("初始生命")]
-        [ValidateInput("@startingHealth>0" , "can't be zero , or small than zero")]
-        [PropertyOrder]
-        private int startingHealth = 100;
+        [LabelText("血量資料")]
+        [Required]
+        private CharacterHealth.Setting settingHealth;
 
         [SerializeField]
         [PropertyOrder(-1)]

@@ -58,10 +58,7 @@ namespace Main.SO
             characterRepository = container.Resolve<CharacterRepository>();
         }
 
-        private void OnGUI()
-        {
-            var characterIdList = characterRepository.FindAllId();
-        }
+        private void OnGUI() { }
 
 
         [OnInspectorGUI]

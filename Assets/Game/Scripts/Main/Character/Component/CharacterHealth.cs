@@ -1,5 +1,6 @@
 #region
 
+using System;
 using Main.Event;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -9,31 +10,25 @@ using Zenject;
 
 namespace Character.Component
 {
-    public class CharacterHealth : MonoBehaviour
+    public class CharacterHealth
     {
     #region Private Variables
 
-        [Inject]
-        private SignalBus signalBus;
-
-        private string characterId;
-
-        [SerializeField]
-        [ReadOnly]
         private int currentHealth;
 
-        [SerializeField]
-        private int StartingHealth = 100;
+        private readonly SignalBus signalBus;
+
+        private readonly string characterId;
 
     #endregion
 
-    #region Unity events
+    #region Constructor
 
-        private void Start()
+        public CharacterHealth(string id , Setting setting , SignalBus signalBus)
         {
-            currentHealth = StartingHealth;
-            var character = GetComponent<Main.Character.Character>();
-            characterId = character.Id;
+            this.signalBus = signalBus;
+            currentHealth  = setting.StartingHealth;
+            characterId    = id;
         }
 
     #endregion
@@ -47,11 +42,6 @@ namespace Character.Component
             if (currentHealth <= 0) Dead();
         }
 
-        public void SetStartingHealth(int amount)
-        {
-            StartingHealth = amount;
-        }
-
     #endregion
 
     #region Private Methods
@@ -59,6 +49,30 @@ namespace Character.Component
         private void Dead()
         {
             signalBus.Fire(new CharacterDead(characterId));
+        }
+
+    #endregion
+
+    #region Nested Types
+
+        [Serializable]
+        public class Setting
+        {
+        #region Public Variables
+
+            public int StartingHealth => startingHealth;
+
+        #endregion
+
+        #region Private Variables
+
+            [SerializeField]
+            [LabelText("初始生命")]
+            [ValidateInput("@startingHealth>0" , "can't be zero , or small than zero")]
+            [PropertyOrder]
+            private int startingHealth = 100;
+
+        #endregion
         }
 
     #endregion

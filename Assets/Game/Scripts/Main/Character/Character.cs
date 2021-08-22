@@ -7,6 +7,7 @@ using Main.Character.Ability.Move;
 using Main.Character.Behaviour;
 using Main.Character.Component;
 using Main.Character.Repository;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Utilities.Contract;
 using Zenject;
@@ -41,34 +42,11 @@ namespace Main.Character
 
         private IMove move;
 
+        [Inject]
+        private SignalBus signalBus;
+
         [SerializeField]
         private string actorDataId;
-
-    #endregion
-
-    #region Unity events
-
-        private void Awake()
-        {
-            Id = Guid.NewGuid().ToString();
-            characterRepository.Register(Id , this);
-            GetComponentOfCharacter();
-            var startingHealth     = 100;
-            var defaultSpriteRight = true;
-            var defaultFacingRight = true;
-            try
-            {
-                var actorData = dataRepository.GetActorData(actorDataId);
-                startingHealth     = actorData.StartingHealth;
-                defaultSpriteRight = actorData.DefaultSpriteRight;
-                defaultFacingRight = actorData.DefaultFacingRight;
-            }
-            catch (PostConditionViolationException e) { }
-
-            characterHealth?.SetStartingHealth(startingHealth);
-            characterFacing?.SetDefaultSpriteRight(defaultSpriteRight);
-            characterFacing?.SetFacing(defaultFacingRight);
-        }
 
     #endregion
 
@@ -86,6 +64,26 @@ namespace Main.Character
             return characterFacing.CurrentDirectionVector;
         }
 
+        public void Init()
+        {
+            Id = Guid.NewGuid().ToString();
+            characterRepository.Register(Id , this);
+            GetComponentOfCharacter();
+            var defaultSpriteRight = true;
+            var defaultFacingRight = true;
+            try
+            {
+                var actorData = dataRepository.GetActorData(actorDataId);
+                characterHealth    = new CharacterHealth(Id , actorData.SettingHealth , signalBus);
+                defaultSpriteRight = actorData.DefaultSpriteRight;
+                defaultFacingRight = actorData.DefaultFacingRight;
+            }
+            catch (PostConditionViolationException e) { }
+
+            characterFacing?.SetDefaultSpriteRight(defaultSpriteRight);
+            characterFacing?.SetFacing(defaultFacingRight);
+        }
+
         public void Move(bool use)
         {
             move?.SetEnable(use);
@@ -101,6 +99,7 @@ namespace Main.Character
             characterFacing?.SetFacing(faceRight);
         }
 
+        [Button]
         public void TakeDamage(int damage)
         {
             characterHealth?.Add(-damage);
@@ -113,7 +112,6 @@ namespace Main.Character
         private void GetComponentOfCharacter()
         {
             characterBehaviour = GetComponent<CharacterBehaviour>();
-            characterHealth    = GetComponent<CharacterHealth>();
             move               = GetComponent<IMove>();
             AttackAbility      = GetComponent<IAttack>();
             animator           = GetComponent<Animator>();
