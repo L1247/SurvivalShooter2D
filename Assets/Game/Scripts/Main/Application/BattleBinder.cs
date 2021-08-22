@@ -28,6 +28,7 @@ namespace Main.Application
             // System
             Container.Bind<CharacterRepository>().AsSingle();
             Container.Bind<PopupTextSpawner>().AsSingle();
+            Container.Bind<CharacterSpawner>().AsSingle();
             // Presenter
             Container.Bind<CharacterPresenter>().AsSingle();
             // Repository

@@ -3,8 +3,8 @@
 using System.Collections;
 using System.Linq;
 using AutoBot.Utilities;
-using Main.Character.Presenter;
 using Main.Character.Repository;
+using Main.System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -21,8 +21,9 @@ namespace Main.SO
         private ActorDataOverview actorDataOverview;
 
         private bool                init;
-        private CharacterPresenter  characterPresenter;
         private CharacterRepository characterRepository;
+
+        private CharacterSpawner characterSpawner;
 
         [InlineButton("CreateActor")]
         [SerializeField]
@@ -35,7 +36,7 @@ namespace Main.SO
 
         private void CreateActor()
         {
-            characterPresenter.SpawnCharacter(actorDataId);
+            characterSpawner.Spawn(actorDataId);
         }
 
         private IEnumerable GetAllActorDataIds()
@@ -53,7 +54,7 @@ namespace Main.SO
             init = true;
             var sceneContext = FindObjectOfType<SceneContext>();
             var container    = sceneContext.Container;
-            characterPresenter  = container.Resolve<CharacterPresenter>();
+            characterSpawner    = container.Resolve<CharacterSpawner>();
             characterRepository = container.Resolve<CharacterRepository>();
         }
 

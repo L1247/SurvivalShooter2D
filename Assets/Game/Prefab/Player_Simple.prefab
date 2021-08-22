@@ -15,13 +15,7 @@ GameObject:
   - component: {fileID: 101848872}
   - component: {fileID: 5568006568785088961}
   - component: {fileID: 6117388890906524513}
-  - component: {fileID: 5810371867747269361}
   - component: {fileID: 5234347968843912324}
-  - component: {fileID: 4794258690929566380}
-  - component: {fileID: 7342619741099287497}
-  - component: {fileID: 6503573652773877466}
-  - component: {fileID: 2341925155490409624}
-  - component: {fileID: 4292199622721683581}
   m_Layer: 0
   m_Name: Player_Simple
   m_TagString: Player
@@ -195,19 +189,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   StartingHealth: 100
---- !u!114 &5810371867747269361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819695567264185091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5fa420dca4a469fa35ec29d16d868de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TAG_TARGET: Enemy
 --- !u!114 &5234347968843912324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,84 +202,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actorDataId: Player_1
---- !u!114 &4794258690929566380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819695567264185091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 5234347968843912324}
-  - {fileID: 5810371867747269361}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 0
---- !u!114 &7342619741099287497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819695567264185091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b64969e194d8441ab72ff374880540, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerTargets: []
-  ANIMATION_DIE: Death
---- !u!114 &6503573652773877466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819695567264185091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f27317801384e49a96c38c377542cce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingFaceRight: 1
-  spriteRenderer: {fileID: 4819695567264185100}
-  defaultSpriteRight: 1
---- !u!114 &2341925155490409624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819695567264185091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9f699e98f64daf993bfedfac4ec6cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  ANIMATION_IDLE: Idle
-  ANIMATION_MOVE: Move
---- !u!114 &4292199622721683581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819695567264185091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2955f9ffd1e545109e01005fabdabea2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackSpeed: 0.5
-  damage: 10
-  attackAnimationNames:
-  - Attack1
-  - Attack2
-  - Attack3
