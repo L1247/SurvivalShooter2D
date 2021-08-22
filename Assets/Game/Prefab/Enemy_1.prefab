@@ -11,15 +11,15 @@ GameObject:
   - component: {fileID: 3234665768501477282}
   - component: {fileID: 3234665768501477309}
   - component: {fileID: 3234665768501477283}
+  - component: {fileID: 3117375212978690752}
   - component: {fileID: 3234665766942828949}
   - component: {fileID: 1906143013897610813}
   - component: {fileID: 8575194469531397684}
   - component: {fileID: 8662401004273738341}
   - component: {fileID: 2564025338183149968}
-  - component: {fileID: 3117375212978690752}
+  - component: {fileID: 7544119842836239632}
   - component: {fileID: 4293817900944457181}
   - component: {fileID: 8822073455693952166}
-  - component: {fileID: 7544119842836239632}
   m_Layer: 0
   m_Name: Enemy_1
   m_TagString: Enemy
@@ -120,6 +120,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &3117375212978690752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234665768501477308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf1effc8c60aec4eb93328aed0d3b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  show: 1
+  volume: 1
+  Collider_Type: 0
+  static_color: {r: 0, g: 1, b: 0, a: 0.3}
+  color_in_collision: 0
+  collision_color: {r: 1, g: 0, b: 0, a: 0.3}
+  trans: {fileID: 3234665768501477282}
 --- !u!114 &3234665766942828949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,56 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   StartingHealth: 100
---- !u!114 &3117375212978690752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3234665768501477308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf1effc8c60aec4eb93328aed0d3b5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  show: 1
-  volume: 1
-  Collider_Type: 0
-  static_color: {r: 0, g: 1, b: 0, a: 0.3}
-  color_in_collision: 0
-  collision_color: {r: 1, g: 0, b: 0, a: 0.3}
-  trans: {fileID: 3234665768501477282}
---- !u!114 &4293817900944457181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3234665768501477308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c6a71dda34b4ba9b8770a7b6427e382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
-  leftPatrolX: -10.71
-  patrolOffsetX: 3
-  rightPatrolX: -4.71
-  spriteRenderer: {fileID: 3234665768501477309}
---- !u!114 &8822073455693952166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3234665768501477308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c3576ead142438bbc1dd6c8c3c3d0ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackSpeed: 0.5
-  damage: 10
 --- !u!114 &7544119842836239632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,3 +226,34 @@ MonoBehaviour:
   startingFaceRight: 0
   spriteRenderer: {fileID: 3234665768501477309}
   defaultSpriteRight: 0
+--- !u!114 &4293817900944457181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234665768501477308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6a71dda34b4ba9b8770a7b6427e382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  leftPatrolX: 0.23000002
+  patrolOffsetX: 3
+  rightPatrolX: 6.23
+  spriteRenderer: {fileID: 3234665768501477309}
+--- !u!114 &8822073455693952166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234665768501477308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3576ead142438bbc1dd6c8c3c3d0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackSpeed: 0.5
+  damage: 10

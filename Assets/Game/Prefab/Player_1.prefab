@@ -13,15 +13,15 @@ GameObject:
   - component: {fileID: 4819695567264185103}
   - component: {fileID: 5959520608705589107}
   - component: {fileID: 101848872}
+  - component: {fileID: 5568006568785088961}
   - component: {fileID: 6117388890906524513}
+  - component: {fileID: 5810371867747269361}
   - component: {fileID: 5234347968843912324}
   - component: {fileID: 4794258690929566380}
   - component: {fileID: 7342619741099287497}
-  - component: {fileID: 5810371867747269361}
-  - component: {fileID: 5568006568785088961}
+  - component: {fileID: 6503573652773877466}
   - component: {fileID: 2341925155490409624}
   - component: {fileID: 4292199622721683581}
-  - component: {fileID: 6503573652773877466}
   m_Layer: 0
   m_Name: Player_1
   m_TagString: Player
@@ -162,6 +162,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5568006568785088961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819695567264185091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf1effc8c60aec4eb93328aed0d3b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  show: 1
+  volume: 1
+  Collider_Type: 0
+  static_color: {r: 0, g: 1, b: 0, a: 0.3}
+  color_in_collision: 0
+  collision_color: {r: 1, g: 0, b: 0, a: 0.3}
+  trans: {fileID: 4819695567264185101}
 --- !u!114 &6117388890906524513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +195,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   StartingHealth: 100
+--- !u!114 &5810371867747269361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819695567264185091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5fa420dca4a469fa35ec29d16d868de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TAG_TARGET: Enemy
 --- !u!114 &5234347968843912324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerTargets: []
   ANIMATION_DIE: Death
---- !u!114 &5810371867747269361
+--- !u!114 &6503573652773877466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,29 +263,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4819695567264185091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5fa420dca4a469fa35ec29d16d868de, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f27317801384e49a96c38c377542cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TAG_TARGET: Enemy
---- !u!114 &5568006568785088961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819695567264185091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf1effc8c60aec4eb93328aed0d3b5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  show: 1
-  volume: 1
-  Collider_Type: 0
-  static_color: {r: 0, g: 1, b: 0, a: 0.3}
-  color_in_collision: 0
-  collision_color: {r: 1, g: 0, b: 0, a: 0.3}
-  trans: {fileID: 4819695567264185101}
+  startingFaceRight: 1
+  spriteRenderer: {fileID: 4819695567264185100}
+  defaultSpriteRight: 1
 --- !u!114 &2341925155490409624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,18 +302,3 @@ MonoBehaviour:
   - Attack1
   - Attack2
   - Attack3
---- !u!114 &6503573652773877466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819695567264185091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f27317801384e49a96c38c377542cce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingFaceRight: 1
-  spriteRenderer: {fileID: 4819695567264185100}
-  defaultSpriteRight: 1
