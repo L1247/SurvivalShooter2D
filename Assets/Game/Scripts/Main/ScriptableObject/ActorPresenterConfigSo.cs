@@ -40,6 +40,9 @@ namespace Main.SO
 
         private IEnumerable GetAllActorDataIds()
         {
+            if (actorDataOverview == null)
+                return null;
+
             return actorDataOverview.FindAll().Select(data => data.ActorDataId)
                                     .Select(id => new ValueDropdownItem(id , id));
         }
