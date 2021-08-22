@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Main.Character.Behaviour
 {
-    public class PlayerBehaviour : CharacterBehaviour
+    public class PlayerCharacterBehaviour : CharacterBehaviour
     {
     #region Private Variables
 
