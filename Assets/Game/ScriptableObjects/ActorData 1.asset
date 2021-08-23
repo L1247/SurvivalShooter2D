@@ -16,6 +16,7 @@ MonoBehaviour:
     type: 3}
   defaultFacingRight: 1
   defaultSpriteRight: 1
-  startingHealth: 200
+  settingHealth:
+    startingHealth: 200
   preview: {fileID: 3234629978573100161, guid: 0e3502a80399d164ea01f1868f65acbf, type: 3}
   actorDataId: Player_1

@@ -15,7 +15,8 @@
     "precompiledReferences": [
         "DOTween.dll",
         "Zenject-usage.dll",
-        "Sirenix.OdinInspector.Attributes.dll"
+        "Sirenix.OdinInspector.Attributes.dll",
+        "Sirenix.Utilities.Editor.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [],

@@ -1,5 +1,7 @@
 #region
 
+#region
+
 using System;
 using Character.Component;
 using Main.Character.Ability.Attack;
@@ -14,6 +16,11 @@ using Zenject;
 
 #endregion
 
+#if UNITY_EDITOR
+#endif
+
+#endregion
+
 namespace Main.Character
 {
     public class Character : MonoBehaviour
@@ -21,6 +28,7 @@ namespace Main.Character
     #region Public Variables
 
         public CharacterBehaviour characterBehaviour { get; private set; }
+        public CharacterHealth    CharacterHealth    { get; private set; }
 
         public IAttack AttackAbility { get; private set; }
 
@@ -32,7 +40,6 @@ namespace Main.Character
 
         private Animator        animator;
         private CharacterFacing characterFacing;
-        private CharacterHealth characterHealth;
 
         [Inject]
         private CharacterRepository characterRepository;
@@ -74,7 +81,7 @@ namespace Main.Character
             try
             {
                 var actorData = dataRepository.GetActorData(actorDataId);
-                characterHealth    = new CharacterHealth(Id , actorData.SettingHealth , signalBus);
+                CharacterHealth    = new CharacterHealth(Id , actorData.SettingHealth , signalBus);
                 defaultSpriteRight = actorData.DefaultSpriteRight;
                 defaultFacingRight = actorData.DefaultFacingRight;
             }
@@ -102,7 +109,7 @@ namespace Main.Character
         [Button]
         public void TakeDamage(int damage)
         {
-            characterHealth?.Add(-damage);
+            CharacterHealth?.Add(-damage);
         }
 
     #endregion

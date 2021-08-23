@@ -12,9 +12,13 @@ namespace Character.Component
 {
     public class CharacterHealth
     {
-    #region Private Variables
+    #region Public Variables
 
-        private int currentHealth;
+        public int CurrentHealth { get; private set; }
+
+    #endregion
+
+    #region Private Variables
 
         private readonly SignalBus signalBus;
 
@@ -27,7 +31,7 @@ namespace Character.Component
         public CharacterHealth(string id , Setting setting , SignalBus signalBus)
         {
             this.signalBus = signalBus;
-            currentHealth  = setting.StartingHealth;
+            CurrentHealth  = setting.StartingHealth;
             characterId    = id;
         }
 
@@ -37,9 +41,9 @@ namespace Character.Component
 
         public void Add(int amount)
         {
-            currentHealth += amount;
+            CurrentHealth += amount;
             signalBus.Fire(new CharacterHealthModified(characterId , amount));
-            if (currentHealth <= 0) Dead();
+            if (CurrentHealth <= 0) Dead();
         }
 
     #endregion
