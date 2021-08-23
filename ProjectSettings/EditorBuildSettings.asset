@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Game/Scenes/Tiny Platformer Forest Scene.unity
+    guid: 07c5cde2882d7ff408426b69e62156e6
   m_configObjects: {}
