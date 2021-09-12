@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8d4d254346408e9a0bbfb63962d0d5, type: 3}
   m_Name: ActorData 1
   m_EditorClassIdentifier: 
-  actorPrefab: {fileID: 4819695567264185091, guid: d45c37e393361b04cb61dd2132d7505c,
+  actorPrefab: {fileID: 3234665768501477308, guid: 7f4eb71b0388bf44084a367706596c66,
     type: 3}
   defaultFacingRight: 1
   defaultSpriteRight: 1
   settingHealth:
     startingHealth: 200
-  preview: {fileID: 3234629978573100161, guid: 0e3502a80399d164ea01f1868f65acbf, type: 3}
+  preview: {fileID: 8793639957104055765, guid: 93685d0d260a4dd46824cbe2adc9a405, type: 3}
   actorDataId: Player_1

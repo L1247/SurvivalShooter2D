@@ -1,6 +1,7 @@
 #region
 
 using Character.Component;
+using EditorUtilities;
 using Main.Character.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace Main.SO
         [LabelText("角色Prefab")]
         [Required]
         [PropertyOrder(2)]
+        [OnValueChanged("ChangePreview")]
+        [AssetSelector(Paths = "Assets/Game/Prefab/Actor")]
         public GameObject actorPrefab;
 
     #endregion
@@ -49,7 +52,7 @@ namespace Main.SO
 
         [SerializeField]
         [PropertyOrder(-1)]
-        [PreviewField(Height = 100 , Alignment = ObjectFieldAlignment.Center , AlignmentHasValue = true)]
+        [PreviewField(Height = 100 , Alignment = ObjectFieldAlignment.Center)]
         [HideLabel]
         private Sprite preview;
 
@@ -58,6 +61,26 @@ namespace Main.SO
         [Required]
         [PropertyOrder(1)]
         private string actorDataId;
+
+    #endregion
+
+    #region Private Methods
+
+        private void ChangePreview()
+        {
+            if (actorPrefab == null) return;
+            var spriteRenderer = actorPrefab.GetComponent<SpriteRenderer>();
+            preview = spriteRenderer.sprite;
+            CustomEditorUtility.SetDirty(this);
+            CustomEditorUtility.SaveAssets();
+        }
+
+
+        [OnInspectorInit]
+        private void InspectorInit()
+        {
+            ChangePreview();
+        }
 
     #endregion
     }
