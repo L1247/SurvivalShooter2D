@@ -43,7 +43,8 @@ namespace Main.SO
         private bool defaultSpriteRight;
 
         [SerializeField]
-        [LabelText("血量資料")]
+        [BoxGroup("血量資料")]
+        [HideLabel]
         [Required]
         private CharacterHealth.Setting settingHealth;
 
