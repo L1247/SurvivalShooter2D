@@ -113,11 +113,11 @@ namespace EditorUtilities
             return path;
         }
 
-        public static string GetAssetPath(Object obj)
+        public static string GetAssetPath(ScriptableObject scriptableObject)
         {
             var path = string.Empty;
         #if UNITY_EDITOR
-            path = AssetDatabase.GetAssetPath(obj);
+            path = AssetDatabase.GetAssetPath(scriptableObject);
         #endif
             return path;
         }
@@ -272,25 +272,6 @@ namespace EditorUtilities
             return animationClips;
         }
 
-        public static List<Object> LoadAllPngAtPath(string path)
-        {
-            var objs = new List<Object>();
-        #if UNITY_EDITOR
-            var dataPath = Application.dataPath + path.Replace("Assets" , "");
-            Debug.Log($"path {dataPath}");
-            var allMatInPath = Directory.GetFiles(dataPath , "*.Png" ,
-                                                  SearchOption.AllDirectories);
-            foreach (var matPath in allMatInPath)
-            {
-                var assetPath = "Assets" + matPath.Replace(Application.dataPath , "")
-                                                  .Replace('\\' , '/');
-                var obj = AssetDatabase.LoadAssetAtPath<Object>(assetPath);
-                objs.Add(obj);
-            }
-        #endif
-            return objs;
-        }
-
         public static T LoadAssetAtPath<T>(string path) where T : Object
         {
             var t = default(T);
@@ -298,31 +279,6 @@ namespace EditorUtilities
             t = AssetDatabase.LoadAssetAtPath<T>(path);
         #endif
             return t;
-        }
-
-        public static Sprite LoadSpriteAtPath(string path)
-        {
-            // var loadAllPngAtPath = LoadAllPngAtPath(path);
-            // var allAssetPath     = new List<string>();
-            //
-            // foreach (var asset in loadAllPngAtPath)
-            // {
-            // #if UNITY_EDITOR
-            //     var assetPath = AssetDatabase.GetAssetPath(asset);
-            //     allAssetPath.Add(assetPath);
-            // #endif
-            // }
-
-            var sprites = new List<Sprite>();
-            // foreach (var assetPath in allAssetPath)
-            // {
-        #if UNITY_EDITOR
-            var assets         = AssetDatabase.LoadAllAssetsAtPath(path);
-            var spritesInAsset = assets.Where(q => q is Sprite).Cast<Sprite>().ToList();
-            foreach (var sprite in spritesInAsset) sprites.Add(sprite);
-        #endif
-            // }
-            return sprites.Count > 0 ? sprites[0] : null;
         }
 
         public static void PingObject(Object instance)
