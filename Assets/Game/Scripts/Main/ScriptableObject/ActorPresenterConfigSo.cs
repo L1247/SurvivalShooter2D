@@ -2,7 +2,7 @@
 
 using System.Collections;
 using System.Linq;
-using AutoBot.Utilities;
+using EditorUtilities;
 using Main.Character.Repository;
 using Main.System;
 using Sirenix.OdinInspector;

@@ -1,3 +1,5 @@
+// using Sirenix.Utilities;
+
 #region
 
 using System;
@@ -15,7 +17,7 @@ using UnityEditor.Animations;
 
 #endregion
 
-namespace AutoBot.Utilities
+namespace EditorUtilities
 {
     public static class CustomEditorUtility
     {
@@ -94,8 +96,7 @@ namespace AutoBot.Utilities
             var states   = animator.layers[0].stateMachine.states;
             foreach (var state in states)
             {
-                var stateName = state.state.ToString()
-                                     .Replace(" (UnityEngine.AnimatorState)" , "");
+                var stateName = state.state.ToString().Replace(" (UnityEngine.AnimatorState)" , "");
                 allStateName.Add(stateName);
             }
         #endif
@@ -112,15 +113,6 @@ namespace AutoBot.Utilities
             return path;
         }
 
-        public static string GetAssetPath(ScriptableObject scriptableObject)
-        {
-            var path = string.Empty;
-        #if UNITY_EDITOR
-            path = AssetDatabase.GetAssetPath(scriptableObject);
-        #endif
-            return path;
-        }
-
         public static string GetAssetPath(Object obj)
         {
             var path = string.Empty;
@@ -130,31 +122,36 @@ namespace AutoBot.Utilities
             return path;
         }
 
+        public static List<Object> GetAssets(string assetName)
+        {
+            var ts = new List<Object>();
+        #if UNITY_EDITOR
+            var results = AssetDatabase.FindAssets(assetName);
+            foreach (var guid2 in results)
+            {
+                var assetPath = AssetDatabase.GUIDToAssetPath(guid2);
+                ts.Add(AssetDatabase.LoadAssetAtPath<Object>(assetPath));
+            }
+        #endif
+            return ts;
+        }
+
 
         public static T GetScriptableObject<T>() where T : ScriptableObject
         {
             return GetScriptableObjects<T>().First();
         }
 
-        public static List<T> GetScriptableObjects<T>(string path = "") where T : ScriptableObject
+        public static List<T> GetScriptableObjects<T>() where T : ScriptableObject
         {
             var ts   = new List<T>();
             var type = typeof(T);
         #if UNITY_EDITOR
-            var guids2       = AssetDatabase.FindAssets($"t:{type}");
-            var pathNotEmpty = string.IsNullOrEmpty(path) == false;
+            var guids2 = AssetDatabase.FindAssets($"t:{type}");
             foreach (var guid2 in guids2)
             {
                 var assetPath = AssetDatabase.GUIDToAssetPath(guid2);
-                // path check
-                if (pathNotEmpty)
-                {
-                    var notContainsPath = assetPath.Contains(path) == false;
-                    if (notContainsPath) continue;
-                }
-
-                var asset = (T)AssetDatabase.LoadAssetAtPath(assetPath , type);
-                ts.Add(asset);
+                ts.Add((T)AssetDatabase.LoadAssetAtPath(assetPath , type));
             }
         #endif
             return ts;
@@ -208,18 +205,31 @@ namespace AutoBot.Utilities
             return _sprites;
         }
 
+        public static Type GetType(string typeName , Type typeOfExistAssembly)
+        {
+            // var allTypesOfAssembly = typeOfExistAssembly.Assembly.GetTypes().ToList();
+            // var types              = allTypesOfAssembly.FindAll(t => t.GetNiceName() == typeName);
+            // var inGameDataStructure = types.FirstOrDefault(t =>
+            // {
+            //     var fullName = t.FullName;
+            //     var contains = fullName.Contains("GameDataStructure") || fullName.Contains("ViewDataSo");
+            //     return contains;
+            // });
+            // if (inGameDataStructure != null) return inGameDataStructure;
+            // return types.Count > 0 ? types[0] : null;
+            return null;
+        }
+
         public static List<AnimationClip> LoadAllClipAtPath(string path)
         {
             var animationClips = new List<AnimationClip>();
 
         #if UNITY_EDITOR
-            var dataPath = Application.dataPath + path.Replace("Assets" , "");
-            var allClipNameInPath = Directory.GetFiles(dataPath , "*.anim" ,
-                                                       SearchOption.AllDirectories);
+            var dataPath          = Application.dataPath + path.Replace("Assets" , "");
+            var allClipNameInPath = Directory.GetFiles(dataPath , "*.anim" , SearchOption.AllDirectories);
             foreach (var clipPath in allClipNameInPath)
             {
-                var assetPath = "Assets" + clipPath.Replace(Application.dataPath , "")
-                                                   .Replace('\\' , '/');
+                var assetPath     = "Assets" + clipPath.Replace(Application.dataPath , "").Replace('\\' , '/');
                 var animationClip = AssetDatabase.LoadAssetAtPath<AnimationClip>(assetPath);
                 animationClips.Add(animationClip);
             }
@@ -231,14 +241,12 @@ namespace AutoBot.Utilities
         {
             var animationClips = new List<Material>();
         #if UNITY_EDITOR
-            var dataPath = Application.dataPath + path.Replace("Assets" , "");
-            var allMatInPath = Directory.GetFiles(dataPath , "*.mat" ,
-                                                  SearchOption.AllDirectories);
+            var dataPath     = Application.dataPath + path.Replace("Assets" , "");
+            var allMatInPath = Directory.GetFiles(dataPath , "*.mat" , SearchOption.AllDirectories);
             foreach (var matPath in allMatInPath)
             {
-                var assetPath = "Assets" + matPath.Replace(Application.dataPath , "")
-                                                  .Replace('\\' , '/');
-                var mateiral = AssetDatabase.LoadAssetAtPath<Material>(assetPath);
+                var assetPath = "Assets" + matPath.Replace(Application.dataPath , "").Replace('\\' , '/');
+                var mateiral  = AssetDatabase.LoadAssetAtPath<Material>(assetPath);
                 animationClips.Add(mateiral);
             }
         #endif
@@ -253,12 +261,10 @@ namespace AutoBot.Utilities
         #if UNITY_EDITOR
             var dataPath = Application.dataPath + path.Replace("Assets" , "");
             var overrideInPath =
-                Directory.GetFiles(dataPath , "*.overrideController" ,
-                                   SearchOption.AllDirectories);
+                Directory.GetFiles(dataPath , "*.overrideController" , SearchOption.AllDirectories);
             foreach (var overridePath in overrideInPath)
             {
-                var assetPath = "Assets" + overridePath.Replace(Application.dataPath , "")
-                                                       .Replace('\\' , '/');
+                var assetPath = "Assets" + overridePath.Replace(Application.dataPath , "").Replace('\\' , '/');
                 var animatorOverrideController = AssetDatabase.LoadAssetAtPath<AnimatorOverrideController>(assetPath);
                 animationClips.Add(animatorOverrideController);
             }
@@ -266,22 +272,23 @@ namespace AutoBot.Utilities
             return animationClips;
         }
 
-        public static List<ScriptableObject> LoadAllScriptableObjectFromPath(string path)
+        public static List<Object> LoadAllPngAtPath(string path)
         {
-            var scriptableObjects = new List<ScriptableObject>();
+            var objs = new List<Object>();
         #if UNITY_EDITOR
             var dataPath = Application.dataPath + path.Replace("Assets" , "");
-            var allClipNameInPath = Directory.GetFiles(dataPath , "*.asset" ,
-                                                       SearchOption.AllDirectories);
-            foreach (var clipPath in allClipNameInPath)
+            Debug.Log($"path {dataPath}");
+            var allMatInPath = Directory.GetFiles(dataPath , "*.Png" ,
+                                                  SearchOption.AllDirectories);
+            foreach (var matPath in allMatInPath)
             {
-                var assetPath = "Assets" + clipPath.Replace(Application.dataPath , "")
-                                                   .Replace('\\' , '/');
-                var scriptableObject = AssetDatabase.LoadAssetAtPath<ScriptableObject>(assetPath);
-                scriptableObjects.Add(scriptableObject);
+                var assetPath = "Assets" + matPath.Replace(Application.dataPath , "")
+                                                  .Replace('\\' , '/');
+                var obj = AssetDatabase.LoadAssetAtPath<Object>(assetPath);
+                objs.Add(obj);
             }
         #endif
-            return scriptableObjects;
+            return objs;
         }
 
         public static T LoadAssetAtPath<T>(string path) where T : Object
@@ -293,33 +300,48 @@ namespace AutoBot.Utilities
             return t;
         }
 
+        public static Sprite LoadSpriteAtPath(string path)
+        {
+            // var loadAllPngAtPath = LoadAllPngAtPath(path);
+            // var allAssetPath     = new List<string>();
+            //
+            // foreach (var asset in loadAllPngAtPath)
+            // {
+            // #if UNITY_EDITOR
+            //     var assetPath = AssetDatabase.GetAssetPath(asset);
+            //     allAssetPath.Add(assetPath);
+            // #endif
+            // }
+
+            var sprites = new List<Sprite>();
+            // foreach (var assetPath in allAssetPath)
+            // {
+        #if UNITY_EDITOR
+            var assets         = AssetDatabase.LoadAllAssetsAtPath(path);
+            var spritesInAsset = assets.Where(q => q is Sprite).Cast<Sprite>().ToList();
+            foreach (var sprite in spritesInAsset) sprites.Add(sprite);
+        #endif
+            // }
+            return sprites.Count > 0 ? sprites[0] : null;
+        }
+
         public static void PingObject(Object instance)
         {
         #if UNITY_EDITOR
             EditorGUIUtility.PingObject(instance);
-            InternalSetSelectionActiveObject(instance);
         #endif
         }
-
-        public static void Refresh()
-        {
-        #if UNITY_EDITOR
-            AssetDatabase.Refresh();
-        #endif
-        }
-
-        public static void RenameAsset(Object instance , string newName)
-        {
-        #if UNITY_EDITOR
-            var assetPath = AssetDatabase.GetAssetPath(instance);
-            AssetDatabase.RenameAsset(assetPath , newName);
-        #endif
-        }
-
 
         public static void SaveAssets()
         {
             InternalSaveAsset();
+        }
+
+        public static void SelectObject(Object instance)
+        {
+        #if UNITY_EDITOR
+            InternalSetSelectionActiveObject(instance);
+        #endif
         }
 
         public static void SetDirty(Object data)

@@ -1,6 +1,5 @@
 #region
 
-using AutoBot.Utilities;
 using Character.Component;
 using Main.Character.Data;
 using Sirenix.OdinInspector;
@@ -50,6 +49,8 @@ namespace Main.SO
 
         [SerializeField]
         [PropertyOrder(-1)]
+        [PreviewField(Height = 100 , Alignment = ObjectFieldAlignment.Center , AlignmentHasValue = true)]
+        [HideLabel]
         private Sprite preview;
 
         [SerializeField]
@@ -57,22 +58,6 @@ namespace Main.SO
         [Required]
         [PropertyOrder(1)]
         private string actorDataId;
-
-    #endregion
-
-    #region Private Methods
-
-        [OnInspectorGUI]
-        [PropertyOrder(-10)]
-        private void ShowPreview()
-        {
-            if (preview == null) return;
-            var assetPath = CustomEditorUtility.GetAssetPath(preview);
-            // var sprites = AssetDatabase.LoadAllAssetsAtPath(assetPath).OfType<Sprite>().ToArray();
-            var sprite  = CustomEditorUtility.LoadAssetAtPath<Sprite>(assetPath);
-            var texture = sprite.texture;
-            GUILayout.Label(texture);
-        }
 
     #endregion
     }
