@@ -3,6 +3,7 @@
 using Character.Component;
 using EditorUtilities;
 using Main.Character.Data;
+using rStarTools.Scripts.StringList;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ using UnityEngine;
 namespace Main.SO
 {
     [CreateAssetMenu(fileName = "ActorData" , menuName = "Survival2D/ActorData" , order = 0)]
-    public class ActorData : ScriptableObject , IActorData
+    public class ActorData : SODataBase<ActorDataOverview> , IActorData
     {
     #region Public Variables
 
@@ -20,8 +21,6 @@ namespace Main.SO
         public bool DefaultSpriteRight => defaultSpriteRight;
 
         public CharacterHealth.Setting SettingHealth => settingHealth;
-
-        public string ActorDataId => actorDataId;
 
         [LabelText("角色Prefab")]
         [Required]
@@ -55,12 +54,6 @@ namespace Main.SO
         [PreviewField(Height = 100 , Alignment = ObjectFieldAlignment.Center)]
         [HideLabel]
         private Sprite preview;
-
-        [SerializeField]
-        [LabelText("角色ID")]
-        [Required]
-        [PropertyOrder(1)]
-        private string actorDataId;
 
     #endregion
 

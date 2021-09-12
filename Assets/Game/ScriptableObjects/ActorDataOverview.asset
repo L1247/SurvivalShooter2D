@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8556e91556ef4c58b0b22bfec0688037, type: 3}
   m_Name: ActorDataOverview
   m_EditorClassIdentifier: 
-  actorDatas:
+  ids:
   - {fileID: 11400000, guid: cc53347dadf12c144b975710bfdda581, type: 2}
   - {fileID: 11400000, guid: 34b8f2414fc65ae4fab81ac0b096ad99, type: 2}

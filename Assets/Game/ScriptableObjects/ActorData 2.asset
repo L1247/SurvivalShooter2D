@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8d4d254346408e9a0bbfb63962d0d5, type: 3}
   m_Name: ActorData 2
   m_EditorClassIdentifier: 
+  uniqueId:
+    dataId: 71350acf-1a65-48b4-8b56-dea472ccbd91
+    displayName: Enemy_1
   actorPrefab: {fileID: 3234665768501477308, guid: 7f4eb71b0388bf44084a367706596c66,
     type: 3}
-  startingHealth: 100
-  actorDataId: Enemy_1
-  defaultSpriteRight: 0
   defaultFacingRight: 0
+  defaultSpriteRight: 0
+  settingHealth:
+    startingHealth: 100
   preview: {fileID: 8793639957104055765, guid: 93685d0d260a4dd46824cbe2adc9a405, type: 3}

@@ -23,7 +23,7 @@ namespace Main.Character.Repository
         public IActorData GetActorData(string actorDataId)
         {
             Contract.RequireString(actorDataId , "actorDataId");
-            var actorData = actorDataOverview.FindActorData(actorDataId);
+            var actorData = actorDataOverview.FindData<ActorData>(actorDataId);
             Contract.EnsureNotNull(actorData , $"actorDataId: {actorDataId} , actorData");
             return actorData;
         }

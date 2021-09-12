@@ -1,7 +1,5 @@
 #region
 
-using System.Collections;
-using System.Linq;
 using EditorUtilities;
 using Main.Character.Repository;
 using Main.System;
@@ -25,27 +23,19 @@ namespace Main.SO
 
         private CharacterSpawner characterSpawner;
 
-        [InlineButton("CreateActor")]
         [SerializeField]
-        [ValueDropdown("GetAllActorDataIds")]
-        private string actorDataId;
+        [BoxGroup("CreateActor")]
+        private ActorName actorName;
 
     #endregion
 
     #region Private Methods
 
+        [Button]
+        [BoxGroup("CreateActor")]
         private void CreateActor()
         {
-            characterSpawner.Spawn(actorDataId);
-        }
-
-        private IEnumerable GetAllActorDataIds()
-        {
-            if (actorDataOverview == null)
-                return null;
-
-            return actorDataOverview.FindAll().Select(data => data.ActorDataId)
-                                    .Select(id => new ValueDropdownItem(id , id));
+            characterSpawner.Spawn(actorName.Id);
         }
 
         private void Init()

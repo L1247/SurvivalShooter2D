@@ -52,9 +52,6 @@ namespace Main.Character
         [Inject]
         private SignalBus signalBus;
 
-        [SerializeField]
-        private string actorDataId;
-
     #endregion
 
     #region Public Methods
@@ -71,7 +68,7 @@ namespace Main.Character
             return characterFacing.CurrentDirectionVector;
         }
 
-        public void Init()
+        public void Init(string dataId)
         {
             Id = Guid.NewGuid().ToString();
             characterRepository.Register(Id , this);
@@ -80,7 +77,7 @@ namespace Main.Character
             var defaultFacingRight = true;
             try
             {
-                var actorData = dataRepository.GetActorData(actorDataId);
+                var actorData = dataRepository.GetActorData(dataId);
                 CharacterHealth    = new CharacterHealth(Id , actorData.SettingHealth , signalBus);
                 defaultSpriteRight = actorData.DefaultSpriteRight;
                 defaultFacingRight = actorData.DefaultFacingRight;

@@ -27,18 +27,18 @@ namespace Main.System
         public void Spawn(string actorDataId)
         {
             Contract.RequireString(actorDataId , "actorDataId");
-            var spawnPointName = $"SpawnPoint_{actorDataId}";
-            var spawnPoint     = GameObject.Find(spawnPointName);
-            Contract.RequireNotNull(spawnPoint , $"spawnPointName: {spawnPointName} spawnPoint");
             var actorData = dataRepository.GetActorData(actorDataId) as ActorData;
             Contract.RequireNotNull(actorData , $"actorDataId: {actorDataId} actorData");
+            var spawnPointName = $"SpawnPoint_{actorData.DisplayName}";
+            var spawnPoint     = GameObject.Find(spawnPointName);
+            Contract.RequireNotNull(spawnPoint , $"spawnPointName: {spawnPointName} spawnPoint");
             var characterPrefab = actorData.actorPrefab;
             Contract.RequireNotNull(characterPrefab , $"actorDataId: {actorDataId} characterPrefab");
             var characterInstance = container.InstantiatePrefab(characterPrefab , spawnPoint.transform);
             characterInstance.transform.localPosition = Vector3.zero;
             characterInstance.transform.parent        = null;
             var character = characterInstance.GetComponent<Character.Character>();
-            character.Init();
+            character.Init(actorDataId);
         }
 
     #endregion
