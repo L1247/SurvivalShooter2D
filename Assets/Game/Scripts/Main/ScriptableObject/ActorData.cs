@@ -1,7 +1,11 @@
 #region
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Character.Component;
 using EditorUtilities;
+using Main.Character.Behaviour;
 using Main.Character.Component;
 using Main.Character.Data;
 using rStarTools.Scripts.StringList;
@@ -17,6 +21,8 @@ namespace Main.SO
     {
     #region Public Variables
 
+        public CharacterBehaviour CharacterBehaviour => characterBehaviour;
+
         public CharacterFacing.Setting SettingFacing => settingFacing;
 
         public CharacterHealth.Setting SettingHealth => settingHealth;
@@ -31,6 +37,13 @@ namespace Main.SO
     #endregion
 
     #region Private Variables
+
+        [Required]
+        [HideLabel]
+        [SerializeField]
+        [BoxGroup("CharacterBehaviour")]
+        [TypeFilter("GetCharacterBehaviour")]
+        private CharacterBehaviour characterBehaviour;
 
         [SerializeField]
         [BoxGroup("Sprite面相資料")]
@@ -61,6 +74,16 @@ namespace Main.SO
             preview = spriteRenderer.sprite;
             CustomEditorUtility.SetDirty(this);
             CustomEditorUtility.SaveAssets();
+        }
+
+        private IEnumerable<Type> GetCharacterBehaviour()
+        {
+            var q = typeof(CharacterBehaviour).Assembly
+                                              .GetTypes()
+                                              .Where(x => x.IsAbstract == false)
+                                              .Where(x => x.IsGenericTypeDefinition == false)
+                                              .Where(x => typeof(CharacterBehaviour).IsAssignableFrom(x));
+            return q;
         }
 
 

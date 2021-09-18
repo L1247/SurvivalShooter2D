@@ -12,6 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8d4d254346408e9a0bbfb63962d0d5, type: 3}
   m_Name: ActorData 2
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: characterBehaviour
+      Entry: 7
+      Data: 0|Main.Character.Behaviour.EnemyBehaviour, Main
+    - Name: 
+      Entry: 8
+      Data: 
   uniqueId:
     dataId: 71350acf-1a65-48b4-8b56-dea472ccbd91
     displayName: Enemy_1

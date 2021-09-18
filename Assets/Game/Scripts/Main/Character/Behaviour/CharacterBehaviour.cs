@@ -1,18 +1,20 @@
 #region
 
+using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 #endregion
 
 namespace Main.Character.Behaviour
 {
-    public class CharacterBehaviour : MonoBehaviour
+    [Serializable]
+    public abstract class CharacterBehaviour
     {
     #region Protected Variables
 
-        protected bool isDead;
+        protected bool       isDead;
+        protected GameObject gameObject;
 
     #endregion
 
@@ -21,22 +23,17 @@ namespace Main.Character.Behaviour
         private BoxCollider2D boxCollider2D;
         private Character     character;
 
-        [SerializeField]
-        [ReadOnly]
         private List<Character> triggerTargets = new List<Character>();
 
     #endregion
 
-    #region Unity events
+    #region Constructor
 
-        protected virtual void Awake()
+        public CharacterBehaviour(Character character)
         {
-            character     = GetComponent<Character>();
-            boxCollider2D = GetComponent<BoxCollider2D>();
-        }
-
-        protected virtual void Start()
-        {
+            this.character = character;
+            boxCollider2D  = this.character.BoxCollider2D;
+            gameObject     = this.character.gameObject;
             Move(true);
         }
 
@@ -52,7 +49,6 @@ namespace Main.Character.Behaviour
             else Attack(true , triggerTargets[0]);
         }
 
-        [Button]
         public virtual void Die()
         {
             isDead = true;

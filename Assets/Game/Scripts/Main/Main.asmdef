@@ -17,7 +17,8 @@
         "DOTween.dll",
         "Zenject-usage.dll",
         "Sirenix.OdinInspector.Attributes.dll",
-        "Sirenix.Utilities.Editor.dll"
+        "Sirenix.Utilities.Editor.dll",
+        "Sirenix.Serialization.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [],

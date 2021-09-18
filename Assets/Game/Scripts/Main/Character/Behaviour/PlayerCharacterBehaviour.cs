@@ -1,19 +1,23 @@
 #region
 
-using Sirenix.OdinInspector;
-using UnityEngine;
+using System;
 
 #endregion
 
 namespace Main.Character.Behaviour
 {
+    [Serializable]
     public class PlayerCharacterBehaviour : CharacterBehaviour
     {
     #region Private Variables
 
-        [BoxGroup("Animation")]
-        [SerializeField]
-        private string ANIMATION_DIE = "Death";
+        private string DIE = "Death";
+
+    #endregion
+
+    #region Constructor
+
+        public PlayerCharacterBehaviour(Character character) : base(character) { }
 
     #endregion
 
@@ -22,7 +26,7 @@ namespace Main.Character.Behaviour
         public override void Die()
         {
             base.Die();
-            PlayAnimation(ANIMATION_DIE);
+            PlayAnimation(DIE);
         }
 
     #endregion

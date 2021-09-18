@@ -27,6 +27,8 @@ namespace Main.Character
     {
     #region Public Variables
 
+        public BoxCollider2D BoxCollider2D { get; private set; }
+
         public CharacterBehaviour CharacterBehaviour { get; private set; }
         public CharacterHealth    CharacterHealth    { get; private set; }
 
@@ -71,10 +73,13 @@ namespace Main.Character
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator       = GetComponent<Animator>();
+            BoxCollider2D  = GetComponent<BoxCollider2D>();
             Id             = Guid.NewGuid().ToString();
             characterRepository.Register(Id , this);
             CharacterHealth = new CharacterHealth(Id , actorData.SettingHealth , signalBus);
             characterFacing = new CharacterFacing(spriteRenderer , actorData.SettingFacing);
+            var type = actorData.CharacterBehaviour.GetType();
+            CharacterBehaviour = (CharacterBehaviour)Activator.CreateInstance(type , new object[] { this });
         }
 
         public void Move(bool use)

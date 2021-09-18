@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace rStarTools.Scripts.StringList
 {
-    public class SODataBase<D> : ScriptableObject , IUniqueId where D : ScriptableObject , IDataOverview
+    public class SODataBase<D> : SerializedScriptableObject , IUniqueId where D : ScriptableObject , IDataOverview
     {
     #region Public Variables
 
