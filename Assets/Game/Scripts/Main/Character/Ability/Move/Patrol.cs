@@ -85,8 +85,7 @@ namespace Main.Character.Ability.Move
 
         private void ProcessPatrolPositions()
         {
-            // todo
-            // spawnPosition = transform.position;
+            spawnPosition = trans.position;
             var spawnPositionX = spawnPosition.x;
             leftPatrolX  = spawnPositionX - patrolOffsetX;
             rightPatrolX = spawnPositionX + patrolOffsetX;
