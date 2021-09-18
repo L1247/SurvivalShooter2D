@@ -1,5 +1,6 @@
 #region
 
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace Main.Character.Component
 {
-    public class CharacterFacing : MonoBehaviour
+    public class CharacterFacing
     {
     #region Public Variables
 
@@ -15,41 +16,28 @@ namespace Main.Character.Component
 
     #endregion
 
-    #region Protected Variables
-
-        [SerializeField]
-        protected bool startingFaceRight;
-
-        [SerializeField]
-        protected SpriteRenderer spriteRenderer;
-
-    #endregion
-
     #region Private Variables
 
-        [SerializeField]
-        private bool defaultSpriteRight;
+        private readonly Setting        setting;
+        private readonly SpriteRenderer spriteRenderer;
 
     #endregion
 
-    #region Unity events
+    #region Constructor
 
-        private void Start()
+        public CharacterFacing(SpriteRenderer spriteRenderer , Setting setting)
         {
-            SetFacing(startingFaceRight);
+            this.spriteRenderer = spriteRenderer;
+            this.setting        = setting;
+            SetFacing(setting.DefaultFacingRight);
         }
 
     #endregion
 
     #region Public Methods
 
-        public void SetDefaultSpriteRight(bool spriteRight)
-        {
-            defaultSpriteRight = spriteRight;
-        }
-
         [Button]
-        public virtual void SetFacing(bool faceRight)
+        public void SetFacing(bool faceRight)
         {
             CurrentDirectionVector = faceRight ? Vector3.right : Vector3.left;
             HandleCharacterFace(faceRight);
@@ -61,8 +49,36 @@ namespace Main.Character.Component
 
         protected virtual void HandleCharacterFace(bool faceRight)
         {
-            var flip = defaultSpriteRight != faceRight;
+            var flip = setting.DefaultSpriteRight != faceRight;
             spriteRenderer.flipX = flip;
+        }
+
+    #endregion
+
+    #region Nested Types
+
+        [Serializable]
+        public class Setting
+        {
+        #region Public Variables
+
+            public bool DefaultFacingRight => defaultFacingRight;
+
+            public bool DefaultSpriteRight => defaultSpriteRight;
+
+        #endregion
+
+        #region Private Variables
+
+            [SerializeField]
+            [LabelText("預設面向方向為右")]
+            private bool defaultFacingRight;
+
+            [SerializeField]
+            [LabelText("預設Sprite為右")]
+            private bool defaultSpriteRight;
+
+        #endregion
         }
 
     #endregion

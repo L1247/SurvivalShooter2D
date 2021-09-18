@@ -17,8 +17,9 @@ MonoBehaviour:
     displayName: Player_1
   actorPrefab: {fileID: 4819695567264185091, guid: d45c37e393361b04cb61dd2132d7505c,
     type: 3}
-  defaultFacingRight: 1
-  defaultSpriteRight: 1
+  settingFacing:
+    defaultFacingRight: 1
+    defaultSpriteRight: 1
   settingHealth:
     startingHealth: 200
   preview: {fileID: 4723107735738678597, guid: 0e3502a80399d164ea01f1868f65acbf, type: 3}

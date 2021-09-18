@@ -7,6 +7,9 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.785D90A9" = "acda2"
+	"InspectorPreview.785D90A9" = "0"
+	"currentGroup.785D90A9" = "all"
 }
 providers = {
 	asset = {
@@ -46,6 +49,8 @@ providers = {
 	}
 }
 recentSearches = [
+	"acda2"
+	"config"
 ]
 searchItemFavorites = [
 ]

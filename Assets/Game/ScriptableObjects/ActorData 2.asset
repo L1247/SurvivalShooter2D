@@ -17,8 +17,9 @@ MonoBehaviour:
     displayName: Enemy_1
   actorPrefab: {fileID: 3234665768501477308, guid: 7f4eb71b0388bf44084a367706596c66,
     type: 3}
-  defaultFacingRight: 0
-  defaultSpriteRight: 0
+  settingFacing:
+    defaultFacingRight: 0
+    defaultSpriteRight: 0
   settingHealth:
     startingHealth: 100
   preview: {fileID: 8793639957104055765, guid: 93685d0d260a4dd46824cbe2adc9a405, type: 3}

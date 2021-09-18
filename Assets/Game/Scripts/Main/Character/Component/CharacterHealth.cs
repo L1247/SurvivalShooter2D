@@ -71,7 +71,7 @@ namespace Character.Component
         #region Private Variables
 
             [SerializeField]
-            [LabelText("初始生命")]
+            [LabelText("預設生命")]
             [ValidateInput("@startingHealth>0" , "can't be zero , or small than zero")]
             [PropertyOrder]
             private int startingHealth = 100;

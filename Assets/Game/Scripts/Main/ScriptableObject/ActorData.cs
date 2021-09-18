@@ -2,6 +2,7 @@
 
 using Character.Component;
 using EditorUtilities;
+using Main.Character.Component;
 using Main.Character.Data;
 using rStarTools.Scripts.StringList;
 using Sirenix.OdinInspector;
@@ -16,9 +17,7 @@ namespace Main.SO
     {
     #region Public Variables
 
-        public bool DefaultFacingRight => defaultFacingRight;
-
-        public bool DefaultSpriteRight => defaultSpriteRight;
+        public CharacterFacing.Setting SettingFacing => settingFacing;
 
         public CharacterHealth.Setting SettingHealth => settingHealth;
 
@@ -34,14 +33,10 @@ namespace Main.SO
     #region Private Variables
 
         [SerializeField]
-        [LabelText("預設產生時面右")]
-        [PropertyOrder]
-        private bool defaultFacingRight;
-
-        [LabelText("預設圖片面右")]
-        [SerializeField]
-        [PropertyOrder]
-        private bool defaultSpriteRight;
+        [BoxGroup("Sprite面相資料")]
+        [HideLabel]
+        [Required]
+        private CharacterFacing.Setting settingFacing;
 
         [SerializeField]
         [BoxGroup("血量資料")]

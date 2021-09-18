@@ -1,6 +1,7 @@
 #region
 
 using Character.Component;
+using Main.Character.Component;
 
 #endregion
 
@@ -10,9 +11,8 @@ namespace Main.Character.Data
     {
     #region Public Variables
 
-        bool                           DefaultFacingRight { get; }
-        bool                           DefaultSpriteRight { get; }
-        public CharacterHealth.Setting SettingHealth      { get; }
+        public CharacterFacing.Setting SettingFacing { get; }
+        public CharacterHealth.Setting SettingHealth { get; }
 
     #endregion
     }

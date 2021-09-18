@@ -8,10 +8,10 @@ using Main.Character.Ability.Attack;
 using Main.Character.Ability.Move;
 using Main.Character.Behaviour;
 using Main.Character.Component;
+using Main.Character.Data;
 using Main.Character.Repository;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Utilities.Contract;
 using Zenject;
 
 #endregion
@@ -44,13 +44,12 @@ namespace Main.Character
         [Inject]
         private CharacterRepository characterRepository;
 
-        [Inject]
-        private IDataRepository dataRepository;
-
         private IMove move;
 
         [Inject]
         private SignalBus signalBus;
+
+        private SpriteRenderer spriteRenderer;
 
     #endregion
 
@@ -68,24 +67,14 @@ namespace Main.Character
             return characterFacing.CurrentDirectionVector;
         }
 
-        public void Init(string dataId)
+        public void Init(IActorData actorData)
         {
-            Id = Guid.NewGuid().ToString();
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            Id             = Guid.NewGuid().ToString();
             characterRepository.Register(Id , this);
-            GetComponentOfCharacter();
-            var defaultSpriteRight = true;
-            var defaultFacingRight = true;
-            try
-            {
-                var actorData = dataRepository.GetActorData(dataId);
-                CharacterHealth    = new CharacterHealth(Id , actorData.SettingHealth , signalBus);
-                defaultSpriteRight = actorData.DefaultSpriteRight;
-                defaultFacingRight = actorData.DefaultFacingRight;
-            }
-            catch (PostConditionViolationException e) { }
-
-            characterFacing?.SetDefaultSpriteRight(defaultSpriteRight);
-            characterFacing?.SetFacing(defaultFacingRight);
+            CharacterHealth = new CharacterHealth(Id , actorData.SettingHealth , signalBus);
+            characterFacing = new CharacterFacing(spriteRenderer , actorData.SettingFacing);
+            // GetComponentOfCharacter();
         }
 
         public void Move(bool use)
@@ -119,7 +108,6 @@ namespace Main.Character
             move               = GetComponent<IMove>();
             AttackAbility      = GetComponent<IAttack>();
             animator           = GetComponent<Animator>();
-            characterFacing    = GetComponent<CharacterFacing>();
         }
 
     #endregion
