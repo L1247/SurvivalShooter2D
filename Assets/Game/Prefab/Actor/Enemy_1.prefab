@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1906143013897610813}
   - component: {fileID: 8575194469531397684}
   - component: {fileID: 8662401004273738341}
-  - component: {fileID: 4293817900944457181}
   - component: {fileID: 8822073455693952166}
   m_Layer: 0
   m_Name: Enemy_1
@@ -180,23 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76519932653b4cc0802fb8238f901561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4293817900944457181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3234665768501477308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c6a71dda34b4ba9b8770a7b6427e382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
-  leftPatrolX: 2.12
-  patrolOffsetX: 3
-  rightPatrolX: 8.12
-  spriteRenderer: {fileID: 3234665768501477309}
 --- !u!114 &8822073455693952166
 MonoBehaviour:
   m_ObjectHideFlags: 0

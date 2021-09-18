@@ -1,13 +1,14 @@
 #region
 
-using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 #endregion
 
 namespace Main.Character.Ability.Move
 {
-    public class MoveBase : MonoBehaviour , IMove
+    [Serializable]
+    public abstract class MoveBase : IMove
     {
     #region Protected Variables
 
@@ -21,15 +22,21 @@ namespace Main.Character.Ability.Move
 
     #endregion
 
-    #region Unity events
+    #region Constructor
 
-        protected virtual void Awake()
+        public MoveBase(Character character)
         {
-            character = GetComponent<Character>();
-            trans     = transform;
+            this.character = character;
+            trans          = this.character.transform;
         }
 
-        protected virtual void Update()
+    #endregion
+
+    #region Unity events
+
+        public virtual void Start() { }
+
+        public virtual void Update()
         {
             if (move) Move();
         }
@@ -38,7 +45,6 @@ namespace Main.Character.Ability.Move
 
     #region Public Methods
 
-        [Button]
         public virtual void Move() { }
 
         public virtual void SetEnable(bool enable)

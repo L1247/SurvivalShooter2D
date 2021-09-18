@@ -43,6 +43,10 @@ namespace Main.Character.Ability.Attack
                       .Subscribe(_ => Attack()).AddTo(gameObject);
         }
 
+        public virtual void Start() { }
+
+        public virtual void Update() { }
+
     #endregion
 
     #region Public Methods

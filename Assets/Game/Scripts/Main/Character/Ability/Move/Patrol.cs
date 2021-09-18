@@ -28,15 +28,17 @@ namespace Main.Character.Ability.Move
         [BoxGroup("ReadOnly")]
         private float rightPatrolX;
 
-        [SerializeField]
-        [Required]
-        private SpriteRenderer spriteRenderer;
+    #endregion
+
+    #region Constructor
+
+        public Patrol(Character character) : base(character) { }
 
     #endregion
 
     #region Unity events
 
-        private void Start()
+        public override void Start()
         {
             ProcessPatrolPositions();
         }
@@ -83,7 +85,8 @@ namespace Main.Character.Ability.Move
 
         private void ProcessPatrolPositions()
         {
-            spawnPosition = transform.position;
+            // todo
+            // spawnPosition = transform.position;
             var spawnPositionX = spawnPosition.x;
             leftPatrolX  = spawnPositionX - patrolOffsetX;
             rightPatrolX = spawnPositionX + patrolOffsetX;

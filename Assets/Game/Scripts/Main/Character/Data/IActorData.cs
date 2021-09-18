@@ -1,6 +1,7 @@
 #region
 
 using Character.Component;
+using Main.Character.Ability.Move;
 using Main.Character.Behaviour;
 using Main.Character.Component;
 
@@ -13,6 +14,7 @@ namespace Main.Character.Data
     #region Public Variables
 
         public CharacterBehaviour CharacterBehaviour { get; }
+        public MoveBase           MoveAbility        { get; }
 
         public CharacterFacing.Setting SettingFacing { get; }
         public CharacterHealth.Setting SettingHealth { get; }

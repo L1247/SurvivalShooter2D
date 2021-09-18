@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 5810371867747269361}
   - component: {fileID: 5234347968843912324}
   - component: {fileID: 4794258690929566380}
-  - component: {fileID: 2341925155490409624}
   - component: {fileID: 4292199622721683581}
   m_Layer: 0
   m_Name: Player_1
@@ -222,21 +221,6 @@ MonoBehaviour:
   _useSceneContext: 0
   _context: {fileID: 0}
   _bindType: 0
---- !u!114 &2341925155490409624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819695567264185091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9f699e98f64daf993bfedfac4ec6cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  ANIMATION_IDLE: Idle
-  ANIMATION_MOVE: Move
 --- !u!114 &4292199622721683581
 MonoBehaviour:
   m_ObjectHideFlags: 0

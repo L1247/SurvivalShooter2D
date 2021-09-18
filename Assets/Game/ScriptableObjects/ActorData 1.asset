@@ -27,6 +27,21 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: moveBase
+      Entry: 7
+      Data: 1|Main.Character.Ability.Move.MoveForward, Main
+    - Name: moveSpeed
+      Entry: 3
+      Data: 100
+    - Name: ANIMATION_IDLE
+      Entry: 1
+      Data: 123
+    - Name: ANIMATION_MOVE
+      Entry: 1
+      Data: 312
+    - Name: 
+      Entry: 8
+      Data: 
   uniqueId:
     dataId: 5de4a116-99d9-4948-956a-51f619f247b0
     displayName: Player_1

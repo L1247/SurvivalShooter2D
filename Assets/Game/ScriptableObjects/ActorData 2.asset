@@ -27,6 +27,24 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: moveBase
+      Entry: 7
+      Data: 1|Main.Character.Ability.Move.Patrol, Main
+    - Name: moveSpeed
+      Entry: 3
+      Data: 0
+    - Name: leftPatrolX
+      Entry: 4
+      Data: 0
+    - Name: patrolOffsetX
+      Entry: 4
+      Data: 0
+    - Name: rightPatrolX
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
   uniqueId:
     dataId: 71350acf-1a65-48b4-8b56-dea472ccbd91
     displayName: Enemy_1

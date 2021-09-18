@@ -4,6 +4,7 @@
 
 #region
 
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ using UnityEngine;
 
 namespace Main.Character.Ability.Move
 {
+    [Serializable]
     public class MoveForward : MoveBase
     {
     #region Private Variables
@@ -22,6 +24,12 @@ namespace Main.Character.Ability.Move
         [BoxGroup("Animation")]
         [SerializeField]
         private string ANIMATION_MOVE = "Move";
+
+    #endregion
+
+    #region Constructor
+
+        public MoveForward(Character character) : base(character) { }
 
     #endregion
 

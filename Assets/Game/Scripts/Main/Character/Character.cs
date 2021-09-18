@@ -32,7 +32,8 @@ namespace Main.Character
         public CharacterBehaviour CharacterBehaviour { get; private set; }
         public CharacterHealth    CharacterHealth    { get; private set; }
 
-        public IAttack AttackAbility { get; private set; }
+        public IAttack        AttackAbility  { get; private set; }
+        public SpriteRenderer SpriteRenderer { get; private set; }
 
         public string Id { get; private set; }
 
@@ -51,7 +52,14 @@ namespace Main.Character
         [Inject]
         private SignalBus signalBus;
 
-        private SpriteRenderer spriteRenderer;
+    #endregion
+
+    #region Unity events
+
+        private void Update()
+        {
+            move.Update();
+        }
 
     #endregion
 
@@ -71,20 +79,24 @@ namespace Main.Character
 
         public void Init(IActorData actorData)
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
             animator       = GetComponent<Animator>();
             BoxCollider2D  = GetComponent<BoxCollider2D>();
+            SpriteRenderer = GetComponent<SpriteRenderer>();
             Id             = Guid.NewGuid().ToString();
             characterRepository.Register(Id , this);
             CharacterHealth = new CharacterHealth(Id , actorData.SettingHealth , signalBus);
-            characterFacing = new CharacterFacing(spriteRenderer , actorData.SettingFacing);
-            var type = actorData.CharacterBehaviour.GetType();
-            CharacterBehaviour = (CharacterBehaviour)Activator.CreateInstance(type , new object[] { this });
+            characterFacing = new CharacterFacing(SpriteRenderer , actorData.SettingFacing);
+            // ability should create before CharacterBehaviour
+            var moveAbilityType = actorData.MoveAbility.GetType();
+            move = (IMove)Activator.CreateInstance(moveAbilityType , new object[] { this });
+            move.Start();
+            var behaviourType = actorData.CharacterBehaviour.GetType();
+            CharacterBehaviour = (CharacterBehaviour)Activator.CreateInstance(behaviourType , new object[] { this });
         }
 
         public void Move(bool use)
         {
-            move?.SetEnable(use);
+            move.SetEnable(use);
         }
 
         public void PlayAnimation(string animationName)
@@ -109,9 +121,8 @@ namespace Main.Character
 
         private void GetComponentOfCharacter()
         {
-            CharacterBehaviour = GetComponent<CharacterBehaviour>();
-            move               = GetComponent<IMove>();
-            AttackAbility      = GetComponent<IAttack>();
+            move          = GetComponent<IMove>();
+            AttackAbility = GetComponent<IAttack>();
         }
 
     #endregion

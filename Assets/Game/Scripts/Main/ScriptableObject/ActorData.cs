@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Character.Component;
 using EditorUtilities;
+using JetBrains.Annotations;
+using Main.Character.Ability.Move;
 using Main.Character.Behaviour;
 using Main.Character.Component;
 using Main.Character.Data;
 using rStarTools.Scripts.StringList;
+using rStarTools.Scripts.StringList.Custom_Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -22,6 +25,7 @@ namespace Main.SO
     #region Public Variables
 
         public CharacterBehaviour CharacterBehaviour => characterBehaviour;
+        public MoveBase           MoveAbility        => moveBase;
 
         public CharacterFacing.Setting SettingFacing => settingFacing;
 
@@ -44,6 +48,13 @@ namespace Main.SO
         [BoxGroup("CharacterBehaviour")]
         [TypeFilter("GetCharacterBehaviour")]
         private CharacterBehaviour characterBehaviour;
+
+        [HideLabel]
+        [Required]
+        [SerializeField]
+        [ColoredBoxGroup("Ability" , 1 , 0 , 0 , 1)]
+        [TypeFilter("GetMoveBase")]
+        private MoveBase moveBase;
 
         [SerializeField]
         [BoxGroup("Sprite面相資料")]
@@ -76,6 +87,7 @@ namespace Main.SO
             CustomEditorUtility.SaveAssets();
         }
 
+        [UsedImplicitly]
         private IEnumerable<Type> GetCharacterBehaviour()
         {
             var q = typeof(CharacterBehaviour).Assembly
@@ -83,6 +95,17 @@ namespace Main.SO
                                               .Where(x => x.IsAbstract == false)
                                               .Where(x => x.IsGenericTypeDefinition == false)
                                               .Where(x => typeof(CharacterBehaviour).IsAssignableFrom(x));
+            return q;
+        }
+
+        [UsedImplicitly]
+        private IEnumerable<Type> GetMoveBase()
+        {
+            var q = typeof(MoveBase).Assembly
+                                    .GetTypes()
+                                    .Where(x => x.IsAbstract == false)
+                                    .Where(x => x.IsGenericTypeDefinition == false)
+                                    .Where(x => typeof(MoveBase).IsAssignableFrom(x));
             return q;
         }
 
