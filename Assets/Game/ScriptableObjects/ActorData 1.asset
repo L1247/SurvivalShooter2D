@@ -30,15 +30,21 @@ MonoBehaviour:
     - Name: moveBase
       Entry: 7
       Data: 1|Main.Character.Ability.Move.MoveForward, Main
+    - Name: MoveSetting
+      Entry: 7
+      Data: 2|Main.Character.Ability.Move.MoveForward+MoveForwardSetting, Main
     - Name: moveSpeed
       Entry: 3
-      Data: 100
+      Data: 3
     - Name: ANIMATION_IDLE
       Entry: 1
-      Data: 123
+      Data: Idle
     - Name: ANIMATION_MOVE
       Entry: 1
-      Data: 312
+      Data: Move
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 

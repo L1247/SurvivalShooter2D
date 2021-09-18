@@ -8,6 +8,16 @@ using UnityEngine;
 namespace Main.Character.Ability.Move
 {
     [Serializable]
+    public class MoveSetting
+    {
+    #region Public Variables
+
+        public int moveSpeed = 3;
+
+    #endregion
+    }
+
+    [Serializable]
     public abstract class MoveBase : IMove
     {
     #region Protected Variables
@@ -16,9 +26,6 @@ namespace Main.Character.Ability.Move
 
         protected Character character;
         protected Transform trans;
-
-        [SerializeField]
-        protected int moveSpeed = 3;
 
     #endregion
 

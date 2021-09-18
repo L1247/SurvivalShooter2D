@@ -13,20 +13,18 @@ namespace Main.Character.Ability.Move
 
         private Vector3 spawnPosition;
 
-        [SerializeField]
+        // [SerializeField]
         [ReadOnly]
         [BoxGroup("ReadOnly")]
         private float leftPatrolX;
 
-        [SerializeField]
-        [LabelText("巡邏的間距")]
-        [PropertyOrder(0)]
-        private float patrolOffsetX = 3f;
 
-        [SerializeField]
+        // [SerializeField]
         [ReadOnly]
         [BoxGroup("ReadOnly")]
         private float rightPatrolX;
+
+        private PatrolSetting moveSetting;
 
     #endregion
 
@@ -50,7 +48,7 @@ namespace Main.Character.Ability.Move
         public override void Move()
         {
             DetectFacing();
-            trans.position += character.GetCurrentFacingVector() * moveSpeed * Time.deltaTime;
+            trans.position += character.GetCurrentFacingVector() * moveSetting.moveSpeed * Time.deltaTime;
         }
 
     #endregion
@@ -87,8 +85,23 @@ namespace Main.Character.Ability.Move
         {
             spawnPosition = trans.position;
             var spawnPositionX = spawnPosition.x;
-            leftPatrolX  = spawnPositionX - patrolOffsetX;
-            rightPatrolX = spawnPositionX + patrolOffsetX;
+            leftPatrolX  = spawnPositionX - moveSetting.PatrolOffsetX;
+            rightPatrolX = spawnPositionX + moveSetting.PatrolOffsetX;
+        }
+
+    #endregion
+
+    #region Nested Types
+
+        public class PatrolSetting : MoveSetting
+        {
+        #region Public Variables
+
+            [LabelText("巡邏的間距")]
+            [PropertyOrder(0)]
+            public float PatrolOffsetX = 3f;
+
+        #endregion
         }
 
     #endregion
