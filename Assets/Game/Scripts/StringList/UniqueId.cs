@@ -23,16 +23,16 @@ namespace rStarTools.Scripts.StringList
     #region Protected Variables
 
         [UsedImplicitly]
+        protected string validateErrorMessage;
+
+        [UsedImplicitly]
         protected virtual float LabelWidth => Utility.GetFlexibleWidth(LabelText);
 
-        protected virtual string LabelText => "顯示名稱:";
+        protected virtual string LabelText => $"{StringListDescription.DisplayName}:";
 
     #endregion
 
     #region Private Variables
-
-        [UsedImplicitly]
-        private string validateErrorMessage;
 
         [HideInInspector]
         [SerializeField]
@@ -59,12 +59,14 @@ namespace rStarTools.Scripts.StringList
 
     #region Public Methods
 
-        public void SetErrorMessage(string errorMessage)
+        public void SetDataId(string id)
         {
-            if (string.IsNullOrEmpty(errorMessage))
-                errorMessage = "Something going wrong";
+            dataId = id;
+        }
 
-            validateErrorMessage = errorMessage;
+        public void SetDisplayName(string newDisplayName)
+        {
+            displayName = newDisplayName;
         }
 
     #endregion
@@ -73,9 +75,19 @@ namespace rStarTools.Scripts.StringList
 
         protected virtual bool ValidateAll()
         {
-            var dataOverview = Utility.GetDataOverview<DO>();
-            var validateAll  = dataOverview.ValidateAll(dataId);
+            var validateAll = GetDataOverview().ValidateAll(dataId , out var errorMessage);
+            validateErrorMessage = errorMessage;
             return validateAll;
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private IDataOverview GetDataOverview()
+        {
+            var dataOverview = Utility.GetDataOverview<DO>();
+            return dataOverview;
         }
 
     #endregion

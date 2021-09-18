@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using CustomEditorUtility = EditorUtilities.CustomEditorUtility;
 #if UNITY_EDITOR
+using UnityEditor;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 #endif
@@ -20,6 +21,28 @@ namespace rStarTools.Scripts.StringList
     public class NameBase<D> where D : ScriptableObject , IDataOverview
     {
     #region Public Variables
+
+        public static GUIStyle ToolbarButton
+        {
+            get
+            {
+                if (toolbarButton == null)
+                {
+                #if UNITY_EDITOR
+                    toolbarButton = new GUIStyle(EditorStyles.toolbarButton)
+                    {
+                        fixedHeight   = 20 ,
+                        fixedWidth    = 30 ,
+                        alignment     = TextAnchor.MiddleCenter ,
+                        stretchHeight = true ,
+                        stretchWidth  = false
+                    };
+                #endif
+                }
+
+                return toolbarButton;
+            }
+        }
 
         public string Id => id;
 
@@ -55,13 +78,13 @@ namespace rStarTools.Scripts.StringList
         }
     #endif
 
+        private static GUIStyle toolbarButton;
+
         private OverviewWrapper overviewWrapper;
 
     #if UNITY_EDITOR
         private OdinEditorWindow window;
     #endif
-
-        private readonly string errorMessage = "此筆資料不存在於資料陣列內";
 
         private Rect lastRect;
 
@@ -69,10 +92,20 @@ namespace rStarTools.Scripts.StringList
         [LabelWidthString("@LabelWidth")]
         [LabelText("@LabelText")]
         [ValueDropdown("@GetNames()")]
-        [ValidateInput("@ValidateId(Id)" , ContinuousValidationCheck = true , DefaultMessage = "@errorMessage")]
+        [ValidateInput("@ValidateId(Id)" , ContinuousValidationCheck = true ,
+                       DefaultMessage = "@StringListDescription.DoesNotContainInDataList")]
         [OnInspectorGUI("IdGUIBefore" , "IdGUIAfter")]
         [OnValueChanged("OnIdChanged")]
         private string id;
+
+    #endregion
+
+    #region Public Methods
+
+        public void SetId(string id)
+        {
+            this.id = id;
+        }
 
     #endregion
 
@@ -115,11 +148,13 @@ namespace rStarTools.Scripts.StringList
             }
 
             var icon = windowExist ? EditorIcons.Stop : EditorIcons.Stretch;
-            if (SirenixEditorGUI.ToolbarButton(icon , windowExist))
+
+            if (GUILayout.Button(icon.Raw , ToolbarButton))
             {
                 if (windowExist) CloseWindow();
                 else OpenNewWindow();
             }
+
         #endif
         }
 

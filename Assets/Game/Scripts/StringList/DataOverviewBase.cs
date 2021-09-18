@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using EditorUtilities;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace rStarTools.Scripts.StringList
     #region Protected Variables
 
         [SerializeField]
-        [LabelText("資料陣列")]
+        [LabelText("@StringListDescription.DataList")]
         [TableList(ShowIndexLabels = true)]
         [Searchable]
         [ListDrawerSettings(OnBeginListElementGUI = "BeginListElementGUI" , OnEndListElementGUI = "EndListElementGUI")]
@@ -30,7 +31,37 @@ namespace rStarTools.Scripts.StringList
 
     #endregion
 
+    #region Private Variables
+
+        [SerializeField]
+        [UsedImplicitly]
+        [LabelWidth(90)]
+        [BoxGroup("DataPath")]
+        [PropertyOrder(-2)]
+        [ShowIf("IsDataScriptableObject")]
+        private bool useDataPath;
+
+        [SerializeField]
+        [FolderPath]
+        [LabelWidth(90)]
+        [BoxGroup("DataPath")]
+        [ShowIf("@useDataPath")]
+        private string dataPath;
+
+    #endregion
+
     #region Public Methods
+
+        public void AddNewData(U data)
+        {
+            ids.Add(data);
+        }
+
+        public bool ContainDisplayName(string displayName)
+        {
+            var uniqueId = ids.Find(id => id.DisplayName == displayName);
+            return uniqueId != null;
+        }
 
         public bool ContainsId(string id)
         {
@@ -40,7 +71,7 @@ namespace rStarTools.Scripts.StringList
 
         public D FindData<D>(string id) where D : class , IUniqueId
         {
-            var data = GetAllData().Find(_ => _.DataId == id) as D;
+            var data = GetAllUniqueId().Find(_ => _.DataId == id) as D;
             return data;
         }
 
@@ -66,16 +97,31 @@ namespace rStarTools.Scripts.StringList
             return ids.Find(uniqueId => uniqueId.DataId == id);
         }
 
-        public List<IUniqueId> GetAllData()
+        public List<U> GetAllData()
+        {
+            return ids;
+        }
+
+        public List<IUniqueId> GetAllUniqueId()
         {
             return ids.Cast<IUniqueId>().ToList();
         }
 
-        public IUniqueId GetData(int index)
+        public string GetDataPath()
         {
-            if (index >= ids.Count) return null;
-            var uniqueId = ids[index];
-            return uniqueId;
+            return dataPath;
+        }
+
+        /// <summary>
+        ///     if uniqueId is null , return empty.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string GetDisplayName(string id)
+        {
+            var uniqueId = FindUniqueId(id);
+            if (uniqueId == null) return string.Empty;
+            return uniqueId.DisplayName;
         }
 
         public virtual IEnumerable GetNames()
@@ -92,19 +138,41 @@ namespace rStarTools.Scripts.StringList
             return valueDropdownItems;
         }
 
+        public IUniqueId GetUniqueIdByIndex(int index)
+        {
+            if (index >= ids.Count) return null;
+            var uniqueId = ids[index];
+            return uniqueId;
+        }
+
+        [Button]
+        [GUIColor(1f , 1f , 0f)]
+        [BoxGroup("DataPath")]
+        [ShowIf("IsDataScriptableObject")]
+        public virtual void UpdateData()
+        {
+            ids = GetUniqueIds();
+        }
+
         public virtual bool Validate(string id)
         {
             return ContainsId(id);
         }
 
-        public bool ValidateAll(string id)
+        public virtual bool ValidateAll(string id , out string errorMessage)
         {
+            errorMessage = string.Empty;
             var uniqueId = FindUniqueId(id);
-            if (uniqueId == null) return false;
+            if (uniqueId == null)
+            {
+                errorMessage = $"{StringListDescription.CantFindInOverview} , Overview {this}";
+                return false;
+            }
+
             var displayName = uniqueId.DisplayName;
             if (string.IsNullOrEmpty(displayName))
             {
-                uniqueId.SetErrorMessage("顯示名稱不能為空");
+                errorMessage = StringListDescription.DisplayNameIsEmpty;
                 return false;
             }
 
@@ -114,7 +182,7 @@ namespace rStarTools.Scripts.StringList
                 var sameDisplayName = _.DisplayName == displayName;
                 return sameDisplayName;
             }).Count < 2;
-            if (isDisplayNameSame == false) uniqueId.SetErrorMessage($"檢查到有相同顯示名稱: {displayName}");
+            if (isDisplayNameSame == false) errorMessage = $"{StringListDescription.SameDisplayName}: {displayName}";
             return isDisplayNameSame;
         }
 
@@ -127,10 +195,37 @@ namespace rStarTools.Scripts.StringList
             return true;
         }
 
+
+        protected U GetDataByIndex(int index)
+        {
+            if (index >= ids.Count) return default;
+            return ids[index];
+        }
+
         protected virtual string GetElementBoxText(int index)
         {
             var text = $"Index: {index}";
             return text;
+        }
+
+        protected List<U> GetUniqueIds()
+        {
+            var path              = useDataPath ? dataPath : "";
+            var typeOfU           = typeof(U);
+            var scriptableObjects = CustomEditorUtility.GetScriptableObjects(typeOfU , path);
+            var uniqueIds         = scriptableObjects.Cast<U>().ToList();
+            return uniqueIds;
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        [UsedImplicitly]
+        private bool IsDataScriptableObject()
+        {
+            var isSubclassOfRawGeneric = Utility.IsSubclassOfRawGeneric(typeof(ScriptableObject) , typeof(U));
+            return isSubclassOfRawGeneric;
         }
 
     #endregion
