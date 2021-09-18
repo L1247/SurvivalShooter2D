@@ -42,7 +42,7 @@ namespace Main.Event
         private CharacterBehaviour GetCharacterBehaviour(string characterId)
         {
             var character      = characterRepository.FindById(characterId);
-            var enemyBehaviour = character.characterBehaviour;
+            var enemyBehaviour = character.CharacterBehaviour;
             return enemyBehaviour;
         }
 
@@ -50,14 +50,14 @@ namespace Main.Event
         {
             var deadCharacterId        = obj.CharacterId;
             var deadCharacter          = characterRepository.FindById(deadCharacterId);
-            var deadCharacterBehaviour = deadCharacter.characterBehaviour;
+            var deadCharacterBehaviour = deadCharacter.CharacterBehaviour;
             deadCharacterBehaviour.Die();
             characterRepository.Remove(deadCharacterId);
             var allCharacter = characterRepository.GetAllCharacter();
             var sameTargetCharacters = allCharacter
                                        .Where(character => character.AttackAbility.AttackingCharacter == deadCharacter)
                                        .ToList();
-            sameTargetCharacters.ForEach(character => character.characterBehaviour.ChooseANewTarget());
+            sameTargetCharacters.ForEach(character => character.CharacterBehaviour.ChooseANewTarget());
         }
 
         private void OnCharacterModified(CharacterHealthModified healthModified)

@@ -27,7 +27,7 @@ namespace Main.Character
     {
     #region Public Variables
 
-        public CharacterBehaviour characterBehaviour { get; private set; }
+        public CharacterBehaviour CharacterBehaviour { get; private set; }
         public CharacterHealth    CharacterHealth    { get; private set; }
 
         public IAttack AttackAbility { get; private set; }
@@ -70,11 +70,11 @@ namespace Main.Character
         public void Init(IActorData actorData)
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+            animator       = GetComponent<Animator>();
             Id             = Guid.NewGuid().ToString();
             characterRepository.Register(Id , this);
             CharacterHealth = new CharacterHealth(Id , actorData.SettingHealth , signalBus);
             characterFacing = new CharacterFacing(spriteRenderer , actorData.SettingFacing);
-            // GetComponentOfCharacter();
         }
 
         public void Move(bool use)
@@ -84,7 +84,7 @@ namespace Main.Character
 
         public void PlayAnimation(string animationName)
         {
-            animator?.Play(animationName);
+            animator.Play(animationName);
         }
 
         public void SetFacing(bool faceRight)
@@ -104,10 +104,9 @@ namespace Main.Character
 
         private void GetComponentOfCharacter()
         {
-            characterBehaviour = GetComponent<CharacterBehaviour>();
+            CharacterBehaviour = GetComponent<CharacterBehaviour>();
             move               = GetComponent<IMove>();
             AttackAbility      = GetComponent<IAttack>();
-            animator           = GetComponent<Animator>();
         }
 
     #endregion
