@@ -15,12 +15,15 @@ namespace Main.Character.Ability.Move
     [Serializable]
     public class MoveForward : MoveBase
     {
+    #region Public Variables
+
+        public MoveForwardSetting MoveSetting;
+
+    #endregion
+
     #region Private Variables
 
         private MoveForwardSetting moveSetting;
-
-        [SerializeField]
-        private MoveForwardSetting MoveSetting;
 
     #endregion
 
@@ -43,6 +46,11 @@ namespace Main.Character.Ability.Move
             base.SetEnable(enable);
             var animationName = move ? moveSetting.ANIMATION_MOVE : moveSetting.ANIMATION_IDLE;
             character.PlayAnimation(animationName);
+        }
+
+        public override void SetSetting(MoveSetting moveSetting)
+        {
+            this.moveSetting = moveSetting as MoveForwardSetting;
         }
 
         public void SetSetting(MoveForwardSetting setting)

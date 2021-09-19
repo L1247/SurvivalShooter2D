@@ -59,6 +59,8 @@ namespace Main.Character.Ability.Move
             move = enable;
         }
 
+        public virtual void SetSetting(MoveSetting moveSetting) { }
+
     #endregion
     }
 }

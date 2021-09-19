@@ -35,7 +35,7 @@ MonoBehaviour:
       Data: 2|Main.Character.Ability.Move.MoveForward+MoveForwardSetting, Main
     - Name: moveSpeed
       Entry: 3
-      Data: 3
+      Data: 10
     - Name: ANIMATION_IDLE
       Entry: 1
       Data: Idle

@@ -89,6 +89,8 @@ namespace Main.Character
             // ability should create before CharacterBehaviour
             var moveAbilityType = actorData.MoveAbility.GetType();
             move = (IMove)Activator.CreateInstance(moveAbilityType , new object[] { this });
+            var moveForward = actorData.MoveAbility as MoveForward;
+            move.SetSetting(moveForward.MoveSetting);
             move.Start();
             var behaviourType = actorData.CharacterBehaviour.GetType();
             CharacterBehaviour = (CharacterBehaviour)Activator.CreateInstance(behaviourType , new object[] { this });
