@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0ef044756c9bc4983d56c536ce52bb, type: 3}
   m_Name: GameSetting
   m_EditorClassIdentifier: 
+  battleBinder:
+    CharacterPrefab: {fileID: 4819695567264185091, guid: d45c37e393361b04cb61dd2132d7505c,
+      type: 3}
   actorDataOverview: {fileID: 11400000, guid: bf69eb0b33215dc42b8f73ed86ff8a3c, type: 2}
   PopupTextPrefab: {fileID: 80881044189422351, guid: 4877bcd5e607fe84c9d0fa0e99ffc1a5,
     type: 3}

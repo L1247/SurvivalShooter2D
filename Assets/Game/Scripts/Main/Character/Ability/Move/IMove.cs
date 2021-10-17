@@ -6,7 +6,7 @@ namespace Main.Character.Ability.Move
 
         public void Move();
 
-        void SetSetting(MoveSetting moveSetting);
+        void SetSetting(MoveSetting setting);
 
     #endregion
     }

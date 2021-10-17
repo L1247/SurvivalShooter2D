@@ -45,6 +45,11 @@ namespace Main.Character.Ability.Move
 
     #region Public Methods
 
+        public override MoveSetting GetSetting()
+        {
+            return new PatrolSetting();
+        }
+
         public override void Move()
         {
             DetectFacing();

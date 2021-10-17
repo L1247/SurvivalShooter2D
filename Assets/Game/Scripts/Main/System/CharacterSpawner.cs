@@ -46,11 +46,6 @@ namespace Main.System
             var characterPrefab = actorData.actorPrefab;
             Contract.RequireNotNull(characterPrefab , $"actorDataId: {actorDataId} characterPrefab");
             characterFactory.Create(actorData);
-            // var characterInstance = container.InstantiatePrefab(characterPrefab , spawnPoint.transform);
-            // characterInstance.transform.localPosition = Vector3.zero;
-            // characterInstance.transform.parent        = null;
-            // var character = characterInstance.GetComponent<Character.Character>();
-            // character.Init(actorData);
         }
 
     #endregion

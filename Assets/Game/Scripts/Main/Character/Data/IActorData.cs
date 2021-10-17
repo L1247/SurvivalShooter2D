@@ -14,7 +14,7 @@ namespace Main.Character.Data
     #region Public Variables
 
         public CharacterBehaviour CharacterBehaviour { get; }
-        public MoveBase           MoveAbility        { get; }
+        public MoveSetting        MoveSetting        { get; }
 
         public CharacterFacing.Setting SettingFacing { get; }
         public CharacterHealth.Setting SettingHealth { get; }

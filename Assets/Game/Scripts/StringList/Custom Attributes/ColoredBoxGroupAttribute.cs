@@ -12,10 +12,14 @@ namespace rStarTools.Scripts.StringList.Custom_Attributes
     {
     #region Public Variables
 
-        public bool   BoldLabel;
-        public float  R , G , B , A;
-        public string LabelText;
-        public bool   ShowIcon     { get; set; }
+        public bool ColorText = true;
+
+        public bool  ShowIcon;
+        public bool  UseLowSaturation;
+        public float R = 1 , G = 1 , B = 1 , A = 1;
+
+        public string Color;
+        public string Icon;
         public int    MarginBottom { get; set; }
         public int    MarginTop    { get; set; }
 
@@ -26,37 +30,20 @@ namespace rStarTools.Scripts.StringList.Custom_Attributes
         public ColoredBoxGroupAttribute(
             string group ,
             float  r , float g , float b , float a ,
-            bool   showLabel   = true ,
-            bool   centerLabel = false ,
-            bool   boldLabel   = false ,
-            float  order       = 0 , bool showIcon = false) : base(group , showLabel , centerLabel , order)
+            float  order = 0) : base(group , true , false , order)
         {
-            ShowIcon = showIcon;
-            R        = r;
-            G        = g;
-            B        = b;
-            A        = a;
-
-            BoldLabel = boldLabel;
+            R         = r;
+            G         = g;
+            B         = b;
+            A         = a;
+            ShowLabel = true;
         }
 
         public ColoredBoxGroupAttribute(
             string group ,
-            string label ,
-            float  r , float g , float b , float a ,
-            bool   showLabel   = true ,
-            bool   centerLabel = false ,
-            bool   boldLabel   = false ,
-            float  order       = 0 , bool showIcon = false) : base(group , showLabel , centerLabel , order)
+            float  order = 0) : base(group , true , false , order)
         {
-            ShowIcon = showIcon;
-            R        = r;
-            G        = g;
-            B        = b;
-            A        = a;
-
-            LabelText = label;
-            BoldLabel = boldLabel;
+            ShowLabel = true;
         }
 
     #endregion

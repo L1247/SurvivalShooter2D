@@ -7,6 +7,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 #endregion
 
@@ -24,6 +25,8 @@ namespace Main.Character.Ability.Move
     #region Private Variables
 
         private MoveForwardSetting moveSetting;
+        private string             ANIMATION_MOVE;
+        private string             ANIMATION_IDLE;
 
     #endregion
 
@@ -35,27 +38,31 @@ namespace Main.Character.Ability.Move
 
     #region Public Methods
 
+        public override MoveSetting GetSetting()
+        {
+            return new MoveForwardSetting();
+        }
+
         public override void Move()
         {
             var currentFacingVector = character.GetCurrentFacingVector();
-            trans.Translate(currentFacingVector * moveSetting.moveSpeed * Time.deltaTime);
+            trans.Translate(currentFacingVector * moveSpeed * Time.deltaTime);
         }
 
         public override void SetEnable(bool enable)
         {
             base.SetEnable(enable);
-            var animationName = move ? moveSetting.ANIMATION_MOVE : moveSetting.ANIMATION_IDLE;
+            var animationName = move ? ANIMATION_MOVE : ANIMATION_IDLE;
             character.PlayAnimation(animationName);
         }
 
-        public override void SetSetting(MoveSetting moveSetting)
+        public override void SetSetting(MoveSetting setting)
         {
-            this.moveSetting = moveSetting as MoveForwardSetting;
-        }
-
-        public void SetSetting(MoveForwardSetting setting)
-        {
-            moveSetting = setting;
+            base.SetSetting(setting);
+            moveSetting = setting as MoveForwardSetting;
+            Assert.IsNotNull(moveSetting , "moveSetting == null");
+            ANIMATION_IDLE = moveSetting.ANIMATION_IDLE;
+            ANIMATION_MOVE = moveSetting.ANIMATION_MOVE;
         }
 
     #endregion

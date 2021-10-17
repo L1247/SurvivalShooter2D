@@ -1,6 +1,7 @@
 #region
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Character.Component;
@@ -13,6 +14,7 @@ using Main.Character.Data;
 using rStarTools.Scripts.StringList;
 using rStarTools.Scripts.StringList.Custom_Attributes;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
 #endregion
@@ -25,7 +27,14 @@ namespace Main.SO
     #region Public Variables
 
         public CharacterBehaviour CharacterBehaviour => characterBehaviour;
-        public MoveBase           MoveAbility        => moveBase;
+
+        [field : HideLabel]
+        [field : Required]
+        [field : ColoredBoxGroup("Move Ability" , ColorText = false , Color = "@Color.red")]
+        [field : ValueDropdown("GetMoveBase")]
+        [field : NonSerialized]
+        [field : OdinSerialize]
+        public MoveSetting MoveSetting { get; }
 
         public CharacterFacing.Setting SettingFacing => settingFacing;
 
@@ -49,13 +58,6 @@ namespace Main.SO
         [TypeFilter("GetCharacterBehaviour")]
         private CharacterBehaviour characterBehaviour;
 
-        [HideLabel]
-        [Required]
-        [SerializeField]
-        [ColoredBoxGroup("Ability" , 1 , 0 , 0 , 1)]
-        [TypeFilter("GetMoveBase")]
-        private MoveBase moveBase;
-
         [SerializeField]
         [BoxGroup("Sprite面相資料")]
         [HideLabel]
@@ -73,6 +75,15 @@ namespace Main.SO
         [PreviewField(Height = 100 , Alignment = ObjectFieldAlignment.Center)]
         [HideLabel]
         private Sprite preview;
+
+    #endregion
+
+    #region Public Methods
+
+        public Character.Character Create()
+        {
+            throw new NotImplementedException();
+        }
 
     #endregion
 
@@ -99,13 +110,20 @@ namespace Main.SO
         }
 
         [UsedImplicitly]
-        private IEnumerable<Type> GetMoveBase()
+        private IEnumerable GetMoveBase()
         {
             var q = typeof(MoveBase).Assembly
                                     .GetTypes()
                                     .Where(x => x.IsAbstract == false)
                                     .Where(x => x.IsGenericTypeDefinition == false)
-                                    .Where(x => typeof(MoveBase).IsAssignableFrom(x));
+                                    .Where(x => typeof(MoveBase).IsAssignableFrom(x))
+                                    .Select(x =>
+                                    {
+                                        var instance = Activator.CreateInstance(x , new object[] { null });
+                                        var moveBase = instance as MoveBase;
+                                        var setting  = moveBase.GetSetting();
+                                        return new ValueDropdownItem(x.Name , setting);
+                                    });
             return q;
         }
 

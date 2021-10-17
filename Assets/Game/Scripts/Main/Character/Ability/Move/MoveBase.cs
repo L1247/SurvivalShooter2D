@@ -25,6 +25,8 @@ namespace Main.Character.Ability.Move
         protected bool move;
 
         protected Character character;
+
+        protected int       moveSpeed;
         protected Transform trans;
 
     #endregion
@@ -34,7 +36,7 @@ namespace Main.Character.Ability.Move
         public MoveBase(Character character)
         {
             this.character = character;
-            trans          = this.character.transform;
+            // trans          = this.character.transform;
         }
 
     #endregion
@@ -52,6 +54,8 @@ namespace Main.Character.Ability.Move
 
     #region Public Methods
 
+        public abstract MoveSetting GetSetting();
+
         public virtual void Move() { }
 
         public virtual void SetEnable(bool enable)
@@ -59,7 +63,10 @@ namespace Main.Character.Ability.Move
             move = enable;
         }
 
-        public virtual void SetSetting(MoveSetting moveSetting) { }
+        public virtual void SetSetting(MoveSetting setting)
+        {
+            moveSpeed = setting.moveSpeed;
+        }
 
     #endregion
     }
