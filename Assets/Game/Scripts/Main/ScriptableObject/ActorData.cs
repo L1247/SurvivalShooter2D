@@ -27,14 +27,7 @@ namespace Main.SO
     #region Public Variables
 
         public CharacterBehaviour CharacterBehaviour => characterBehaviour;
-
-        [field : HideLabel]
-        [field : Required]
-        [field : ColoredBoxGroup("Move Ability" , ColorText = false , Color = "@Color.red")]
-        [field : ValueDropdown("GetMoveBase")]
-        [field : NonSerialized]
-        [field : OdinSerialize]
-        public MoveSetting MoveSetting { get; }
+        public MoveSetting        MoveSetting        => moveSetting;
 
         public CharacterFacing.Setting SettingFacing => settingFacing;
 
@@ -46,6 +39,13 @@ namespace Main.SO
         [OnValueChanged("ChangePreview")]
         [AssetSelector(Paths = "Assets/Game/Prefab/Actor")]
         public GameObject actorPrefab;
+
+        [HideLabel]
+        [Required]
+        [ColoredBoxGroup("Move Ability" , ColorText = false , Color = "@Color.red")]
+        [ValueDropdown("GetMoveBase")]
+        [OdinSerialize]
+        public MoveSetting moveSetting;
 
     #endregion
 
