@@ -21,9 +21,18 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: move
+      Entry: 7
+      Data: 0|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Main.Character.Ability.Move.MoveForward, Main
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: moveSetting
       Entry: 7
-      Data: 0|Main.Character.Ability.Move.MoveForward+MoveForwardSetting, Main
+      Data: 1|Main.Character.Ability.Move.MoveForward+MoveForwardSetting, Main
     - Name: moveSpeed
       Entry: 3
       Data: 3
@@ -36,12 +45,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: move
-      Entry: 6
-      Data: 
     - Name: characterBehaviour
       Entry: 7
-      Data: 1|Main.Character.Behaviour.PlayerCharacterBehaviour, Main
+      Data: 2|Main.Character.Behaviour.PlayerCharacterBehaviour, Main
     - Name: 
       Entry: 8
       Data: 

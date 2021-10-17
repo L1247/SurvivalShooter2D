@@ -46,8 +46,6 @@ namespace Main.Character
         [Inject]
         private SignalBus signalBus;
 
-        private IActorData actorData;
-
     #endregion
 
     #region Unity events
@@ -67,12 +65,10 @@ namespace Main.Character
             AttackAbility?.SetTarget(target);
         }
 
-        // Note that we can't use a constructor anymore since we are a MonoBehaviour now
         [Inject]
         public void Construct(IActorData actorData)
         {
-            this.actorData =
-                actorData; // var characterInstance = container.InstantiatePrefab(characterPrefab , spawnPoint.transform);
+            // var characterInstance = container.InstantiatePrefab(characterPrefab , spawnPoint.transform);
             // characterInstance.transform.localPosition = Vector3.zero;
             // characterInstance.transform.parent        = null;
             var moveAbilityType = actorData.Move;
@@ -86,24 +82,16 @@ namespace Main.Character
             characterRepository.Register(Id , this);
             CharacterHealth = new CharacterHealth(Id , actorData.SettingHealth , signalBus);
             characterFacing = new CharacterFacing(SpriteRenderer , actorData.SettingFacing);
+            var behaviourType = actorData.CharacterBehaviour.GetType();
+            CharacterBehaviour = (CharacterBehaviour)Activator.CreateInstance(behaviourType , new object[] { this });
         }
+
+        // Note that we can't use a constructor anymore since we are a MonoBehaviour now
 
         public Vector3 GetCurrentFacingVector()
         {
             if (characterFacing == null) return Vector3.right;
             return characterFacing.CurrentDirectionVector;
-        }
-
-        public void Init(IActorData actorData)
-        {
-            // // ability should create before CharacterBehaviour
-            // var moveAbilityType = actorData.MoveAbility.GetType();
-            // move = (IMove)Activator.CreateInstance(moveAbilityType , new object[] { this });
-            // var moveForward = actorData.MoveAbility as MoveForward;
-            // move.SetSetting(moveForward.MoveSetting);
-            // move.Start();
-            // var behaviourType = actorData.CharacterBehaviour.GetType();
-            // CharacterBehaviour = (CharacterBehaviour)Activator.CreateInstance(behaviourType , new object[] { this });
         }
 
         public void Move(bool use)
