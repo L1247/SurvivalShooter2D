@@ -1,5 +1,6 @@
 #region
 
+using System;
 using Character.Component;
 using Main.Character.Ability.Move;
 using Main.Character.Behaviour;
@@ -18,6 +19,7 @@ namespace Main.Character.Data
 
         public CharacterFacing.Setting SettingFacing { get; }
         public CharacterHealth.Setting SettingHealth { get; }
+        public Type                    Move          { get; }
 
     #endregion
     }

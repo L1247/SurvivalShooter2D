@@ -26,12 +26,22 @@ namespace Main.SO
     {
     #region Public Variables
 
+        [LabelText("Move: ")]
+        [LabelWidth(45)]
+        [Required]
+        [ColoredBoxGroup("Move Ability" , ColorText = false , Color = "@Color.red")]
+        [ValueDropdown("GetMoveBase")]
+        [OdinSerialize]
+        [PropertyOrder(0)]
+        public Type move;
+
         public CharacterBehaviour CharacterBehaviour => characterBehaviour;
         public MoveSetting        MoveSetting        => moveSetting;
 
         public CharacterFacing.Setting SettingFacing => settingFacing;
 
         public CharacterHealth.Setting SettingHealth => settingHealth;
+        public Type                    Move          => move;
 
         [LabelText("角色Prefab")]
         [Required]
@@ -43,7 +53,8 @@ namespace Main.SO
         [HideLabel]
         [Required]
         [ColoredBoxGroup("Move Ability" , ColorText = false , Color = "@Color.red")]
-        [ValueDropdown("GetMoveBase")]
+        // [ValueDropdown("GetMoveBase")]
+        [PropertyOrder(1)]
         [OdinSerialize]
         public MoveSetting moveSetting;
 
@@ -117,13 +128,7 @@ namespace Main.SO
                                     .Where(x => x.IsAbstract == false)
                                     .Where(x => x.IsGenericTypeDefinition == false)
                                     .Where(x => typeof(MoveBase).IsAssignableFrom(x))
-                                    .Select(x =>
-                                    {
-                                        var instance = Activator.CreateInstance(x , new object[] { null });
-                                        var moveBase = instance as MoveBase;
-                                        var setting  = moveBase.GetSetting();
-                                        return new ValueDropdownItem(x.Name , setting);
-                                    });
+                                    .Select(x => new ValueDropdownItem(x.Name , x));
             return q;
         }
 

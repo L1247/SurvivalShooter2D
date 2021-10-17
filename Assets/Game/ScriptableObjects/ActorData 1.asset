@@ -23,12 +23,21 @@ MonoBehaviour:
     SerializationNodes:
     - Name: moveSetting
       Entry: 7
-      Data: 0|Main.Character.Ability.Move.MoveSetting, Main
+      Data: 0|Main.Character.Ability.Move.MoveForward+MoveForwardSetting, Main
     - Name: moveSpeed
       Entry: 3
       Data: 3
+    - Name: ANIMATION_IDLE
+      Entry: 1
+      Data: Idle
+    - Name: ANIMATION_MOVE
+      Entry: 1
+      Data: Move
     - Name: 
       Entry: 8
+      Data: 
+    - Name: move
+      Entry: 6
       Data: 
     - Name: characterBehaviour
       Entry: 7
@@ -39,10 +48,10 @@ MonoBehaviour:
   uniqueId:
     dataId: 5de4a116-99d9-4948-956a-51f619f247b0
     displayName: Player_1
-  moveSetting:
-    moveSpeed: 3
   actorPrefab: {fileID: 4819695567264185091, guid: d45c37e393361b04cb61dd2132d7505c,
     type: 3}
+  moveSetting:
+    moveSpeed: 3
   settingFacing:
     defaultFacingRight: 1
     defaultSpriteRight: 1

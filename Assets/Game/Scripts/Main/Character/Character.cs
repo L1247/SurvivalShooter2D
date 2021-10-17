@@ -75,12 +75,10 @@ namespace Main.Character
                 actorData; // var characterInstance = container.InstantiatePrefab(characterPrefab , spawnPoint.transform);
             // characterInstance.transform.localPosition = Vector3.zero;
             // characterInstance.transform.parent        = null;
-            // var character = characterInstance.GetComponent<Character.Character>();
-            // character.Init(actorData);
-            // var moveAbilityType = actorData.MoveAbility.GetType();
-            // move = (IMove)Activator.CreateInstance(moveAbilityType , new object[] { this });
-            // move.SetSetting(actorData.MoveSetting);
-            // move.Start();
+            var moveAbilityType = actorData.Move;
+            move = (IMove)Activator.CreateInstance(moveAbilityType , new object[] { this });
+            move.SetSetting(actorData.MoveSetting);
+            move.Start();
             animator       = GetComponent<Animator>();
             BoxCollider2D  = GetComponent<BoxCollider2D>();
             SpriteRenderer = GetComponent<SpriteRenderer>();

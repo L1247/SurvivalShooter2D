@@ -36,7 +36,7 @@ namespace Main.Character.Ability.Move
         public MoveBase(Character character)
         {
             this.character = character;
-            // trans          = this.character.transform;
+            if (character != null) trans = this.character.transform;
         }
 
     #endregion

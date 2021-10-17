@@ -21,15 +21,21 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: characterBehaviour
+    - Name: moveSetting
       Entry: 7
-      Data: 0|Main.Character.Behaviour.EnemyBehaviour, Main
+      Data: 0|Main.Character.Ability.Move.MoveSetting, Main
+    - Name: moveSpeed
+      Entry: 3
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
-    - Name: moveBase
+    - Name: move
+      Entry: 6
+      Data: 
+    - Name: characterBehaviour
       Entry: 7
-      Data: 1|Main.Character.Ability.Move.Patrol, Main
+      Data: 1|Main.Character.Behaviour.EnemyBehaviour, Main
     - Name: 
       Entry: 8
       Data: 
@@ -38,6 +44,8 @@ MonoBehaviour:
     displayName: Enemy_1
   actorPrefab: {fileID: 3234665768501477308, guid: 7f4eb71b0388bf44084a367706596c66,
     type: 3}
+  moveSetting:
+    moveSpeed: 3
   settingFacing:
     defaultFacingRight: 0
     defaultSpriteRight: 0
