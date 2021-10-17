@@ -1,7 +1,5 @@
 #region
 
-#region
-
 using System;
 using Character.Component;
 using Main.Character.Ability.Attack;
@@ -16,10 +14,6 @@ using Zenject;
 
 #endregion
 
-#if UNITY_EDITOR
-#endif
-
-#endregion
 
 namespace Main.Character
 {
@@ -52,6 +46,8 @@ namespace Main.Character
         [Inject]
         private SignalBus signalBus;
 
+        private IActorData actorData;
+
     #endregion
 
     #region Unity events
@@ -69,6 +65,13 @@ namespace Main.Character
         {
             AttackAbility?.SetEnable(use);
             AttackAbility?.SetTarget(target);
+        }
+
+        // Note that we can't use a constructor anymore since we are a MonoBehaviour now
+        [Inject]
+        public void Construct(IActorData actorData)
+        {
+            this.actorData = actorData;
         }
 
         public Vector3 GetCurrentFacingVector()
@@ -126,6 +129,12 @@ namespace Main.Character
             move          = GetComponent<IMove>();
             AttackAbility = GetComponent<IAttack>();
         }
+
+    #endregion
+
+    #region Nested Types
+
+        public class Factory : PlaceholderFactory<IActorData , Character> { }
 
     #endregion
     }

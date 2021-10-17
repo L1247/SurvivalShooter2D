@@ -1,5 +1,6 @@
 #region
 
+using Main.Application;
 using Main.SO;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -9,6 +10,14 @@ using Zenject;
 
 public class GameSetting : ScriptableObjectInstaller<GameSetting>
 {
+#region Public Variables
+
+    [HideLabel]
+    [BoxGroup("BattleBinder Settings")]
+    public BattleBinder.Settings battleBinder;
+
+#endregion
+
 #region Private Variables
 
     [SerializeField]
@@ -27,6 +36,7 @@ public class GameSetting : ScriptableObjectInstaller<GameSetting>
     {
         Container.BindInstance(PopupTextPrefab).WithId("PopupTextPrefab");
         Container.BindInstance(actorDataOverview);
+        Container.BindInstance(battleBinder).IfNotBound();
     }
 
 #endregion

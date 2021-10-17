@@ -14,11 +14,22 @@ namespace Main.System
     {
     #region Private Variables
 
+        private readonly Character.Character.Factory characterFactory;
+
         [Inject]
         private DiContainer container;
 
         [Inject]
         private IDataRepository dataRepository;
+
+    #endregion
+
+    #region Constructor
+
+        public CharacterSpawner(Character.Character.Factory characterFactory)
+        {
+            this.characterFactory = characterFactory;
+        }
 
     #endregion
 
@@ -34,11 +45,12 @@ namespace Main.System
             Contract.RequireNotNull(spawnPoint , $"spawnPointName: {spawnPointName} spawnPoint");
             var characterPrefab = actorData.actorPrefab;
             Contract.RequireNotNull(characterPrefab , $"actorDataId: {actorDataId} characterPrefab");
-            var characterInstance = container.InstantiatePrefab(characterPrefab , spawnPoint.transform);
-            characterInstance.transform.localPosition = Vector3.zero;
-            characterInstance.transform.parent        = null;
-            var character = characterInstance.GetComponent<Character.Character>();
-            character.Init(actorData);
+            characterFactory.Create(actorData);
+            // var characterInstance = container.InstantiatePrefab(characterPrefab , spawnPoint.transform);
+            // characterInstance.transform.localPosition = Vector3.zero;
+            // characterInstance.transform.parent        = null;
+            // var character = characterInstance.GetComponent<Character.Character>();
+            // character.Init(actorData);
         }
 
     #endregion
