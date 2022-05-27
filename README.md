@@ -6,3 +6,5 @@ Unity version: 2021.1.15f1
 
 依賴Odin Inspcetor
 若開啟有錯誤，請Import Odin
+
+此支線沒有完成，所以場景內沒有角色
