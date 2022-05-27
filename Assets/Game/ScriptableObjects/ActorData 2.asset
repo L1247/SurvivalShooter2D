@@ -21,6 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: move
+      Entry: 6
+      Data: 
     - Name: moveSetting
       Entry: 7
       Data: 0|Main.Character.Ability.Move.MoveSetting, Main
@@ -29,9 +32,6 @@ MonoBehaviour:
       Data: 3
     - Name: 
       Entry: 8
-      Data: 
-    - Name: move
-      Entry: 6
       Data: 
     - Name: characterBehaviour
       Entry: 7
