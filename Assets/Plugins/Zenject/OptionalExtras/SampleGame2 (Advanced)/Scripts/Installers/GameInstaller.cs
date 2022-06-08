@@ -22,7 +22,8 @@ namespace Zenject.SpaceFighter
                     .FromSubContainerResolve()
                     .ByNewPrefabInstaller<EnemyInstaller>(_settings.EnemyFacadePrefab)
                     // Place each enemy under an Enemies game object at the root of scene hierarchy
-                    .UnderTransformGroup("Enemies"));
+                    .UnderTransformGroup("Enemies")
+                );
 
             Container.BindFactory<float, float, BulletTypes, Bullet, Bullet.Factory>()
                 // We could just use FromMonoPoolableMemoryPool here instead, but

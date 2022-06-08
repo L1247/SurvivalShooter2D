@@ -30,6 +30,7 @@ namespace Main.Character.Ability.Move
 
     #region Constructor
 
+        public Patrol() { }
         public Patrol(Character character) : base(character) { }
 
     #endregion

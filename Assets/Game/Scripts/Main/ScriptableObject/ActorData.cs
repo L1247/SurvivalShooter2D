@@ -33,8 +33,14 @@ namespace Main.SO
         [ValueDropdown("GetMoveBase")]
         [OdinSerialize]
         [PropertyOrder(0)]
+        [OnValueChanged("OnMoveChanged")]
         public Type move;
 
+        private void OnMoveChanged()
+        {
+            var moveBase = (MoveBase) Activator.CreateInstance(move);
+            moveSetting = moveBase.GetSetting();
+        }
         public CharacterBehaviour CharacterBehaviour => characterBehaviour;
         public MoveSetting        MoveSetting        => moveSetting;
 
@@ -56,6 +62,7 @@ namespace Main.SO
         // [ValueDropdown("GetMoveBase")]
         [PropertyOrder(1)]
         [OdinSerialize]
+        [HideReferenceObjectPicker]
         public MoveSetting moveSetting;
 
     #endregion

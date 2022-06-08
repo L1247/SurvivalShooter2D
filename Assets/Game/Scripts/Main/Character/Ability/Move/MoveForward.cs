@@ -32,6 +32,7 @@ namespace Main.Character.Ability.Move
 
     #region Constructor
 
+        public MoveForward() { }
         public MoveForward(Character character) : base(character) { }
 
     #endregion

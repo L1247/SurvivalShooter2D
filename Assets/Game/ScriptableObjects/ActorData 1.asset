@@ -26,22 +26,19 @@ MonoBehaviour:
       Data: 0|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Main.Character.Ability.Move.MoveForward, Main
+      Data: Main.Character.Ability.Move.Patrol, Main
     - Name: 
       Entry: 8
       Data: 
     - Name: moveSetting
       Entry: 7
-      Data: 1|Main.Character.Ability.Move.MoveForward+MoveForwardSetting, Main
+      Data: 1|Main.Character.Ability.Move.Patrol+PatrolSetting, Main
     - Name: moveSpeed
       Entry: 3
       Data: 3
-    - Name: ANIMATION_IDLE
-      Entry: 1
-      Data: Idle
-    - Name: ANIMATION_MOVE
-      Entry: 1
-      Data: Move
+    - Name: PatrolOffsetX
+      Entry: 4
+      Data: 8
     - Name: 
       Entry: 8
       Data: 

@@ -33,7 +33,11 @@ namespace Main.Character.Ability.Move
 
     #region Constructor
 
-        public MoveBase(Character character)
+        public MoveBase()
+        {
+
+        }
+        protected MoveBase(Character character)
         {
             this.character = character;
             if (character != null) trans = this.character.transform;

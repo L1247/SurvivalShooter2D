@@ -1,30 +1,32 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Zenject.SpaceFighter
 {
     public class PlayerShootHandler : ITickable
     {
-        readonly AudioPlayer _audioPlayer;
-        readonly Player _player;
-        readonly Settings _settings;
-        readonly Bullet.Factory _bulletFactory;
+        readonly AudioPlayer      _audioPlayer;
+        readonly Player           _player;
+        readonly Settings         _settings;
+        readonly Bullet.Factory   _bulletFactory;
         readonly PlayerInputState _inputState;
 
-        float _lastFireTime;
+        float         _lastFireTime;
+        private int[] angels = { -50 , -40 , -30 , -20 , -10 , 0 , 10 , 20 , 30 , 40 ,50 };
 
         public PlayerShootHandler(
-            PlayerInputState inputState,
-            Bullet.Factory bulletFactory,
-            Settings settings,
-            Player player,
-            AudioPlayer audioPlayer)
+            PlayerInputState inputState ,
+            Bullet.Factory   bulletFactory ,
+            Settings         settings ,
+            Player           player ,
+            AudioPlayer      audioPlayer)
         {
-            _audioPlayer = audioPlayer;
-            _player = player;
-            _settings = settings;
+            _audioPlayer   = audioPlayer;
+            _player        = player;
+            _settings      = settings;
             _bulletFactory = bulletFactory;
-            _inputState = inputState;
+            _inputState    = inputState;
         }
 
         public void Tick()
@@ -41,22 +43,28 @@ namespace Zenject.SpaceFighter
             }
         }
 
+
         void Fire()
         {
-            _audioPlayer.Play(_settings.Laser, _settings.LaserVolume);
+            // _audioPlayer.Play(_settings.Laser, _settings.LaserVolume);
 
-            var bullet = _bulletFactory.Create(
-                _settings.BulletSpeed, _settings.BulletLifetime, BulletTypes.FromPlayer);
+            var bulletCount = angels.Length;
+            for (int i = 0 ; i < bulletCount ; i++)
+            {
+                float angel = angels[i];
+                var bullet = _bulletFactory.Create(
+                    _settings.BulletSpeed , _settings.BulletLifetime , BulletTypes.FromPlayer);
 
-            bullet.transform.position = _player.Position + _player.LookDir * _settings.BulletOffsetDistance;
-            bullet.transform.rotation = _player.Rotation;
+                bullet.transform.position = _player.Position + _player.LookDir * _settings.BulletOffsetDistance;
+                bullet.transform.rotation = _player.Rotation * Quaternion.Euler(0 , 0 , angel);
+            }
         }
 
         [Serializable]
         public class Settings
         {
             public AudioClip Laser;
-            public float LaserVolume = 1.0f;
+            public float     LaserVolume = 1.0f;
 
             public float BulletLifetime;
             public float BulletSpeed;
